@@ -1,2 +1,2 @@
 1. Quiero hacer la estructura base de mi index.html con un encabezado, filtro de categorias, catalogo cetral y footer.
-quiero hacer mi propio index basado en un comercio de ventas de gaseosa.
+2.Quiero crear la pagina de detalle del producto donde se puedan ver especificaciones del mismo.
