@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de producto | Refrescante Argentina</title>
+</head>
+<body>
+
+    <!-- Encabezado -->
+    <header>
+        <div class="logo">Refrescante Argentina</div>
+        <nav aria-label="Navegación principal">
+            <ul>
+                <li><a href="index.html#inicio">Inicio</a></li>
+                <li><a href="index.html#marcas">Marcas</a></li>
+                <li><a href="index.html#catalogo">Catálogo</a></li>
+                <li><a href="index.html#descubri">Descubrí</a></li>
+                <li><a href="index.html#comprar">Comprar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Detalle de producto -->
+    <main>
+
+        <section id="detalle">
+            <h3>Detalle del producto</h3>
+
+            <!-- Coca-Cola Original 500ml -->
+            <article class="producto-detalle" id="detalle-coca-cola">
+                <img src="https://placehold.co/300x300" alt="Coca-Cola Original 500ml">
+                <h4>Coca-Cola Original 500ml</h4>
+                <p>El sabor original de siempre, en botella de 500ml. Perfecta para compartir cada momento.</p>
+                <ul>
+                    <li>Contenido neto: 500 ml</li>
+                    <li>Presentación: Botella PET</li>
+                    <li>Precio sugerido: $1.200</li>
+                </ul>
+                <a href="index.html#catalogo">Volver al catálogo</a>
+            </article>
+
+            <!-- Sprite Lima-Limón 500ml -->
+            <article class="producto-detalle" id="detalle-sprite">
+                <img src="https://placehold.co/300x300" alt="Sprite Lima-Limón 500ml">
+                <h4>Sprite Lima-Limón 500ml</h4>
+                <p>Frescura lima-limón con burbujas que despiertan los sentidos. En botella de 500ml.</p>
+                <ul>
+                    <li>Contenido neto: 500 ml</li>
+                    <li>Presentación: Botella PET</li>
+                    <li>Precio sugerido: $1.100</li>
+                </ul>
+                <a href="index.html#catalogo">Volver al catálogo</a>
+            </article>
+
+            <!-- Fanta Naranja 500ml -->
+            <article class="producto-detalle" id="detalle-fanta">
+                <img src="https://placehold.co/300x300" alt="Fanta Naranja 500ml">
+                <h4>Fanta Naranja 500ml</h4>
+                <p>Diversión y sabor a naranja en cada sorbo. En botella de 500ml.</p>
+                <ul>
+                    <li>Contenido neto: 500 ml</li>
+                    <li>Presentación: Botella PET</li>
+                    <li>Precio sugerido: $1.100</li>
+                </ul>
+                <a href="index.html#catalogo">Volver al catálogo</a>
+            </article>
+
+            <!-- Schweppes Tónica 500ml -->
+            <article class="producto-detalle" id="detalle-schweppes">
+                <img src="https://placehold.co/300x300" alt="Schweppes Tónica 500ml">
+                <h4>Schweppes Tónica 500ml</h4>
+                <p>Un clásico para grandes ocasiones. Agua tónica en botella de 500ml.</p>
+                <ul>
+                    <li>Contenido neto: 500 ml</li>
+                    <li>Presentación: Botella PET</li>
+                    <li>Precio sugerido: $1.300</li>
+                </ul>
+                <a href="index.html#catalogo">Volver al catálogo</a>
+            </article>
+
+        </section>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2026 Refrescante Argentina. Todos los derechos reservados.</p>
+        <nav aria-label="Redes sociales">
+            <ul>
+                <li><a href="https://facebook.com" rel="noopener noreferrer" target="_blank">Facebook</a></li>
+                <li><a href="https://instagram.com" rel="noopener noreferrer" target="_blank">Instagram</a></li>
+                <li><a href="https://x.com" rel="noopener noreferrer" target="_blank">X</a></li>
+                <li><a href="https://youtube.com" rel="noopener noreferrer" target="_blank">YouTube</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script>
+        const productos = document.querySelectorAll('.producto-detalle');
+
+        function mostrarProducto() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id') || 'coca-cola';
+
+            productos.forEach(function (articulo) {
+                articulo.style.display = (articulo.id === 'detalle-' + id) ? 'block' : 'none';
+            });
+        }
+
+        mostrarProducto();
+    </script>
+
+</body>
+</html>
