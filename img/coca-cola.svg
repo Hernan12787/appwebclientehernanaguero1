@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300" width="200" height="300">
+  <defs>
+    <linearGradient id="botella" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B0000"/>
+      <stop offset="100%" style="stop-color:#cc0000"/>
+    </linearGradient>
+    <linearGradient id="etiqueta" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="100%" style="stop-color:#f0f0f0"/>
+    </linearGradient>
+  </defs>
+  <rect x="70" y="10" width="60" height="30" rx="5" fill="#8B0000"/>
+  <rect x="65" y="40" width="70" height="20" rx="3" fill="#666"/>
+  <path d="M60,60 Q60,70 65,80 L65,250 Q65,265 80,270 L120,270 Q135,265 135,250 L135,80 Q140,70 140,60 Z" fill="url(#botella)"/>
+  <rect x="70" y="100" width="60" height="80" rx="5" fill="url(#etiqueta)"/>
+  <text x="100" y="130" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="12" font-weight="bold" fill="#cc0000">COCA</text>
+  <text x="100" y="148" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="12" font-weight="bold" fill="#cc0000">COLA</text>
+  <path d="M75,160 Q100,175 125,160" stroke="#cc0000" stroke-width="2" fill="none"/>
+  <rect x="75" y="200" width="50" height="40" rx="3" fill="#cc0000" opacity="0.3"/>
+  <ellipse cx="100" cy="275" rx="35" ry="8" fill="rgba(0,0,0,0.1)"/>
+</svg>

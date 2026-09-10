@@ -1,91 +1,81 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrito | Refrescante Argentina</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito | Refrescante Argentina</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <header>
+    <div class="logo">Refrescante Argentina</div>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html#inicio">Inicio</a></li>
+        <li><a href="index.html#marcas">Marcas</a></li>
+        <li><a href="index.html#catalogo">Catálogo</a></li>
+        <li><a href="index.html#descubri">Descubrí</a></li>
+        <li><a href="carrito.html">Carrito</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <!-- Encabezado -->
-    <header>
-        <div class="logo">Refrescante Argentina</div>
-        <nav aria-label="Navegación principal">
-            <ul>
-                <li><a href="index.html#inicio">Inicio</a></li>
-                <li><a href="index.html#marcas">Marcas</a></li>
-                <li><a href="index.html#catalogo">Catálogo</a></li>
-                <li><a href="index.html#descubri">Descubrí</a></li>
-                <li><a href="carrito.html">Carrito</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
+  <main>
+    <section id="carrito">
+      <h2>Tu carrito de compras</h2>
 
-    <!-- Contenido principal -->
-    <main>
+      <article class="item-carrito">
+        <img src="img/coca-cola.svg" alt="Coca-Cola Original 500ml">
+        <div>
+          <h4>Coca-Cola Original 500ml</h4>
+          <p>Precio unitario: $1.200</p>
+          <p>Cantidad: 2</p>
+        </div>
+        <p class="subtotal">Subtotal: $2.400</p>
+      </article>
 
-        <!-- Carrito de compras -->
-        <section id="carrito">
-            <h2>Tu carrito de compras</h2>
+      <article class="item-carrito">
+        <img src="img/sprite.svg" alt="Sprite Lima-Limón 500ml">
+        <div>
+          <h4>Sprite Lima-Limón 500ml</h4>
+          <p>Precio unitario: $1.100</p>
+          <p>Cantidad: 1</p>
+        </div>
+        <p class="subtotal">Subtotal: $1.100</p>
+      </article>
 
-            <!-- Lista de productos del carrito -->
-            <article class="item-carrito">
-                <img src="https://placehold.co/100x100" alt="Coca-Cola Original 500ml">
-                <div>
-                    <h4>Coca-Cola Original 500ml</h4>
-                    <p>Precio unitario: $1.200</p>
-                    <p>Cantidad: 2</p>
-                </div>
-                <p class="subtotal">Subtotal: $2.400</p>
-            </article>
+      <article class="item-carrito">
+        <img src="img/fanta.svg" alt="Fanta Naranja 500ml">
+        <div>
+          <h4>Fanta Naranja 500ml</h4>
+          <p>Precio unitario: $1.100</p>
+          <p>Cantidad: 3</p>
+        </div>
+        <p class="subtotal">Subtotal: $3.300</p>
+      </article>
 
-            <article class="item-carrito">
-                <img src="https://placehold.co/100x100" alt="Sprite Lima-Limón 500ml">
-                <div>
-                    <h4>Sprite Lima-Limón 500ml</h4>
-                    <p>Precio unitario: $1.100</p>
-                    <p>Cantidad: 1</p>
-                </div>
-                <p class="subtotal">Subtotal: $1.100</p>
-            </article>
+      <aside class="resumen">
+        <h3>Resumen</h3>
+        <p>Productos: 6</p>
+        <p>Subtotal: $6.800</p>
+        <p>Envío: $1.000</p>
+        <p><strong>Total: $7.800</strong></p>
+        <a href="contacto.html">Finalizar compra</a>
+      </aside>
+    </section>
+  </main>
 
-            <article class="item-carrito">
-                <img src="https://placehold.co/100x100" alt="Fanta Naranja 500ml">
-                <div>
-                    <h4>Fanta Naranja 500ml</h4>
-                    <p>Precio unitario: $1.100</p>
-                    <p>Cantidad: 3</p>
-                </div>
-                <p class="subtotal">Subtotal: $3.300</p>
-            </article>
-
-            <!-- Resumen de la compra -->
-            <aside class="resumen">
-                <h3>Resumen</h3>
-                <p>Productos: 6</p>
-                <p>Subtotal: $6.800</p>
-                <p>Envío: $1.000</p>
-                <p><strong>Total: $7.800</strong></p>
-                <a href="contacto.html">Finalizar compra</a>
-            </aside>
-
-        </section>
-
-    </main>
-
-    <!-- Pie de página -->
-    <footer>
-        <p>&copy; 2026 Refrescante Argentina. Todos los derechos reservados.</p>
-        <nav aria-label="Redes sociales">
-            <ul>
-                <li><a href="https://facebook.com" rel="noopener noreferrer" target="_blank">Facebook</a></li>
-                <li><a href="https://instagram.com" rel="noopener noreferrer" target="_blank">Instagram</a></li>
-                <li><a href="https://x.com" rel="noopener noreferrer" target="_blank">X</a></li>
-                <li><a href="https://youtube.com" rel="noopener noreferrer" target="_blank">YouTube</a></li>
-            </ul>
-        </nav>
-    </footer>
-
+  <footer>
+    <p>&copy; 2026 Refrescante Argentina. Todos los derechos reservados.</p>
+    <nav aria-label="Redes sociales">
+      <ul>
+        <li><a href="https://facebook.com" rel="noopener noreferrer" target="_blank">Facebook</a></li>
+        <li><a href="https://instagram.com" rel="noopener noreferrer" target="_blank">Instagram</a></li>
+        <li><a href="https://x.com" rel="noopener noreferrer" target="_blank">X</a></li>
+        <li><a href="https://youtube.com" rel="noopener noreferrer" target="_blank">YouTube</a></li>
+      </ul>
+    </nav>
+  </footer>
 </body>
 </html>
