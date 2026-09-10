@@ -85,15 +85,5 @@
       </ul>
     </nav>
   </footer>
-
-  <script>
-    const productos = document.querySelectorAll('.producto-detalle');
-    function mostrarProducto() {
-      const params = new URLSearchParams(window.location.search);
-      const id = params.get('id') || 'coca-cola';
-      productos.forEach(a => a.style.display = a.id === 'detalle-' + id ? 'block' : 'none');
-    }
-    mostrarProducto();
-  </script>
 </body>
 </html>
