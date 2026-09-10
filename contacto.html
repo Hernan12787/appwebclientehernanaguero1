@@ -1,83 +1,72 @@
 <!DOCTYPE html>
 <html lang="es">
-<head> 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto | Refrescante Argentina</title>
-    <link rel="stylesheet" href="style.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto | Refrescante Argentina</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <header>
+    <div class="logo">Refrescante Argentina</div>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html#inicio">Inicio</a></li>
+        <li><a href="index.html#marcas">Marcas</a></li>
+        <li><a href="index.html#catalogo">Catálogo</a></li>
+        <li><a href="index.html#descubri">Descubrí</a></li>
+        <li><a href="carrito.html">Carrito</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <!-- Encabezado -->
-    <header>
-        <div class="logo">Refrescante Argentina</div>
-        <nav aria-label="Navegación principal">
-            <ul>
-                <li><a href="index.html#inicio">Inicio</a></li>
-                <li><a href="index.html#marcas">Marcas</a></li>
-                <li><a href="index.html#catalogo">Catálogo</a></li>
-                <li><a href="index.html#descubri">Descubrí</a></li>
-                <li><a href="carrito.html">Carrito</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
+  <main>
+    <section id="contacto">
+      <h2>Contacto de clientes</h2>
+      <p>Completá el formulario y te responderemos a la brevedad.</p>
+      <form action="#" method="post">
+        <div>
+          <label for="nombre">Nombre y apellido</label>
+          <input type="text" id="nombre" name="nombre" required>
+        </div>
+        <div>
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+          <label for="telefono">Teléfono</label>
+          <input type="tel" id="telefono" name="telefono">
+        </div>
+        <div>
+          <label for="asunto">Asunto</label>
+          <select id="asunto" name="asunto" required>
+            <option value="">Seleccioná una opción</option>
+            <option value="consulta">Consulta</option>
+            <option value="pedido">Información de pedido</option>
+            <option value="reclamo">Reclamo</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+        <div>
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+        </div>
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
 
-    <!-- Contenido principal -->
-    <main>
-
-        <!-- Contacto de clientes -->
-        <section id="contacto">
-            <h2>Contacto de clientes</h2>
-            <p>Completá el formulario y te responderemos a la brevedad.</p>
-
-            <!-- Formulario de contacto -->
-            <form action="#" method="post">
-                <div>
-                    <label for="nombre">Nombre y apellido</label>
-                    <input type="text" id="nombre" name="nombre" required>
-                </div>
-                <div>
-                    <label for="email">Correo electrónico</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div>
-                    <label for="telefono">Teléfono</label>
-                    <input type="tel" id="telefono" name="telefono">
-                </div>
-                <div>
-                    <label for="asunto">Asunto</label>
-                    <select id="asunto" name="asunto" required>
-                        <option value="">Seleccioná una opción</option>
-                        <option value="consulta">Consulta</option>
-                        <option value="pedido">Información de pedido</option>
-                        <option value="reclamo">Reclamo</option>
-                        <option value="otro">Otro</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="mensaje">Mensaje</label>
-                    <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
-                </div>
-                <button type="submit">Enviar</button>
-            </form>
-
-        </section>
-
-    </main>
-
-    <!-- Pie de página -->
-    <footer>
-        <p>&copy; 2026 Refrescante Argentina. Todos los derechos reservados.</p>
-        <nav aria-label="Redes sociales">
-            <ul>
-                <li><a href="https://facebook.com" rel="noopener noreferrer" target="_blank">Facebook</a></li>
-                <li><a href="https://instagram.com" rel="noopener noreferrer" target="_blank">Instagram</a></li>
-                <li><a href="https://x.com" rel="noopener noreferrer" target="_blank">X</a></li>
-                <li><a href="https://youtube.com" rel="noopener noreferrer" target="_blank">YouTube</a></li>
-            </ul>
-        </nav>
-    </footer>
-
+  <footer>
+    <p>&copy; 2026 Refrescante Argentina. Todos los derechos reservados.</p>
+    <nav aria-label="Redes sociales">
+      <ul>
+        <li><a href="https://facebook.com" rel="noopener noreferrer" target="_blank">Facebook</a></li>
+        <li><a href="https://instagram.com" rel="noopener noreferrer" target="_blank">Instagram</a></li>
+        <li><a href="https://x.com" rel="noopener noreferrer" target="_blank">X</a></li>
+        <li><a href="https://youtube.com" rel="noopener noreferrer" target="_blank">YouTube</a></li>
+      </ul>
+    </nav>
+  </footer>
 </body>
 </html>

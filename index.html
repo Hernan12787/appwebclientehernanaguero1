@@ -1,132 +1,120 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Refrescante Argentina</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Refrescante Argentina</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <header>
+    <div class="logo">Refrescante Argentina</div>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#marcas">Marcas</a></li>
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#descubri">Descubrí</a></li>
+        <li><a href="carrito.html">Carrito</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <!-- Encabezado -->
-    <header>
-        <div class="logo">Refrescante Argentina</div>
-        <nav aria-label="Navegación principal">
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#marcas">Marcas</a></li>
-                <li><a href="#catalogo">Catálogo</a></li>
-                <li><a href="#descubri">Descubrí</a></li>
-                <li><a href="carrito.html">Carrito</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
+  <main id="inicio">
+    <section class="hero">
+      <h2>La chispa de la vida en cada sorbo</h2>
+      <p>El sabor que acompaña cada momento.</p>
+      <a href="#marcas">Conocé nuestras marcas</a>
+    </section>
 
-    <!-- Contenido principal -->
-    <main id="inicio">
+    <section id="marcas">
+      <h3>Nuestras marcas</h3>
+      <article class="marca">
+        <h4>Coca‑Cola</h4>
+        <p>El sabor original.</p>
+        <a href="#coca-cola">Explorar</a>
+      </article>
+      <article class="marca">
+        <h4>Sprite</h4>
+        <p>Frescura lima‑limón.</p>
+        <a href="#sprite">Explorar</a>
+      </article>
+      <article class="marca">
+        <h4>Fanta</h4>
+        <p>Diversión y sabor naranja.</p>
+        <a href="#fanta">Explorar</a>
+      </article>
+      <article class="marca">
+        <h4>Schweppes</h4>
+        <p>Un clásico para grandes ocasiones.</p>
+        <a href="#schweppes">Explorar</a>
+      </article>
+    </section>
 
-        <!-- Banner principal -->
-        <section class="hero">
-            <h2>La chispa de la vida en cada sorbo</h2>
-            <p>El sabor que acompaña cada momento.</p>
-            <a href="#marcas">Conocé nuestras marcas</a>
-        </section>
+    <section id="catalogo">
+      <h3>Nuestros productos</h3>
+      <article class="producto">
+        <img src="img/coca-cola.svg" alt="Coca-Cola Original 500ml">
+        <h4>Coca-Cola Original 500ml</h4>
+        <p>El sabor original en botella de 500ml.</p>
+        <a href="producto.html?id=coca-cola">Ver detalle</a>
+      </article>
+      <article class="producto">
+        <img src="img/sprite.svg" alt="Sprite Lima-Limón 500ml">
+        <h4>Sprite Lima-Limón 500ml</h4>
+        <p>Frescura lima-limón en botella de 500ml.</p>
+        <a href="producto.html?id=sprite">Ver detalle</a>
+      </article>
+      <article class="producto">
+        <img src="img/fanta.svg" alt="Fanta Naranja 500ml">
+        <h4>Fanta Naranja 500ml</h4>
+        <p>Diversión y sabor naranja en botella de 500ml.</p>
+        <a href="producto.html?id=fanta">Ver detalle</a>
+      </article>
+      <article class="producto">
+        <img src="img/schweppes.svg" alt="Schweppes Tónica 500ml">
+        <h4>Schweppes Tónica 500ml</h4>
+        <p>Un clásico para grandes ocasiones en botella de 500ml.</p>
+        <a href="producto.html?id=schweppes">Ver detalle</a>
+      </article>
+    </section>
 
-        <!-- Nuestras marcas -->
-        <section id="marcas">
-            <h3>Nuestras marcas</h3>
-            <article class="marca">
-                <h4>Coca‑Cola</h4>
-                <p>El sabor original.</p>
-                <a href="#coca-cola">Explorar</a>
-            </article>
-            <article class="marca">
-                <h4>Sprite</h4>
-                <p>Frescura lima‑limón.</p>
-                <a href="#sprite">Explorar</a>
-            </article>
-            <article class="marca">
-                <h4>Fanta</h4>
-                <p>Diversión y sabor naranja.</p>
-                <a href="#fanta">Explorar</a>
-            </article>
-            <article class="marca">
-                <h4>Schweppes</h4>
-                <p>Un clásico para grandes ocasiones.</p>
-                <a href="#schweppes">Explorar</a>
-            </article>
-        </section>
+    <section id="descubri">
+      <h3>Experiencias</h3>
+      <article class="experiencia">
+        <h4>Coke Studio</h4>
+        <p>Música y sesiones exclusivas.</p>
+        <a href="#coke-studio">Explorar</a>
+      </article>
+      <article class="experiencia">
+        <h4>Torneo de futbol Coca Cola</h4>
+        <p>Promos y la pasión de un torneo.</p>
+        <a href="#fifa26">Ver promos</a>
+      </article>
+      <article class="experiencia">
+        <h4>Aliados por el agua</h4>
+        <p>El ciclo del agua para todos.</p>
+        <a href="#sustentabilidad">Conocé más</a>
+      </article>
+    </section>
 
-        <!-- Catálogo de productos -->
-        <section id="catalogo">
-            <h3>Nuestros productos</h3>
-            <article class="producto">
-                <img "https://unsplash.com/es/fotos/una-botella-de-refresco-aJ8CYMhemc8" alt="Gaseosa Cola Clásica 500ml">
-                <h4>Coca-Cola Original 500ml</h4>
-                <p>El sabor original en botella de 500ml.</p>
-                <a href="producto.html?id=coca-cola">Ver detalle</a>
-            </article>
-            <article class="producto">
-                <img src="https://placehold.co/200x200" alt="Sprite Lima-Limón 500ml">
-                <h4>Sprite Lima-Limón 500ml</h4>
-                <p>Frescura lima-limón en botella de 500ml.</p>
-                <a href="producto.html?id=sprite">Ver detalle</a>
-            </article>
-            <article class="producto">
-                <img src="https://placehold.co/200x200" alt="Fanta Naranja 500ml">
-                <h4>Fanta Naranja 500ml</h4>
-                <p>Diversión y sabor naranja en botella de 500ml.</p>
-                <a href="producto.html?id=fanta">Ver detalle</a>
-            </article>
-            <article class="producto">
-                <img src="https://placehold.co/200x200" alt="Schweppes Tónica 500ml">
-                <h4>Schweppes Tónica 500ml</h4>
-                <p>Un clásico para grandes ocasiones en botella de 500ml.</p>
-                <a href="producto.html?id=schweppes">Ver detalle</a>
-            </article>
-        </section>
+    <section id="comprar">
+      <h3>¿Te quedaste sin gaseosa?</h3>
+      <a href="#tiendas">Comprar ahora</a>
+    </section>
+  </main>
 
-        <!-- Experiencias -->
-        <section id="descubri">
-            <h3>Experiencias</h3>
-            <article class="experiencia">
-                <h4>Coke Studio</h4>
-                <p>Música y sesiones exclusivas.</p>
-                <a href="#coke-studio">Explorar</a>
-            </article>
-            <article class="experiencia">
-                <h4>Torneo de futbol Coca Cola</h4>
-                <p>Promos y la pasión de un torneo.</p>
-                <a href="#fifa26">Ver promos</a>
-            </article>
-            <article class="experiencia">
-                <h4>Aliados por el agua</h4>
-                <p>El ciclo del agua para todos.</p>
-                <a href="#sustentabilidad">Conocé más</a>
-            </article>
-        </section>
-
-        <!-- Comprar -->
-        <section id="comprar">
-            <h3>¿Te quedaste sin gaseosa?</h3>
-            <a href="#tiendas">Comprar ahora</a>
-        </section>
-
-    </main>
-
-    <!-- Pie de página -->
-    <footer>
-        <p>&copy; 2026 Refrescante Argentina. Todos los derechos reservados.</p>
-        <nav aria-label="Redes sociales">
-            <ul>
-                <li><a href="https://facebook.com" rel="noopener noreferrer" target="_blank">Facebook</a></li>
-                <li><a href="https://instagram.com" rel="noopener noreferrer" target="_blank">Instagram</a></li>
-                <li><a href="https://x.com" rel="noopener noreferrer" target="_blank">X</a></li>
-                <li><a href="https://youtube.com" rel="noopener noreferrer" target="_blank">YouTube</a></li>
-            </ul>
-        </nav>
-    </footer>
-
+  <footer>
+    <p>&copy; 2026 Refrescante Argentina. Todos los derechos reservados.</p>
+    <nav aria-label="Redes sociales">
+      <ul>
+        <li><a href="https://facebook.com" rel="noopener noreferrer" target="_blank">Facebook</a></li>
+        <li><a href="https://instagram.com" rel="noopener noreferrer" target="_blank">Instagram</a></li>
+        <li><a href="https://x.com" rel="noopener noreferrer" target="_blank">X</a></li>
+        <li><a href="https://youtube.com" rel="noopener noreferrer" target="_blank">YouTube</a></li>
+      </ul>
+    </nav>
+  </footer>
 </body>
 </html>
