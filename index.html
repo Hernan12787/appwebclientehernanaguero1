@@ -32,62 +32,90 @@
     </section>
     <div class="items">
 
-      <section id="marcas">
-        <h3>Nuestras marcas</h3>
-        <div class="item-cards">
-          <article class="marca">
-            <h4>Coca‑Cola</h4>
-            <p>El sabor original.</p>
-            <a href="#coca-cola">Explorar</a>
-          </article>
-          <article class="marca">
-            <h4>Sprite</h4>
-            <p>Frescura lima‑limón.</p>
-            <a href="#sprite">Explorar</a>
-          </article>
-          <article class="marca">
-            <h4>Fanta</h4>
-            <p>Diversión y sabor naranja.</p>
-            <a href="#fanta">Explorar</a>
-          </article>
-          <article class="marca">
-            <h4>Schweppes</h4>
-            <p>Un clásico para grandes ocasiones.</p>
-            <a href="#schweppes">Explorar</a>
-          </article>
-        </div>
-      </section>
+      <div class="buscador">
+        <input class="filtro" type="radio" name="filtro" id="f-todos" checked>
+        <input class="filtro" type="radio" name="filtro" id="f-coca-cola">
+        <input class="filtro" type="radio" name="filtro" id="f-sprite">
+        <input class="filtro" type="radio" name="filtro" id="f-fanta">
+        <input class="filtro" type="radio" name="filtro" id="f-schweppes">
 
+        <details class="buscador-barra">
+          <summary class="bus-summary" title="Buscar marca o producto">
+            <span class="bus-icono">&#128269;</span>
+            <span class="bus-texto">
+              <span class="t-todos">¿Qué gaseosa buscás? Elegí una marca…</span>
+              <span class="t-coca-cola">Coca-Cola</span>
+              <span class="t-sprite">Sprite</span>
+              <span class="t-fanta">Fanta</span>
+              <span class="t-schweppes">Schweppes</span>
+            </span>
+            <span class="bus-flecha">&#9660;</span>
+          </summary>
+          <div class="bus-opciones">
+            <label for="f-todos">Todas las marcas</label>
+            <label for="f-coca-cola">Coca-Cola</label>
+            <label for="f-sprite">Sprite</label>
+            <label for="f-fanta">Fanta</label>
+            <label for="f-schweppes">Schweppes</label>
+          </div>
+        </details>
 
-      <section id="catalogo">
-        <h3>Nuestros productos</h3>
-        <div class="item-cards">
-          <article class="producto">
-            <img src="img/coca-cola.jpg" alt="Coca-Cola Original 500ml">
-            <h4>Coca-Cola Original 500ml</h4>
-            <p>El sabor original en botella de 500ml.</p>
-            <a href="producto.html?id=coca-cola">Ver detalle</a>
-          </article>
-          <article class="producto">
-            <img src="img/sprite.jpg" alt="Sprite Lima-Limón 500ml">
-            <h4>Sprite Lima-Limón 500ml</h4>
-            <p>Frescura lima-limón en botella de 500ml.</p>
-            <a href="producto.html?id=sprite">Ver detalle</a>
-          </article>
-          <article class="producto">
-            <img src="img/fanta.jpg" alt="Fanta Naranja 500ml">
-            <h4>Fanta Naranja 500ml</h4>
-            <p>Diversión y sabor naranja en botella de 500ml.</p>
-            <a href="producto.html?id=fanta">Ver detalle</a>
-          </article>
-          <article class="producto">
-            <img src="img/schweppes.jpg" alt="Schweppes Tónica 500ml">
-            <h4>Schweppes Tónica 500ml</h4>
-            <p>Un clásico para grandes ocasiones en botella de 500ml.</p>
-            <a href="producto.html?id=schweppes">Ver detalle</a>
-          </article>
-        </div>
-      </section>
+        <section id="marcas">
+          <h3>Nuestras marcas</h3>
+          <div class="item-cards">
+            <article class="marca marca-coca-cola">
+              <h4>Coca‑Cola</h4>
+              <p>El sabor original.</p>
+              <a href="#coca-cola">Explorar</a>
+            </article>
+            <article class="marca marca-sprite">
+              <h4>Sprite</h4>
+              <p>Frescura lima‑limón.</p>
+              <a href="#sprite">Explorar</a>
+            </article>
+            <article class="marca marca-fanta">
+              <h4>Fanta</h4>
+              <p>Diversión y sabor naranja.</p>
+              <a href="#fanta">Explorar</a>
+            </article>
+            <article class="marca marca-schweppes">
+              <h4>Schweppes</h4>
+              <p>Un clásico para grandes ocasiones.</p>
+              <a href="#schweppes">Explorar</a>
+            </article>
+          </div>
+        </section>
+
+        <section id="catalogo">
+          <h3>Nuestros productos</h3>
+          <div class="item-cards">
+            <article class="producto producto-coca-cola">
+              <img src="img/coca-cola.jpg" alt="Coca-Cola Original 500ml">
+              <h4>Coca-Cola Original 500ml</h4>
+              <p>El sabor original en botella de 500ml.</p>
+              <a href="producto.html?id=coca-cola">Ver detalle</a>
+            </article>
+            <article class="producto producto-sprite">
+              <img src="img/sprite.jpg" alt="Sprite Lima-Limón 500ml">
+              <h4>Sprite Lima-Limón 500ml</h4>
+              <p>Frescura lima-limón en botella de 500ml.</p>
+              <a href="producto.html?id=sprite">Ver detalle</a>
+            </article>
+            <article class="producto producto-fanta">
+              <img src="img/fanta.jpg" alt="Fanta Naranja 500ml">
+              <h4>Fanta Naranja 500ml</h4>
+              <p>Diversión y sabor naranja en botella de 500ml.</p>
+              <a href="producto.html?id=fanta">Ver detalle</a>
+            </article>
+            <article class="producto producto-schweppes">
+              <img src="img/schweppes.jpg" alt="Schweppes Tónica 500ml">
+              <h4>Schweppes Tónica 500ml</h4>
+              <p>Un clásico para grandes ocasiones en botella de 500ml.</p>
+              <a href="producto.html?id=schweppes">Ver detalle</a>
+            </article>
+          </div>
+        </section>
+      </div>
 
       <section id="descubri">
         <h3>Experiencias</h3>

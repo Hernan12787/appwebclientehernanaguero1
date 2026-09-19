@@ -473,3 +473,186 @@ footer nav a:hover {
     background: #e11d48;
     color: #ffffff;
 }
+
+/* ===== Buscador de productos (solo HTML/CSS) ===== */
+.buscador {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.buscador .filtro {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.buscador-barra {
+    position: relative;
+    max-width: 440px;
+    margin: 0 auto 1.5rem;
+    background: #ffffff;
+    border: 2px solid #e5e7eb;
+    border-radius: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.buscador-barra:hover,
+.buscador-barra[open] {
+    border-color: #e11d48;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.bus-summary {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.1rem;
+    cursor: pointer;
+    list-style: none;
+}
+
+.bus-summary::-webkit-details-marker {
+    display: none;
+}
+
+.bus-icono {
+    color: #e11d48;
+}
+
+.bus-texto {
+    flex: 1;
+    color: #6b7280;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bus-texto > span {
+    display: none;
+}
+
+#f-todos:checked ~ .buscador-barra .t-todos,
+#f-coca-cola:checked ~ .buscador-barra .t-coca-cola,
+#f-sprite:checked ~ .buscador-barra .t-sprite,
+#f-fanta:checked ~ .buscador-barra .t-fanta,
+#f-schweppes:checked ~ .buscador-barra .t-schweppes {
+    display: inline;
+}
+
+.bus-flecha {
+    color: #9ca3af;
+    font-size: 0.75rem;
+    transition: transform 0.2s;
+}
+
+.buscador-barra[open] .bus-flecha {
+    transform: rotate(180deg);
+}
+
+.bus-opciones {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 280px;
+    max-height: 300px;
+    overflow-y: auto;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+}
+
+.bus-opciones label {
+    display: block;
+    padding: 0.6rem 0.75rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    color: #374151;
+    font-weight: 500;
+    transition: background 0.15s, color 0.15s;
+}
+
+.bus-opciones label:hover {
+    background: #fdf2f4;
+    color: #e11d48;
+}
+
+#f-todos:checked ~ .buscador-barra .bus-opciones label[for="f-todos"],
+#f-coca-cola:checked ~ .buscador-barra .bus-opciones label[for="f-coca-cola"],
+#f-sprite:checked ~ .buscador-barra .bus-opciones label[for="f-sprite"],
+#f-fanta:checked ~ .buscador-barra .bus-opciones label[for="f-fanta"],
+#f-schweppes:checked ~ .buscador-barra .bus-opciones label[for="f-schweppes"] {
+    background: #fdf2f4;
+    color: #e11d48;
+    font-weight: 700;
+}
+
+#f-todos:checked ~ .buscador-barra .bus-opciones label[for="f-todos"]::before,
+#f-coca-cola:checked ~ .buscador-barra .bus-opciones label[for="f-coca-cola"]::before,
+#f-sprite:checked ~ .buscador-barra .bus-opciones label[for="f-sprite"]::before,
+#f-fanta:checked ~ .buscador-barra .bus-opciones label[for="f-fanta"]::before,
+#f-schweppes:checked ~ .buscador-barra .bus-opciones label[for="f-schweppes"]::before {
+    content: "✓ ";
+}
+
+/* Filtrado de marcas y productos */
+.buscador > section h3 {
+    margin-top: 1.5rem;
+}
+
+.buscador .item-cards .marca,
+.buscador .item-cards .producto {
+    display: none;
+}
+
+#f-todos:checked ~ #marcas .item-cards .marca,
+#f-todos:checked ~ #catalogo .item-cards .producto,
+#f-coca-cola:checked ~ #marcas .item-cards .marca-coca-cola,
+#f-coca-cola:checked ~ #catalogo .item-cards .producto-coca-cola,
+#f-sprite:checked ~ #marcas .item-cards .marca-sprite,
+#f-sprite:checked ~ #catalogo .item-cards .producto-sprite,
+#f-fanta:checked ~ #marcas .item-cards .marca-fanta,
+#f-fanta:checked ~ #catalogo .item-cards .producto-fanta,
+#f-schweppes:checked ~ #marcas .item-cards .marca-schweppes,
+#f-schweppes:checked ~ #catalogo .item-cards .producto-schweppes {
+    display: block;
+    animation: aparecer 0.25s ease;
+}
+
+#f-coca-cola:checked ~ #marcas .item-cards,
+#f-coca-cola:checked ~ #catalogo .item-cards,
+#f-sprite:checked ~ #marcas .item-cards,
+#f-sprite:checked ~ #catalogo .item-cards,
+#f-fanta:checked ~ #marcas .item-cards,
+#f-fanta:checked ~ #catalogo .item-cards,
+#f-schweppes:checked ~ #marcas .item-cards,
+#f-schweppes:checked ~ #catalogo .item-cards {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 280px));
+    justify-content: center;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    .bus-opciones {
+        left: 0;
+        right: 0;
+        transform: none;
+        min-width: auto;
+    }
+}
