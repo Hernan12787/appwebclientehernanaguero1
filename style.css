@@ -112,7 +112,9 @@ header nav a:hover {
 /* ===== Grids de tarjetas ===== */
 
 
-.items .item-cards {
+.items .item-cards,
+#carrito .item-cards,
+#tiendas .item-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
@@ -120,7 +122,8 @@ header nav a:hover {
 
 .marca,
 .producto,
-.experiencia {
+#descubri .experiencia,
+.tienda {
    
     background: #ffffff;
     border: 1px solid #e5e7eb;
@@ -133,7 +136,8 @@ header nav a:hover {
 
 .marca:hover,
 .producto:hover,
-.experiencia:hover {
+#descubri .experiencia:hover,
+.tienda:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
@@ -143,14 +147,23 @@ header nav a:hover {
 }
 
 .producto img,
-.experiencia img {
+#descubri .experiencia img {
     margin: 0 auto 1rem;
     border-radius: 0.5rem;
 }
 
+.tienda img {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    margin: 0 auto 1.25rem;
+    border-radius: 0.75rem;
+}
+
 .producto h4,
 .marca h4,
-.experiencia h4 {
+#descubri .experiencia h4,
+.tienda h4 {
     margin-bottom: 0.5rem;
     color: #111827;
     transition: all 0.3s ease;
@@ -158,20 +171,23 @@ header nav a:hover {
 
 .producto:hover h4,
 .marca:hover h4,
-.experiencia:hover h4 {
+#descubri .experiencia:hover h4,
+.tienda:hover h4 {
     color: #e11d48;
 }
 
 .producto p,
 .marca p,
-.experiencia p {
+#descubri .experiencia p,
+.tienda p {
     color: #6b7280;
     margin-bottom: 1rem;
 }
 
 .producto a,
 .marca a,
-.experiencia a {
+#descubri .experiencia a,
+.tienda a {
     display: inline-block;
     font-weight: 600;
     color: #e11d48;
@@ -183,9 +199,37 @@ header nav a:hover {
 
 .producto a:hover,
 .marca a:hover,
-.experiencia a:hover {
+#descubri .experiencia a:hover,
+.tienda a:hover {
     background: #e11d48;
     color: #ffffff;
+}
+
+/* ===== Sección Tiendas (en index solo visible desde #inicio) ===== */
+main#inicio #tiendas {
+    display: none;
+}
+
+main#inicio:target #tiendas {
+    display: block;
+}
+
+/* ===== Sección Descubrí (solo visible al acceder por el ancla #descubri) ===== */
+#descubri {
+    display: none;
+}
+
+#descubri:target {
+    display: block;
+}
+
+/* ===== Experiencias (solo visibles desde #descubri) ===== */
+.experiencia {
+    display: none;
+}
+
+#descubri .experiencia {
+    display: block;
 }
 
 /* ===== Comprar ===== */

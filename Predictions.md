@@ -6,3 +6,5 @@
 6.Agregar imagenes reales en vez de vectoriales
 7.agrego buscador de productos 
 agregar marcas y un footer
+borrar las clases que sobran y que son redundantes
+ 
