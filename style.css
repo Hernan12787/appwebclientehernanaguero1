@@ -110,19 +110,11 @@ header nav a:hover {
 }
 
 /* ===== Grids de tarjetas ===== */
-#marcas {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-}
 
-#catalogo {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-}
 
-#descubri {
+.items .item-cards,
+#carrito .item-cards,
+#tiendas .item-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
@@ -130,7 +122,9 @@ header nav a:hover {
 
 .marca,
 .producto,
-.experiencia {
+#descubri .experiencia,
+.tienda {
+   
     background: #ffffff;
     border: 1px solid #e5e7eb;
     border-radius: 1rem;
@@ -142,7 +136,8 @@ header nav a:hover {
 
 .marca:hover,
 .producto:hover,
-.experiencia:hover {
+#descubri .experiencia:hover,
+.tienda:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
@@ -151,14 +146,24 @@ header nav a:hover {
     transition: transform 0.3s ease-in, box-shadow 0.3s ease-in;
 }
 
-.producto img {
+.producto img,
+#descubri .experiencia img {
     margin: 0 auto 1rem;
     border-radius: 0.5rem;
 }
 
+.tienda img {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    margin: 0 auto 1.25rem;
+    border-radius: 0.75rem;
+}
+
 .producto h4,
 .marca h4,
-.experiencia h4 {
+#descubri .experiencia h4,
+.tienda h4 {
     margin-bottom: 0.5rem;
     color: #111827;
     transition: all 0.3s ease;
@@ -166,20 +171,23 @@ header nav a:hover {
 
 .producto:hover h4,
 .marca:hover h4,
-.experiencia:hover h4 {
+#descubri .experiencia:hover h4,
+.tienda:hover h4 {
     color: #e11d48;
 }
 
 .producto p,
 .marca p,
-.experiencia p {
+#descubri .experiencia p,
+.tienda p {
     color: #6b7280;
     margin-bottom: 1rem;
 }
 
 .producto a,
 .marca a,
-.experiencia a {
+#descubri .experiencia a,
+.tienda a {
     display: inline-block;
     font-weight: 600;
     color: #e11d48;
@@ -191,9 +199,37 @@ header nav a:hover {
 
 .producto a:hover,
 .marca a:hover,
-.experiencia a:hover {
+#descubri .experiencia a:hover,
+.tienda a:hover {
     background: #e11d48;
     color: #ffffff;
+}
+
+/* ===== Sección Tiendas (en index solo visible desde #inicio) ===== */
+main#inicio #tiendas {
+    display: none;
+}
+
+main#inicio:target #tiendas {
+    display: block;
+}
+
+/* ===== Sección Descubrí (solo visible al acceder por el ancla #descubri) ===== */
+#descubri {
+    display: none;
+}
+
+#descubri:target {
+    display: block;
+}
+
+/* ===== Experiencias (solo visibles desde #descubri) ===== */
+.experiencia {
+    display: none;
+}
+
+#descubri .experiencia {
+    display: block;
 }
 
 /* ===== Comprar ===== */
@@ -228,15 +264,53 @@ footer {
     background: #111827;
     color: #d1d5db;
     text-align: center;
-    padding: 2rem 1rem;
+    padding: 2.5rem 1rem 2rem;
     margin-top: 3rem;
 }
 
-footer p {
-    margin-bottom: 1rem;
+footer .footer-logo {
+    max-width: 180px;
+    margin: 0 auto 2rem;
 }
 
-footer nav ul {
+footer .footer-cols {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+footer .footer-col {
+    min-width: 200px;
+}
+
+footer .footer-col h5 {
+    color: #ffffff;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+footer .footer-col ul {
+    list-style: none;
+}
+
+footer .footer-col a {
+    color: #9ca3af;
+    display: inline-block;
+    padding: 0.25rem 0;
+    transition: color 0.2s;
+}
+
+footer .footer-col a:hover {
+    color: #ffffff;
+}
+
+footer .footer-social {
+    margin-bottom: 1.5rem;
+}
+
+footer .footer-social ul {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
@@ -244,13 +318,17 @@ footer nav ul {
     gap: 0.5rem 1.5rem;
 }
 
-footer nav a {
+footer .footer-social a {
     color: #d1d5db;
     transition: color 0.2s;
 }
 
-footer nav a:hover {
+footer .footer-social a:hover {
     color: #ffffff;
+}
+
+footer p {
+    color: #9ca3af;
 }
 
 /* ===== Responsive ===== */
@@ -481,4 +559,187 @@ footer nav a:hover {
 .producto-detalle a:hover {
     background: #e11d48;
     color: #ffffff;
+}
+
+/* ===== Buscador de productos (solo HTML/CSS) ===== */
+.buscador {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.buscador .filtro {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.buscador-barra {
+    position: relative;
+    max-width: 440px;
+    margin: 0 auto 1.5rem;
+    background: #ffffff;
+    border: 2px solid #e5e7eb;
+    border-radius: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.buscador-barra:hover,
+.buscador-barra[open] {
+    border-color: #e11d48;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.bus-summary {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.1rem;
+    cursor: pointer;
+    list-style: none;
+}
+
+.bus-summary::-webkit-details-marker {
+    display: none;
+}
+
+.bus-icono {
+    color: #e11d48;
+}
+
+.bus-texto {
+    flex: 1;
+    color: #6b7280;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bus-texto > span {
+    display: none;
+}
+
+#f-todos:checked ~ .buscador-barra .t-todos,
+#f-coca-cola:checked ~ .buscador-barra .t-coca-cola,
+#f-sprite:checked ~ .buscador-barra .t-sprite,
+#f-fanta:checked ~ .buscador-barra .t-fanta,
+#f-schweppes:checked ~ .buscador-barra .t-schweppes {
+    display: inline;
+}
+
+.bus-flecha {
+    color: #9ca3af;
+    font-size: 0.75rem;
+    transition: transform 0.2s;
+}
+
+.buscador-barra[open] .bus-flecha {
+    transform: rotate(180deg);
+}
+
+.bus-opciones {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 280px;
+    max-height: 300px;
+    overflow-y: auto;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+}
+
+.bus-opciones label {
+    display: block;
+    padding: 0.6rem 0.75rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    color: #374151;
+    font-weight: 500;
+    transition: background 0.15s, color 0.15s;
+}
+
+.bus-opciones label:hover {
+    background: #fdf2f4;
+    color: #e11d48;
+}
+
+#f-todos:checked ~ .buscador-barra .bus-opciones label[for="f-todos"],
+#f-coca-cola:checked ~ .buscador-barra .bus-opciones label[for="f-coca-cola"],
+#f-sprite:checked ~ .buscador-barra .bus-opciones label[for="f-sprite"],
+#f-fanta:checked ~ .buscador-barra .bus-opciones label[for="f-fanta"],
+#f-schweppes:checked ~ .buscador-barra .bus-opciones label[for="f-schweppes"] {
+    background: #fdf2f4;
+    color: #e11d48;
+    font-weight: 700;
+}
+
+#f-todos:checked ~ .buscador-barra .bus-opciones label[for="f-todos"]::before,
+#f-coca-cola:checked ~ .buscador-barra .bus-opciones label[for="f-coca-cola"]::before,
+#f-sprite:checked ~ .buscador-barra .bus-opciones label[for="f-sprite"]::before,
+#f-fanta:checked ~ .buscador-barra .bus-opciones label[for="f-fanta"]::before,
+#f-schweppes:checked ~ .buscador-barra .bus-opciones label[for="f-schweppes"]::before {
+    content: "✓ ";
+}
+
+/* Filtrado de marcas y productos */
+.buscador > section h3 {
+    margin-top: 1.5rem;
+}
+
+.buscador .item-cards .marca,
+.buscador .item-cards .producto {
+    display: none;
+}
+
+#f-todos:checked ~ #marcas .item-cards .marca,
+#f-todos:checked ~ #catalogo .item-cards .producto,
+#f-coca-cola:checked ~ #marcas .item-cards .marca-coca-cola,
+#f-coca-cola:checked ~ #catalogo .item-cards .producto-coca-cola,
+#f-sprite:checked ~ #marcas .item-cards .marca-sprite,
+#f-sprite:checked ~ #catalogo .item-cards .producto-sprite,
+#f-fanta:checked ~ #marcas .item-cards .marca-fanta,
+#f-fanta:checked ~ #catalogo .item-cards .producto-fanta,
+#f-schweppes:checked ~ #marcas .item-cards .marca-schweppes,
+#f-schweppes:checked ~ #catalogo .item-cards .producto-schweppes {
+    display: block;
+    animation: aparecer 0.25s ease;
+}
+
+#f-coca-cola:checked ~ #marcas .item-cards,
+#f-coca-cola:checked ~ #catalogo .item-cards,
+#f-sprite:checked ~ #marcas .item-cards,
+#f-sprite:checked ~ #catalogo .item-cards,
+#f-fanta:checked ~ #marcas .item-cards,
+#f-fanta:checked ~ #catalogo .item-cards,
+#f-schweppes:checked ~ #marcas .item-cards,
+#f-schweppes:checked ~ #catalogo .item-cards {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 280px));
+    justify-content: center;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    .bus-opciones {
+        left: 0;
+        right: 0;
+        transform: none;
+        min-width: auto;
+    }
 }

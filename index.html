@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Refrescante Argentina</title>
+  <title>Refresco Argentina</title>
+  <link rel="icon" type="image/x-icon" href="refresco.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <header>
-    <div class="logo">Refrescante Argentina</div>
+    <div class="logo">Refresco Argentina</div>
     <nav aria-label="Navegación principal">
       <ul>
         <li><a href="#inicio">Inicio</a></li>
@@ -22,99 +29,202 @@
   </header>
 
   <main id="inicio">
+
     <section class="hero">
-      <h2>La chispa de la vida en cada sorbo</h2>
+      <h2><img src="refresco.ico" alt="Refresco Argentina"> La chispa de la vida en cada sorbo</h2>
       <p>El sabor que acompaña cada momento.</p>
       <a href="#marcas">Conocé nuestras marcas</a>
     </section>
+    <div class="items">
 
-    <section id="marcas">
-      <h3>Nuestras marcas</h3>
-      <article class="marca">
-        <h4>Coca‑Cola</h4>
-        <p>El sabor original.</p>
-        <a href="#coca-cola">Explorar</a>
-      </article>
-      <article class="marca">
-        <h4>Sprite</h4>
-        <p>Frescura lima‑limón.</p>
-        <a href="#sprite">Explorar</a>
-      </article>
-      <article class="marca">
-        <h4>Fanta</h4>
-        <p>Diversión y sabor naranja.</p>
-        <a href="#fanta">Explorar</a>
-      </article>
-      <article class="marca">
-        <h4>Schweppes</h4>
-        <p>Un clásico para grandes ocasiones.</p>
-        <a href="#schweppes">Explorar</a>
-      </article>
-    </section>
+      <div class="buscador">
+        <input class="filtro" type="radio" name="filtro" id="f-todos" checked>
+        <input class="filtro" type="radio" name="filtro" id="f-coca-cola">
+        <input class="filtro" type="radio" name="filtro" id="f-sprite">
+        <input class="filtro" type="radio" name="filtro" id="f-fanta">
+        <input class="filtro" type="radio" name="filtro" id="f-schweppes">
 
-    <section id="catalogo">
-      <h3>Nuestros productos</h3>
-      <article class="producto">
-        <img src="img/coca-cola.svg" alt="Coca-Cola Original 500ml">
-        <h4>Coca-Cola Original 500ml</h4>
-        <p>El sabor original en botella de 500ml.</p>
-        <a href="producto.html?id=coca-cola">Ver detalle</a>
-      </article>
-      <article class="producto">
-        <img src="img/sprite.svg" alt="Sprite Lima-Limón 500ml">
-        <h4>Sprite Lima-Limón 500ml</h4>
-        <p>Frescura lima-limón en botella de 500ml.</p>
-        <a href="producto.html?id=sprite">Ver detalle</a>
-      </article>
-      <article class="producto">
-        <img src="img/fanta.svg" alt="Fanta Naranja 500ml">
-        <h4>Fanta Naranja 500ml</h4>
-        <p>Diversión y sabor naranja en botella de 500ml.</p>
-        <a href="producto.html?id=fanta">Ver detalle</a>
-      </article>
-      <article class="producto">
-        <img src="img/schweppes.svg" alt="Schweppes Tónica 500ml">
-        <h4>Schweppes Tónica 500ml</h4>
-        <p>Un clásico para grandes ocasiones en botella de 500ml.</p>
-        <a href="producto.html?id=schweppes">Ver detalle</a>
-      </article>
-    </section>
+        <details class="buscador-barra">
+          <summary class="bus-summary" title="Buscar marca o producto">
+            <span class="bus-icono">&#128269;</span>
+            <span class="bus-texto">
+              <span class="t-todos">¿Qué gaseosa buscás? Elegí una marca…</span>
+              <span class="t-coca-cola">Coca-Cola</span>
+              <span class="t-sprite">Sprite</span>
+              <span class="t-fanta">Fanta</span>
+              <span class="t-schweppes">Schweppes</span>
+            </span>
+            <span class="bus-flecha">&#9660;</span>
+          </summary>
+          <div class="bus-opciones">
+            <label for="f-todos">Todas las marcas</label>
+            <label for="f-coca-cola">Coca-Cola</label>
+            <label for="f-sprite">Sprite</label>
+            <label for="f-fanta">Fanta</label>
+            <label for="f-schweppes">Schweppes</label>
+          </div>
+        </details>
 
-    <section id="descubri">
-      <h3>Experiencias</h3>
-      <article class="experiencia">
-        <h4>Coke Studio</h4>
-        <p>Música y sesiones exclusivas.</p>
-        <a href="#coke-studio">Explorar</a>
-      </article>
-      <article class="experiencia">
-        <h4>Torneo de futbol Coca Cola</h4>
-        <p>Promos y la pasión de un torneo.</p>
-        <a href="#fifa26">Ver promos</a>
-      </article>
-      <article class="experiencia">
-        <h4>Aliados por el agua</h4>
-        <p>El ciclo del agua para todos.</p>
-        <a href="#sustentabilidad">Conocé más</a>
-      </article>
-    </section>
+        <section id="marcas">
+          <h3>Nuestras marcas</h3>
+          <div class="item-cards">
+            <article class="marca marca-coca-cola">
+              <h4>Coca‑Cola</h4>
+              <p>El sabor original.</p>
+              <a href="#coca-cola">Explorar</a>
+            </article>
+            <article class="marca marca-sprite">
+              <h4>Sprite</h4>
+              <p>Frescura lima‑limón.</p>
+              <a href="#sprite">Explorar</a>
+            </article>
+            <article class="marca marca-fanta">
+              <h4>Fanta</h4>
+              <p>Diversión y sabor naranja.</p>
+              <a href="#fanta">Explorar</a>
+            </article>
+            <article class="marca marca-schweppes">
+              <h4>Schweppes</h4>
+              <p>Un clásico para grandes ocasiones.</p>
+              <a href="#schweppes">Explorar</a>
+            </article>
+          </div>
+        </section>
 
-    <section id="comprar">
-      <h3>¿Te quedaste sin gaseosa?</h3>
-      <a href="#tiendas">Comprar ahora</a>
-    </section>
+        <section id="tiendas">
+          <h3>Tiendas Cencosud</h3>
+          <div class="item-cards">
+            <article class="tienda">
+              <img src="img/jumbo.jpg" alt="Logo Jumbo Cencosud">
+              <h4>Jumbo Cencosud</h4>
+              <p>Tus compras del súper con toda la chispa Coca‑Cola.</p>
+              <a href="https://www.jumbo.com.ar/benedictino?_q=benedictino&map=ft" rel="noopener noreferrer" target="_blank">Comprar acá</a>
+            </article>
+            <article class="tienda">
+              <img src="img/disco.jpg" alt="Logo Disco Cencosud">
+              <h4>Disco Cencosud</h4>
+              <p>Las mejores ofertas del súper con Coca‑Cola.</p>
+              <a href="https://www.disco.com.ar/benedictino?_q=benedictino&map=ft" rel="noopener noreferrer" target="_blank">Comprar acá</a>
+            </article>
+            <article class="tienda">
+              <img src="img/vea.jpg" alt="Logo Vea Cencosud">
+              <h4>Vea Cencosud</h4>
+              <p>El súper de cercanía con todos tus productos.</p>
+              <a href="https://www.vea.com.ar/benedictino?_q=benedictino&map=ft" rel="noopener noreferrer" target="_blank">Comprar acá</a>
+            </article>
+          </div>
+        </section>
+
+        <section id="catalogo">
+          <h3>Nuestros productos</h3>
+          <div class="item-cards">
+            <article class="producto producto-coca-cola">
+              <img src="img/coca-cola.jpg" alt="Coca-Cola Original 500ml">
+              <h4>Coca-Cola Original 500ml</h4>
+              <p>El sabor original en botella de 500ml.</p>
+              <a href="producto.html?id=coca-cola">Ver detalle</a>
+            </article>
+            <article class="producto producto-sprite">
+              <img src="img/sprite.jpg" alt="Sprite Lima-Limón 500ml">
+              <h4>Sprite Lima-Limón 500ml</h4>
+              <p>Frescura lima-limón en botella de 500ml.</p>
+              <a href="producto.html?id=sprite">Ver detalle</a>
+            </article>
+            <article class="producto producto-fanta">
+              <img src="img/fanta.jpg" alt="Fanta Naranja 500ml">
+              <h4>Fanta Naranja 500ml</h4>
+              <p>Diversión y sabor naranja en botella de 500ml.</p>
+              <a href="producto.html?id=fanta">Ver detalle</a>
+            </article>
+            <article class="producto producto-schweppes">
+              <img src="img/schweppes.jpg" alt="Schweppes Tónica 500ml">
+              <h4>Schweppes Tónica 500ml</h4>
+              <p>Un clásico para grandes ocasiones en botella de 500ml.</p>
+              <a href="producto.html?id=schweppes">Ver detalle</a>
+            </article>
+          </div>
+        </section>
+      </div>
+
+     
+
+      <section id="descubri">
+        <h3>Experiencias</h3>
+        <div class="item-cards">
+          <article class="experiencia">
+            <img src="img/fanta-halloween.jpg" alt="Fanta Halloween">
+            <h4>Fanta Halloween</h4>
+            <p>Registrate y llevate 2x1 en entradas para Cinemark.</p>
+            <a href="https://www.coca-cola.com/ar/es/offerings/fanta-halloween-26" rel="noopener noreferrer" target="_blank">Explorar</a>
+          </article>
+          <article class="experiencia">
+            <img src="img/copa-mundial.jpg" alt="Copa Mundial de la FIFA 26">
+            <h4>Copa Mundial de la FIFA 26™</h4>
+            <p>La pasión sigue con Coca‑Cola rumbo al Mundial.</p>
+            <a href="https://www.coca-cola.com/ar/es/offerings/copa-mundial-de-la-fifa-2026" rel="noopener noreferrer" target="_blank">Explorar</a>
+          </article>
+          <article class="experiencia">
+            <img src="img/juntos-en-todas.jpg" alt="Juntos en Todas">
+            <h4>Juntos en Todas</h4>
+            <p>Una experiencia única de The Coca‑Cola Company.</p>
+            <a href="https://www.coca-cola.com/ar/es/offerings/juntos-en-todas" rel="noopener noreferrer" target="_blank">Explorar</a>
+          </article>
+          <article class="experiencia">
+            <img src="img/coke-studio.jpg" alt="Coke Studio">
+            <h4>Coke Studio</h4>
+            <p>Música y sesiones exclusivas con los mejores artistas.</p>
+            <a href="https://www.coca-cola.com/ar/es/offerings/coke-studio" rel="noopener noreferrer" target="_blank">Explorar</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="comprar">
+        <h3>¿Te quedaste sin gaseosa?</h3>
+        <a href="#tiendas">Comprar ahora</a>
+      </section>
+    </div>
   </main>
 
   <footer>
-    <p>&copy; 2026 Refrescante Argentina. Todos los derechos reservados.</p>
-    <nav aria-label="Redes sociales">
+    <div class="footer-logo">
+      <img src="img/coca-cola-logo-white.svg" alt="The Coca Cola Company">
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h5>Sobre Nosotros</h5>
+        <ul>
+          <li><a href="https://www.coca-colacompany.com/company" rel="noopener noreferrer" target="_blank">Nuestra Compañía</a></li>
+          <li><a href="https://www.coca-cola.com/ar/es/media-center" rel="noopener noreferrer" target="_blank">Sala de Prensa</a></li>
+          <li><a href="https://www.coca-colacompany.com/about-us/history" rel="noopener noreferrer" target="_blank">Nuestra historia</a></li>
+          <li><a href="https://www.coca-colacompany.com/careers" rel="noopener noreferrer" target="_blank">Trabaja con nosotros</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>¿Necesitas Ayuda?</h5>
+        <ul>
+          <li><a href="https://www.coca-cola.com/ar/es/sitemap" rel="noopener noreferrer" target="_blank">Mapa del sitio</a></li>
+          <li><a href="https://www.coca-cola.com/ar/es/about-us/contact-us" rel="noopener noreferrer" target="_blank">Contáctanos</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="https://www.coca-cola.com/ar/es/legal/terms-of-service" rel="noopener noreferrer" target="_blank">Términos de Uso</a></li>
+          <li><a href="https://datatrust.coca-cola.com/xg/es#global-privacy-notices" rel="noopener noreferrer" target="_blank">Aviso de privacidad del consumidor</a></li>
+          <li><a href="https://datatrust.coca-cola.com/xg/es#global-privacy-notices" rel="noopener noreferrer" target="_blank">Aviso de cookies</a></li>
+        </ul>
+      </div>
+    </div>
+    <nav class="footer-social" aria-label="Redes sociales">
       <ul>
-        <li><a href="https://facebook.com" rel="noopener noreferrer" target="_blank">Facebook</a></li>
-        <li><a href="https://instagram.com" rel="noopener noreferrer" target="_blank">Instagram</a></li>
-        <li><a href="https://x.com" rel="noopener noreferrer" target="_blank">X</a></li>
-        <li><a href="https://youtube.com" rel="noopener noreferrer" target="_blank">YouTube</a></li>
+        <li><a href="https://facebook.com/CocaColaCoAr/" rel="noopener noreferrer" target="_blank">Facebook</a></li>
+        <li><a href="https://www.instagram.com/cocacolacoar/" rel="noopener noreferrer" target="_blank">Instagram</a></li>
+        <li><a href="https://www.youtube.com/user/CocaColaCo" rel="noopener noreferrer" target="_blank">Youtube</a></li>
+        <li><a href="https://www.linkedin.com/company/the-coca-cola-company" rel="noopener noreferrer" target="_blank">LinkedIn</a></li>
       </ul>
     </nav>
+    <p>&copy; 2026 The Coca‑Cola Company. Todos los derechos reservados.</p>
   </footer>
 </body>
+
 </html>
