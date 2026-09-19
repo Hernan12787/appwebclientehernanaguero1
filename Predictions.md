@@ -5,3 +5,4 @@
 5.simplificar el codigo y agregarle css.
 6.Agregar imagenes reales en vez de vectoriales
 7.agrego buscador de productos 
+agregar marcas y un footer
