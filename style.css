@@ -110,19 +110,9 @@ header nav a:hover {
 }
 
 /* ===== Grids de tarjetas ===== */
-#marcas {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-}
 
-#catalogo {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-}
 
-#descubri {
+.items .item-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
@@ -131,6 +121,7 @@ header nav a:hover {
 .marca,
 .producto,
 .experiencia {
+   
     background: #ffffff;
     border: 1px solid #e5e7eb;
     border-radius: 1rem;
