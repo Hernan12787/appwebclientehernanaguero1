@@ -142,7 +142,8 @@ header nav a:hover {
     transition: transform 0.3s ease-in, box-shadow 0.3s ease-in;
 }
 
-.producto img {
+.producto img,
+.experiencia img {
     margin: 0 auto 1rem;
     border-radius: 0.5rem;
 }
