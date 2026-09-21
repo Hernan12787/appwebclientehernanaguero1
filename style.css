@@ -152,6 +152,11 @@ header nav a:hover {
     border-radius: 0.5rem;
 }
 
+.producto img {
+    max-height: 150px;
+    object-fit: contain;
+}
+
 .tienda img {
     width: 100%;
     max-width: 320px;
@@ -742,4 +747,71 @@ footer p {
         transform: none;
         min-width: auto;
     }
+}
+
+/* ===== Aguas purificadas y minerales ===== */
+#catalogo .aguas-detalles {
+    margin-top: 2rem;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+#catalogo .aguas-detalles summary {
+    cursor: pointer;
+    font-weight: 700;
+    color: #111827;
+    padding: 1rem 1.25rem;
+    list-style-position: inside;
+    transition: color 0.2s;
+}
+
+#catalogo .aguas-detalles summary:hover {
+    color: #e11d48;
+}
+
+#catalogo .aguas-detalles[open] summary {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+#catalogo .aguas-detalles .item-cards {
+    padding: 1.5rem;
+}
+
+#catalogo .aguas-detalles .agua {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#catalogo .aguas-detalles .agua a {
+    display: block;
+    color: inherit;
+}
+
+#catalogo .aguas-detalles .agua:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+#catalogo .aguas-detalles .agua img {
+    max-height: 150px;
+    margin: 0 auto 1rem;
+    border-radius: 0.5rem;
+    object-fit: contain;
+}
+
+#catalogo .aguas-detalles .agua h4 {
+    margin-bottom: 0.5rem;
+    color: #111827;
+    transition: all 0.3s ease;
+}
+
+#catalogo .aguas-detalles .agua:hover h4 {
+    color: #e11d48;
 }

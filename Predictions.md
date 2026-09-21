@@ -8,3 +8,4 @@
 agregar marcas y un footer
 borrar las clases que sobran y que son redundantes
  quitar iconos sobrantes
+ Agregar productos nuevos
