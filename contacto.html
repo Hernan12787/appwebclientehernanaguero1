@@ -24,8 +24,25 @@
   <main>
     <section id="contacto">
       <h2>Contacto de clientes</h2>
-      <p>Completá el formulario y te responderemos a la brevedad.</p>
-      <form action="#" method="post">
+      <p>Completá el formulario y te responderemos a la brevedad, o visitanos en nuestra planta de Coca-Cola FEMSA.</p>
+      <div class="contacto-grid">
+        <aside class="contacto-mapa">
+          <h3>Nuestra planta</h3>
+          <p class="contacto-mapa-dir">
+            <strong>Coca-Cola FEMSA Argentina</strong><br>
+            Av. Amancio Alcorta 3570,<br>
+            C1437HUS Ciudad de Buenos Aires
+          </p>
+          <iframe
+            src="https://www.google.com/maps?q=Av.%20Amancio%20Alcorta%203570%2C%20Ciudad%20Aut%C3%B3noma%20de%20Buenos%20Aires%2C%20Argentina&output=embed"
+            title="Mapa de Coca-Cola FEMSA Argentina"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+          <a href="https://www.google.com/maps?q=Av.%20Amancio%20Alcorta%203570%2C%20Ciudad%20Aut%C3%B3noma%20de%20Buenos%20Aires%2C%20Argentina" rel="noopener noreferrer" target="_blank">Abrir en Google Maps</a>
+        </aside>
+        <form action="#" method="post">
         <div>
           <label for="nombre">Nombre y apellido</label>
           <input type="text" id="nombre" name="nombre" required>
@@ -54,6 +71,7 @@
         </div>
         <button type="submit">Enviar</button>
       </form>
+      </div>
     </section>
   </main>
 
