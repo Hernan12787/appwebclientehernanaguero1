@@ -299,6 +299,12 @@ header nav a:hover {
     color: #ffffff;
 }
 
+/* ===== Historia solo visible en #inicio, oculta en las vistas de catálogo y descubrí ===== */
+main#inicio:has(#catalogo:target) .historia,
+main#inicio:has(#descubri:target) .historia {
+    display: none;
+}
+
 /* ===== Vistas por ancla: catálogo y descubrí solo desde su enlace ===== */
 main#inicio #catalogo,
 main#inicio #descubri {
