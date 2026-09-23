@@ -9,11 +9,10 @@
 </head>
 <body>
   <header>
-    <div class="logo">Refrescante Argentina</div>
+    <div class="logo"><img src="img/coca-tapa.svg" alt="Tapa de Coca-Cola" class="logo-icono"> Refrescante Argentina</div>
     <nav aria-label="Navegación principal">
       <ul>
         <li><a href="index.html#inicio">Inicio</a></li>
-        <li><a href="index.html#marcas">Marcas</a></li>
         <li><a href="index.html#catalogo">Catálogo</a></li>
         <li><a href="carrito.html">Carrito</a></li>
         <li><a href="contacto.html">Contacto</a></li>
@@ -24,45 +23,74 @@
   <main>
     <section id="carrito">
       <h2>Tu carrito de compras</h2>
+      <p class="carrito-hint">Elegí cuántas unidades querés comprar de cada gaseosa, sin límites.</p>
 
-      <article class="item-carrito">
-        <img src="img/coca-cola.jpg" alt="Coca-Cola Original 500ml">
-        <div>
-          <h4>Coca-Cola Original 500ml</h4>
-          <p>Precio unitario: $1.200</p>
-          <p>Cantidad: 2</p>
+      <div class="carrito-wrap">
+        <div class="carrito-grid">
+
+          <article class="item-carrito card-coca">
+            <img src="img/coca-cola.jpg" alt="Coca-Cola Original 500ml">
+            <div class="item-info">
+              <h4>Coca-Cola Original 500ml</h4>
+              <p>Precio unitario: $1.200</p>
+              <div class="cantidad">
+                <label for="uds-coca">Unidades:</label>
+                <input type="number" class="unidades" id="uds-coca" value="0" min="0">
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-sprite">
+            <img src="img/sprite.jpg" alt="Sprite Lima-Limón 500ml">
+            <div class="item-info">
+              <h4>Sprite Lima-Limón 500ml</h4>
+              <p>Precio unitario: $1.100</p>
+              <div class="cantidad">
+                <label for="uds-sprite">Unidades:</label>
+                <input type="number" class="unidades" id="uds-sprite" value="0" min="0">
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-fanta">
+            <img src="img/fanta.jpg" alt="Fanta Naranja 500ml">
+            <div class="item-info">
+              <h4>Fanta Naranja 500ml</h4>
+              <p>Precio unitario: $1.100</p>
+              <div class="cantidad">
+                <label for="uds-fanta">Unidades:</label>
+                <input type="number" class="unidades" id="uds-fanta" value="0" min="0">
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-schweppes">
+            <img src="img/schweppes.jpg" alt="Schweppes Tónica 500ml">
+            <div class="item-info">
+              <h4>Schweppes Tónica 500ml</h4>
+              <p>Precio unitario: $1.100</p>
+              <div class="cantidad">
+                <label for="uds-schweppes">Unidades:</label>
+                <input type="number" class="unidades" id="uds-schweppes" value="0" min="0">
+              </div>
+            </div>
+          </article>
+
         </div>
-        <p class="subtotal">Subtotal: $2.400</p>
-      </article>
 
-      <article class="item-carrito">
-        <img src="img/sprite.jpg" alt="Sprite Lima-Limón 500ml">
-        <div>
-          <h4>Sprite Lima-Limón 500ml</h4>
-          <p>Precio unitario: $1.100</p>
-          <p>Cantidad: 1</p>
-        </div>
-        <p class="subtotal">Subtotal: $1.100</p>
-      </article>
-
-      <article class="item-carrito">
-        <img src="img/fanta.jpg" alt="Fanta Naranja 500ml">
-        <div>
-          <h4>Fanta Naranja 500ml</h4>
-          <p>Precio unitario: $1.100</p>
-          <p>Cantidad: 3</p>
-        </div>
-        <p class="subtotal">Subtotal: $3.300</p>
-      </article>
-
-      <aside class="resumen">
-        <h3>Resumen</h3>
-        <p>Productos: 6</p>
-        <p>Subtotal: $6.800</p>
-        <p>Envío: $1.000</p>
-        <p><strong>Total: $7.800</strong></p>
-        <a href="contacto.html">Finalizar compra</a>
-      </aside>
+        <aside class="resumen">
+          <h3>Tu lista de compra</h3>
+          <ul class="lista-seleccion">
+            <li id="fila-coca"><span class="ico-sel">&#10003;</span><span>Coca-Cola Original 500ml</span><span class="subtot"><span class="cant">0</span> × $1.200 = <span class="submonto">$0</span></span></li>
+            <li id="fila-sprite"><span class="ico-sel">&#10003;</span><span>Sprite Lima-Limón 500ml</span><span class="subtot"><span class="cant">0</span> × $1.100 = <span class="submonto">$0</span></span></li>
+            <li id="fila-fanta"><span class="ico-sel">&#10003;</span><span>Fanta Naranja 500ml</span><span class="subtot"><span class="cant">0</span> × $1.100 = <span class="submonto">$0</span></span></li>
+            <li id="fila-schweppes"><span class="ico-sel">&#10003;</span><span>Schweppes Tónica 500ml</span><span class="subtot"><span class="cant">0</span> × $1.100 = <span class="submonto">$0</span></span></li>
+          </ul>
+          <p class="res-total">Total a pagar: <strong id="total-compra">$0</strong></p>
+          <p id="res-mensaje" class="res-mensaje"></p>
+          <button type="button" id="btn-finalizar" class="btn-finalizar">Finalizar compra</button>
+        </aside>
+      </div>
     </section>
 
     <section id="tiendas">
@@ -130,5 +158,50 @@
     </nav>
     <p>&copy; 2026 The Coca‑Cola Company. Todos los derechos reservados.</p>
   </footer>
+
+  <script>
+    const productos = {
+      'uds-coca':       { fila: 'fila-coca',       nombre: 'Coca-Cola Original 500ml', precio: 1200 },
+      'uds-sprite':     { fila: 'fila-sprite',     nombre: 'Sprite Lima-Limón 500ml',   precio: 1100 },
+      'uds-fanta':      { fila: 'fila-fanta',      nombre: 'Fanta Naranja 500ml',       precio: 1100 },
+      'uds-schweppes':  { fila: 'fila-schweppes',  nombre: 'Schweppes Tónica 500ml',    precio: 1100 }
+    };
+
+    function formatearPeso(n) {
+      return '$' + n.toLocaleString('es-AR');
+    }
+
+    function actualizarLista() {
+      let total = 0;
+      for (const id in productos) {
+        const info = productos[id];
+        const input = document.getElementById(id);
+        const cant = Math.max(0, parseInt(input.value, 10) || 0);
+        const submonto = cant * info.precio;
+        total += submonto;
+        const fila = document.getElementById(info.fila);
+        fila.querySelector('.cant').textContent = cant;
+        fila.querySelector('.submonto').textContent = formatearPeso(submonto);
+      }
+      document.getElementById('total-compra').textContent = formatearPeso(total);
+      return total;
+    }
+
+    ['uds-coca', 'uds-sprite', 'uds-fanta', 'uds-schweppes'].forEach(id => {
+      document.getElementById(id).addEventListener('input', actualizarLista);
+    });
+
+    document.getElementById('btn-finalizar').addEventListener('click', () => {
+      const total = actualizarLista();
+      const mensaje = document.getElementById('res-mensaje');
+      if (total > 0) {
+        mensaje.textContent = 'Gracias por tu compra. Total: ' + formatearPeso(total) + '.';
+        mensaje.className = 'res-mensaje ok';
+      } else {
+        mensaje.textContent = 'Aún no elegiste ninguna gaseosa.';
+        mensaje.className = 'res-mensaje';
+      }
+    });
+  </script>
 </body>
 </html>
