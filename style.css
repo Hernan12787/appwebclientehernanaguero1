@@ -78,35 +78,117 @@ header nav a:hover {
     border-bottom-color: #e11d48;
 }
 
-/* ===== Hero ===== */
-.hero {
+/* ===== Historia (vista Inicio) ===== */
+.historia {
     text-align: center;
-    padding: 4rem 1rem;
-    background: linear-gradient(135deg, #e11d48, #f97316);
-    color: #ffffff;
-    border-radius: 1rem;
-    margin-top: 2rem;
+    padding: 2.5rem 1rem 1rem;
 }
 
-.hero h2 {
-    color: #ffffff;
-    margin: 0 0 0.75rem;
+.historia h1 {
+    color: #111827;
+    font-size: 2.2rem;
+    margin-bottom: 0.75rem;
+}
+
+.historia-subtitulo {
+    color: #6b7280;
+    font-size: 1.1rem;
+    max-width: 640px;
+    margin: 0 auto 2rem;
+}
+
+.historia h2 {
+    text-align: center;
+    margin: 2.5rem 0 1.5rem;
+}
+
+.historia-figura {
+    margin: 0;
+    text-align: center;
+}
+
+.historia-figura img {
+    margin: 0 auto 1rem;
+    max-height: 150px;
+    object-fit: contain;
+    border-radius: 0.5rem;
+}
+
+.historia-figura figcaption {
+    margin-top: 0.25rem;
+    color: #9ca3af;
+    font-size: 0.85rem;
+}
+
+.historia-texto p {
+    text-align: center;
+}
+
+.historia-texto-ancho {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.historia-lista {
+    max-width: 640px;
+    margin: 0 auto;
+    padding-left: 1.25rem;
+    color: #4b5563;
+    text-align: left;
+}
+
+.historia-lista li {
+    margin-bottom: 0.75rem;
+}
+
+.hitos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.hito {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hito:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.hito h4 {
+    margin-bottom: 0.5rem;
+    color: #111827;
     transition: all 0.3s ease;
 }
 
-.hero a {
-    display: inline-block;
-    margin-top: 1.5rem;
-    background: #ffffff;
+.hito:hover h4 {
     color: #e11d48;
-    font-weight: 600;
-    padding: 0.75rem 1.5rem;
-    border-radius: 2rem;
-    transition: transform 0.2s;
 }
 
-.hero a:hover {
-    transform: translateY(-2px);
+.hito-fecha {
+    color: #e11d48;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.hito p {
+    color: #6b7280;
+}
+
+@media (max-width: 600px) {
+    .historia h1 {
+        font-size: 1.6rem;
+    }
 }
 
 /* ===== Grids de tarjetas ===== */
@@ -210,24 +292,19 @@ header nav a:hover {
     color: #ffffff;
 }
 
-/* ===== Secciones Marcas y Tiendas: ocultas en #inicio, visibles desde su ancla ===== */
-main#inicio #marcas,
-main#inicio #tiendas {
+/* ===== Vistas por ancla: catálogo y descubrí solo desde su enlace ===== */
+main#inicio #catalogo,
+main#inicio #descubri {
     display: none;
 }
 
-main#inicio #marcas:target,
-main#inicio #tiendas:target {
+main#inicio #catalogo:target,
+main#inicio #descubri:target {
     display: block;
 }
 
-/* ===== Sección Descubrí (solo visible al acceder por el ancla #descubri) ===== */
-#descubri {
+main#inicio:has(#descubri:target) #catalogo {
     display: none;
-}
-
-#descubri:target {
-    display: block;
 }
 
 /* ===== Experiencias (solo visibles desde #descubri) ===== */
@@ -346,10 +423,6 @@ footer p {
 }
 
 @media (max-width: 600px) {
-    .hero {
-        padding: 3rem 1rem;
-    }
-
     header nav ul {
         flex-direction: column;
         align-items: center;
@@ -702,9 +775,17 @@ footer p {
 
 /* ===== Detalle de producto ===== */
 #detalle {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
     gap: 1.5rem;
+}
+
+#detalle h3 {
+    flex-basis: 100%;
+    text-align: center;
+    margin: 1rem 0 1.5rem;
 }
 
 .producto-detalle {
@@ -715,6 +796,8 @@ footer p {
     text-align: center;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     transition: all 0.3s ease;
+    flex: 1 1 240px;
+    max-width: 300px;
 }
 
 .producto-detalle:hover {

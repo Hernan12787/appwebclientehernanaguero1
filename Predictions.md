@@ -9,3 +9,7 @@ agregar marcas y un footer
 borrar las clases que sobran y que son redundantes
  quitar iconos sobrantes
  Agregar productos nuevos
+ Agregar mapa,lista de compras en carrito,mejorar el diseño de las paginas
+ Armar un un enlace de inicio con una historia de la bebida
+
+

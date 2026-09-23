@@ -15,7 +15,6 @@
     <nav aria-label="Navegación principal">
       <ul>
         <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#marcas">Marcas</a></li>
         <li><a href="#catalogo">Catálogo</a></li>
         <li><a href="#descubri">Descubrí</a></li>
         <li><a href="carrito.html">Carrito</a></li>
@@ -26,92 +25,77 @@
 
   <main id="inicio">
 
-    <section class="hero">
-      <h2><img src="refresco.ico" alt="Refresco Argentina"> La chispa de la vida en cada sorbo</h2>
-      <p>El sabor que acompaña cada momento.</p>
-      <a href="#marcas">Conocé nuestras marcas</a>
+    <section class="historia">
+      <h1>Sabor Único, Historia Inigualable</h1>
+      <p class="historia-subtitulo">Más de un siglo acompañando momentos, conectando personas y refrescando al mundo.</p>
+
+      <div class="item-cards">
+        <figure class="producto historia-figura">
+          <img src="img/afiche-coca-cola.jpg" alt="Afiche publicitario clásico de Coca-Cola">
+          <h4>Afiche clásico</h4>
+          <p>Afiche publicitario clásico de Coca-Cola.</p>
+          <figcaption>Fuente: Wikipedia</figcaption>
+        </figure>
+        <figure class="producto historia-figura">
+          <img src="img/botella-contour-1915.jpg" alt="Evolución de la icónica botella Contour">
+          <h4>La botella Contour</h4>
+          <p>Evolución de la icónica botella Contour.</p>
+          <figcaption>Fuente: Retail Brew</figcaption>
+        </figure>
+      </div>
+
+      <h2>Reseña Histórica: El Viaje de una Leyenda</h2>
+
+      <div class="item-cards">
+        <article class="producto historia-texto">
+          <h4>1886: El Origen en Atlanta</h4>
+          <p>Todo comenzó en la farmacia Jacobs de Atlanta, Georgia. El farmacéutico John S. Pemberton buscaba un jarabe medicinal que aliviara los dolores de cabeza y brindara energía. Al mezclar su jarabe con agua carbonatada, descubrió una bebida con un sabor refrescante e innovador. Su contador, Frank Robinson, fue quien bautizó la marca como Coca-Cola y diseñó con su propia caligrafía Spencerian el icónico logotipo que hoy conoce todo el planeta.</p>
+        </article>
+        <article class="producto historia-texto">
+          <h4>1891 - 1915: De Jarabe Local a Fenómeno Global</h4>
+          <p>Bajo la dirección del empresario Asa Candler, Coca-Cola pasó de venderse en fuentes de soda locales a transformarse en una marca nacional. Para destacar entre las imitaciones, en 1915 la Root Glass Company diseñó la icónica botella Contour, cuya silueta curvada era tan distintiva que podía reconocerse incluso a oscuras o al romperse.</p>
+        </article>
+      </div>
+
+      <h2>Un Ícono de la Cultura Popular</h2>
+
+      <article class="producto historia-texto historia-texto-ancho">
+        <p>Con el paso de las décadas, Coca-Cola trascendió la industria de las bebidas para convertirse en un símbolo cultural:</p>
+        <ul class="historia-lista">
+          <li><strong>Publicidad y Navidad:</strong> En la década de 1930, las ilustraciones de Haddon Sundblom consolidaron la imagen moderna de Papá Noel con los colores rojo y blanco característicos de la marca.</li>
+          <li><strong>Expansión Global:</strong> Durante la Segunda Guerra Mundial, la marca construyó embotelladoras en todo el mundo para abastecer a los soldados, impulsando su presencia internacional.</li>
+          <li><strong>Innovación de Producto:</strong> A lo largo del tiempo nacieron variantes como Coca-Cola Light, Coca-Cola Zero y opciones sin cafeína, adaptándose a los nuevos hábitos de consumo.</li>
+        </ul>
+      </article>
+
+      <h2>Línea de Tiempo de Hitos Clave</h2>
+      <div class="hitos-grid">
+        <article class="hito">
+          <h4>Nacimiento de la Fórmula</h4>
+          <p class="hito-fecha">8 de Mayo, 1886</p>
+          <p>Dr. John S. Pemberton sirvió el primer vaso de Coca-Cola en la farmacia Jacobs por 5 centavos.</p>
+        </article>
+        <article class="hito">
+          <h4>Creación de la Botella Contour</h4>
+          <p class="hito-fecha">1915</p>
+          <p>Se patenta el diseño de botella más famoso del mundo para diferenciarse de los competidores.</p>
+        </article>
+        <article class="hito">
+          <h4>Llegada a la Cultura Navideña</h4>
+          <p class="hito-fecha">1931</p>
+          <p>Debut de las campañas publicitarias con la imagen icónica de Papá Noel.</p>
+        </article>
+        <article class="hito">
+          <h4>Primera Bebida en el Espacio</h4>
+          <p class="hito-fecha">1985</p>
+          <p>Coca-Cola se convierte en el primer refresco consumido fuera de la Tierra a bordo del transbordador espacial Challenger.</p>
+        </article>
+      </div>
     </section>
+
     <div class="items">
 
-      <div class="buscador">
-        <input class="filtro" type="radio" name="filtro" id="f-todos" checked>
-        <input class="filtro" type="radio" name="filtro" id="f-coca-cola">
-        <input class="filtro" type="radio" name="filtro" id="f-sprite">
-        <input class="filtro" type="radio" name="filtro" id="f-fanta">
-        <input class="filtro" type="radio" name="filtro" id="f-schweppes">
-
-        <details class="buscador-barra">
-          <summary class="bus-summary" title="Buscar marca o producto">
-            <span class="bus-icono">&#128269;</span>
-            <span class="bus-texto">
-              <span class="t-todos">¿Qué gaseosa buscás? Elegí una marca…</span>
-              <span class="t-coca-cola">Coca-Cola</span>
-              <span class="t-sprite">Sprite</span>
-              <span class="t-fanta">Fanta</span>
-              <span class="t-schweppes">Schweppes</span>
-            </span>
-            <span class="bus-flecha">&#9660;</span>
-          </summary>
-          <div class="bus-opciones">
-            <label for="f-todos">Todas las marcas</label>
-            <label for="f-coca-cola">Coca-Cola</label>
-            <label for="f-sprite">Sprite</label>
-            <label for="f-fanta">Fanta</label>
-            <label for="f-schweppes">Schweppes</label>
-          </div>
-        </details>
-
-        <section id="marcas">
-          <h3>Nuestras marcas</h3>
-          <div class="item-cards">
-            <article class="marca marca-coca-cola">
-              <h4>Coca‑Cola</h4>
-              <p>El sabor original.</p>
-              <a href="#coca-cola">Explorar</a>
-            </article>
-            <article class="marca marca-sprite">
-              <h4>Sprite</h4>
-              <p>Frescura lima‑limón.</p>
-              <a href="#sprite">Explorar</a>
-            </article>
-            <article class="marca marca-fanta">
-              <h4>Fanta</h4>
-              <p>Diversión y sabor naranja.</p>
-              <a href="#fanta">Explorar</a>
-            </article>
-            <article class="marca marca-schweppes">
-              <h4>Schweppes</h4>
-              <p>Un clásico para grandes ocasiones.</p>
-              <a href="#schweppes">Explorar</a>
-            </article>
-          </div>
-        </section>
-
-        <section id="tiendas">
-          <h3>Tiendas Cencosud</h3>
-          <div class="item-cards">
-            <article class="tienda">
-              <img src="img/jumbo.jpg" alt="Logo Jumbo Cencosud">
-              <h4>Jumbo Cencosud</h4>
-              <p>Tus compras del súper con toda la chispa Coca‑Cola.</p>
-              <a href="https://www.jumbo.com.ar/benedictino?_q=benedictino&map=ft" rel="noopener noreferrer" target="_blank">Comprar acá</a>
-            </article>
-            <article class="tienda">
-              <img src="img/disco.jpg" alt="Logo Disco Cencosud">
-              <h4>Disco Cencosud</h4>
-              <p>Las mejores ofertas del súper con Coca‑Cola.</p>
-              <a href="https://www.disco.com.ar/benedictino?_q=benedictino&map=ft" rel="noopener noreferrer" target="_blank">Comprar acá</a>
-            </article>
-            <article class="tienda">
-              <img src="img/vea.jpg" alt="Logo Vea Cencosud">
-              <h4>Vea Cencosud</h4>
-              <p>El súper de cercanía con todos tus productos.</p>
-              <a href="https://www.vea.com.ar/benedictino?_q=benedictino&map=ft" rel="noopener noreferrer" target="_blank">Comprar acá</a>
-            </article>
-          </div>
-        </section>
-
-        <section id="catalogo">
+      <section id="catalogo">
           <h3>Nuestros productos</h3>
           <div class="item-cards">
             <article class="producto producto-coca-cola">
@@ -139,6 +123,9 @@
               <a href="producto.html?id=schweppes">Ver detalle</a>
             </article>
           </div>
+
+          <div class="otras-bebidas">
+          <h3>Otras bebidas para comprar desde el supermercado</h3>
 
           <details class="aguas-detalles">
             <summary>Aguas purificadas y minerales</summary>
@@ -277,6 +264,7 @@
               </article>
             </div>
           </details>
+        </div>
         </section>
       </div>
 
@@ -310,11 +298,6 @@
             <a href="https://www.coca-cola.com/ar/es/offerings/coke-studio" rel="noopener noreferrer" target="_blank">Explorar</a>
           </article>
         </div>
-      </section>
-
-      <section id="comprar">
-        <h3>¿Te quedaste sin gaseosa?</h3>
-        <a href="#tiendas">Comprar ahora</a>
       </section>
     </div>
   </main>
