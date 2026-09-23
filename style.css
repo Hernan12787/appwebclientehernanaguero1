@@ -53,8 +53,15 @@ header .logo {
     font-size: 1.3rem;
     font-weight: 700;
     color: #e11d48;
-    text-align: center;
-    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+header .logo .logo-icono {
+    width: 2rem;
+    height: 2rem;
+    display: inline-block;
 }
 
 header nav ul {
