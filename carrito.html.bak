@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito | Refrescante Argentina</title>
+  <link rel="icon" type="image/x-icon" href="refresco.ico">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo"><img src="img/coca-tapa.svg" alt="Tapa de Coca-Cola" class="logo-icono"> Refrescante Argentina</div>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html#inicio">Inicio</a></li>
+        <li><a href="index.html#catalogo">Catálogo</a></li>
+        <li><a href="carrito.html">Carrito</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="carrito">
+      <h2>Tu carrito de compras</h2>
+      <p class="carrito-hint">Elegí cuántas unidades querés comprar de cada gaseosa (hasta 9 por producto).</p>
+
+      <div class="carrito-wrap">
+        <div class="carrito-grid">
+
+          <article class="item-carrito card-coca">
+            <img src="img/coca-cola.jpg" alt="Coca-Cola Original 500ml">
+            <div class="item-info">
+              <h4>Coca-Cola Original 500ml</h4>
+              <p>Precio unitario: $1.200</p>
+              <div class="cantidad uds uds-coca" role="radiogroup" aria-label="Unidades de Coca-Cola Original 500ml">
+                <span class="cant-lbl">Unidades:</span>
+                <div class="pills">
+                  <input type="radio" id="q-coca-0" name="uds-coca" checked>
+                  <label for="q-coca-0">0</label>
+                  <input type="radio" id="q-coca-1" name="uds-coca">
+                  <label for="q-coca-1">1</label>
+                  <input type="radio" id="q-coca-2" name="uds-coca">
+                  <label for="q-coca-2">2</label>
+                  <input type="radio" id="q-coca-3" name="uds-coca">
+                  <label for="q-coca-3">3</label>
+                  <input type="radio" id="q-coca-4" name="uds-coca">
+                  <label for="q-coca-4">4</label>
+                  <input type="radio" id="q-coca-5" name="uds-coca">
+                  <label for="q-coca-5">5</label>
+                  <input type="radio" id="q-coca-6" name="uds-coca">
+                  <label for="q-coca-6">6</label>
+                  <input type="radio" id="q-coca-7" name="uds-coca">
+                  <label for="q-coca-7">7</label>
+                  <input type="radio" id="q-coca-8" name="uds-coca">
+                  <label for="q-coca-8">8</label>
+                  <input type="radio" id="q-coca-9" name="uds-coca">
+                  <label for="q-coca-9">9</label>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-sprite">
+            <img src="img/sprite.jpg" alt="Sprite Lima-Limón 500ml">
+            <div class="item-info">
+              <h4>Sprite Lima-Limón 500ml</h4>
+              <p>Precio unitario: $1.100</p>
+              <div class="cantidad uds uds-sprite" role="radiogroup" aria-label="Unidades de Sprite Lima-Limón 500ml">
+                <span class="cant-lbl">Unidades:</span>
+                <div class="pills">
+                  <input type="radio" id="q-sprite-0" name="uds-sprite" checked>
+                  <label for="q-sprite-0">0</label>
+                  <input type="radio" id="q-sprite-1" name="uds-sprite">
+                  <label for="q-sprite-1">1</label>
+                  <input type="radio" id="q-sprite-2" name="uds-sprite">
+                  <label for="q-sprite-2">2</label>
+                  <input type="radio" id="q-sprite-3" name="uds-sprite">
+                  <label for="q-sprite-3">3</label>
+                  <input type="radio" id="q-sprite-4" name="uds-sprite">
+                  <label for="q-sprite-4">4</label>
+                  <input type="radio" id="q-sprite-5" name="uds-sprite">
+                  <label for="q-sprite-5">5</label>
+                  <input type="radio" id="q-sprite-6" name="uds-sprite">
+                  <label for="q-sprite-6">6</label>
+                  <input type="radio" id="q-sprite-7" name="uds-sprite">
+                  <label for="q-sprite-7">7</label>
+                  <input type="radio" id="q-sprite-8" name="uds-sprite">
+                  <label for="q-sprite-8">8</label>
+                  <input type="radio" id="q-sprite-9" name="uds-sprite">
+                  <label for="q-sprite-9">9</label>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-fanta">
+            <img src="img/fanta.jpg" alt="Fanta Naranja 500ml">
+            <div class="item-info">
+              <h4>Fanta Naranja 500ml</h4>
+              <p>Precio unitario: $1.100</p>
+              <div class="cantidad uds uds-fanta" role="radiogroup" aria-label="Unidades de Fanta Naranja 500ml">
+                <span class="cant-lbl">Unidades:</span>
+                <div class="pills">
+                  <input type="radio" id="q-fanta-0" name="uds-fanta" checked>
+                  <label for="q-fanta-0">0</label>
+                  <input type="radio" id="q-fanta-1" name="uds-fanta">
+                  <label for="q-fanta-1">1</label>
+                  <input type="radio" id="q-fanta-2" name="uds-fanta">
+                  <label for="q-fanta-2">2</label>
+                  <input type="radio" id="q-fanta-3" name="uds-fanta">
+                  <label for="q-fanta-3">3</label>
+                  <input type="radio" id="q-fanta-4" name="uds-fanta">
+                  <label for="q-fanta-4">4</label>
+                  <input type="radio" id="q-fanta-5" name="uds-fanta">
+                  <label for="q-fanta-5">5</label>
+                  <input type="radio" id="q-fanta-6" name="uds-fanta">
+                  <label for="q-fanta-6">6</label>
+                  <input type="radio" id="q-fanta-7" name="uds-fanta">
+                  <label for="q-fanta-7">7</label>
+                  <input type="radio" id="q-fanta-8" name="uds-fanta">
+                  <label for="q-fanta-8">8</label>
+                  <input type="radio" id="q-fanta-9" name="uds-fanta">
+                  <label for="q-fanta-9">9</label>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-schweppes">
+            <img src="img/schweppes.jpg" alt="Schweppes Tónica 500ml">
+            <div class="item-info">
+              <h4>Schweppes Tónica 500ml</h4>
+              <p>Precio unitario: $1.100</p>
+              <div class="cantidad uds uds-schweppes" role="radiogroup" aria-label="Unidades de Schweppes Tónica 500ml">
+                <span class="cant-lbl">Unidades:</span>
+                <div class="pills">
+                  <input type="radio" id="q-schweppes-0" name="uds-schweppes" checked>
+                  <label for="q-schweppes-0">0</label>
+                  <input type="radio" id="q-schweppes-1" name="uds-schweppes">
+                  <label for="q-schweppes-1">1</label>
+                  <input type="radio" id="q-schweppes-2" name="uds-schweppes">
+                  <label for="q-schweppes-2">2</label>
+                  <input type="radio" id="q-schweppes-3" name="uds-schweppes">
+                  <label for="q-schweppes-3">3</label>
+                  <input type="radio" id="q-schweppes-4" name="uds-schweppes">
+                  <label for="q-schweppes-4">4</label>
+                  <input type="radio" id="q-schweppes-5" name="uds-schweppes">
+                  <label for="q-schweppes-5">5</label>
+                  <input type="radio" id="q-schweppes-6" name="uds-schweppes">
+                  <label for="q-schweppes-6">6</label>
+                  <input type="radio" id="q-schweppes-7" name="uds-schweppes">
+                  <label for="q-schweppes-7">7</label>
+                  <input type="radio" id="q-schweppes-8" name="uds-schweppes">
+                  <label for="q-schweppes-8">8</label>
+                  <input type="radio" id="q-schweppes-9" name="uds-schweppes">
+                  <label for="q-schweppes-9">9</label>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <aside class="resumen">
+          <h3>Tu lista de compra</h3>
+          <ul class="lista-seleccion">
+            <li id="fila-coca" class="fila-coca"><span class="ico-sel">&#10003;</span><span class="prod-nombre">Coca-Cola Original 500ml</span><span class="subtot"><span class="cant"></span> × $1.200 = <span class="submonto"></span></span></li>
+            <li id="fila-sprite" class="fila-sprite"><span class="ico-sel">&#10003;</span><span class="prod-nombre">Sprite Lima-Limón 500ml</span><span class="subtot"><span class="cant"></span> × $1.100 = <span class="submonto"></span></span></li>
+            <li id="fila-fanta" class="fila-fanta"><span class="ico-sel">&#10003;</span><span class="prod-nombre">Fanta Naranja 500ml</span><span class="subtot"><span class="cant"></span> × $1.100 = <span class="submonto"></span></span></li>
+            <li id="fila-schweppes" class="fila-schweppes"><span class="ico-sel">&#10003;</span><span class="prod-nombre">Schweppes Tónica 500ml</span><span class="subtot"><span class="cant"></span> × $1.100 = <span class="submonto"></span></span></li>
+          </ul>
+          <p class="res-total">Total a pagar: <strong id="total-compra"></strong></p>
+          <input type="checkbox" id="comprado" class="check-finalizar">
+          <p class="res-mensaje">
+            <span class="msg-ok">Gracias por tu compra. Total: <span class="msg-total"></span>.</span>
+            <span class="msg-vacio">Aún no elegiste ninguna gaseosa.</span>
+          </p>
+          <label for="comprado" class="btn-finalizar">Finalizar compra</label>
+        </aside>
+      </div>
+    </section>
+
+    <section id="tiendas">
+      <h3>Tiendas Cencosud</h3>
+      <div class="item-cards">
+        <article class="tienda">
+          <img src="img/jumbo.jpg" alt="Logo Jumbo Cencosud">
+          <h4>Jumbo Cencosud</h4>
+          <p>Tus compras del súper con toda la chispa Coca‑Cola.</p>
+          <a href="https://www.jumbo.com.ar/benedictino?_q=benedictino&map=ft" rel="noopener noreferrer" target="_blank">Comprar acá</a>
+        </article>
+        <article class="tienda">
+          <img src="img/disco.jpg" alt="Logo Disco Cencosud">
+          <h4>Disco Cencosud</h4>
+          <p>Las mejores ofertas del súper con Coca‑Cola.</p>
+          <a href="https://www.disco.com.ar/benedictino?_q=benedictino&map=ft" rel="noopener noreferrer" target="_blank">Comprar acá</a>
+        </article>
+        <article class="tienda">
+          <img src="img/vea.jpg" alt="Logo Vea Cencosud">
+          <h4>Vea Cencosud</h4>
+          <p>El súper de cercanía con todos tus productos.</p>
+          <a href="https://www.vea.com.ar/benedictino?_q=benedictino&map=ft" rel="noopener noreferrer" target="_blank">Comprar acá</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-logo">
+      <img src="img/coca-cola-logo-white.svg" alt="The Coca Cola Company">
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h5>Sobre Nosotros</h5>
+        <ul>
+          <li><a href="https://www.coca-colacompany.com/company" rel="noopener noreferrer" target="_blank">Nuestra Compañía</a></li>
+          <li><a href="https://www.coca-cola.com/ar/es/media-center" rel="noopener noreferrer" target="_blank">Sala de Prensa</a></li>
+          <li><a href="https://www.coca-colacompany.com/about-us/history" rel="noopener noreferrer" target="_blank">Nuestra historia</a></li>
+          <li><a href="https://www.coca-colacompany.com/careers" rel="noopener noreferrer" target="_blank">Trabaja con nosotros</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>¿Necesitas Ayuda?</h5>
+        <ul>
+          <li><a href="https://www.coca-cola.com/ar/es/sitemap" rel="noopener noreferrer" target="_blank">Mapa del sitio</a></li>
+          <li><a href="https://www.coca-cola.com/ar/es/about-us/contact-us" rel="noopener noreferrer" target="_blank">Contáctanos</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="https://www.coca-cola.com/ar/es/legal/terms-of-service" rel="noopener noreferrer" target="_blank">Términos de Uso</a></li>
+          <li><a href="https://datatrust.coca-cola.com/xg/es#global-privacy-notices" rel="noopener noreferrer" target="_blank">Aviso de privacidad del consumidor</a></li>
+          <li><a href="https://datatrust.coca-cola.com/xg/es#global-privacy-notices" rel="noopener noreferrer" target="_blank">Aviso de cookies</a></li>
+        </ul>
+      </div>
+    </div>
+    <nav class="footer-social" aria-label="Redes sociales">
+      <ul>
+        <li><a href="https://facebook.com/CocaColaCoAr/" rel="noopener noreferrer" target="_blank">Facebook</a></li>
+        <li><a href="https://www.instagram.com/cocacolacoar/" rel="noopener noreferrer" target="_blank">Instagram</a></li>
+        <li><a href="https://www.youtube.com/user/CocaColaCo" rel="noopener noreferrer" target="_blank">Youtube</a></li>
+        <li><a href="https://www.linkedin.com/company/the-coca-cola-company" rel="noopener noreferrer" target="_blank">LinkedIn</a></li>
+      </ul>
+    </nav>
+    <p>&copy; 2026 The Coca‑Cola Company. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>

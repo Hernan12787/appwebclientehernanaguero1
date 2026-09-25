@@ -23,7 +23,7 @@
   <main>
     <section id="carrito">
       <h2>Tu carrito de compras</h2>
-      <p class="carrito-hint">Elegí cuántas unidades querés comprar de cada gaseosa (de 0 a 30 por producto, total máximo $225.000).</p>
+      <p class="carrito-hint">Elegí cuántas unidades querés comprar de cada gaseosa (hasta 9 por producto).</p>
 
       <div class="carrito-wrap">
         <div class="carrito-grid">
@@ -32,8 +32,8 @@
             <img src="img/coca-cola.jpg" alt="Coca-Cola Original 500ml">
             <div class="item-info">
               <h4>Coca-Cola Original 500ml</h4>
-              <p>Precio unitario: $1.900</p>
-                            <div class="uds uds-coca">
+              <p>Precio unitario: $1.200</p>
+              <div class="uds uds-coca">
                 <input type="checkbox" id="ab-coca" class="ud-toggle">
                 <div class="pills" role="radiogroup" aria-label="Unidades de Coca-Cola Original 500ml">
                   <input type="radio" id="q-coca-0" name="uds-coca" checked>
@@ -112,8 +112,8 @@
             <img src="img/sprite.jpg" alt="Sprite Lima-Limón 500ml">
             <div class="item-info">
               <h4>Sprite Lima-Limón 500ml</h4>
-              <p>Precio unitario: $1.800</p>
-                            <div class="uds uds-sprite">
+              <p>Precio unitario: $1.100</p>
+              <div class="uds uds-sprite">
                 <input type="checkbox" id="ab-sprite" class="ud-toggle">
                 <div class="pills" role="radiogroup" aria-label="Unidades de Sprite Lima-Limón 500ml">
                   <input type="radio" id="q-sprite-0" name="uds-sprite" checked>
@@ -192,8 +192,8 @@
             <img src="img/fanta.jpg" alt="Fanta Naranja 500ml">
             <div class="item-info">
               <h4>Fanta Naranja 500ml</h4>
-              <p>Precio unitario: $1.800</p>
-                            <div class="uds uds-fanta">
+              <p>Precio unitario: $1.100</p>
+              <div class="uds uds-fanta">
                 <input type="checkbox" id="ab-fanta" class="ud-toggle">
                 <div class="pills" role="radiogroup" aria-label="Unidades de Fanta Naranja 500ml">
                   <input type="radio" id="q-fanta-0" name="uds-fanta" checked>
@@ -272,8 +272,8 @@
             <img src="img/schweppes.jpg" alt="Schweppes Tónica 500ml">
             <div class="item-info">
               <h4>Schweppes Tónica 500ml</h4>
-              <p>Precio unitario: $2.000</p>
-                            <div class="uds uds-schweppes">
+              <p>Precio unitario: $1.100</p>
+              <div class="uds uds-schweppes">
                 <input type="checkbox" id="ab-schweppes" class="ud-toggle">
                 <div class="pills" role="radiogroup" aria-label="Unidades de Schweppes Tónica 500ml">
                   <input type="radio" id="q-schweppes-0" name="uds-schweppes" checked>
@@ -353,10 +353,10 @@
         <aside class="resumen">
           <h3>Tu lista de compra</h3>
           <ul class="lista-seleccion">
-            <li id="fila-coca" class="fila-coca"><span class="ico-sel">&#10003;</span><span class="prod-nombre">Coca-Cola Original 500ml</span><span class="subtot"><span class="cant"></span> × $1.900 = <span class="submonto"></span></span></li>
-            <li id="fila-sprite" class="fila-sprite"><span class="ico-sel">&#10003;</span><span class="prod-nombre">Sprite Lima-Limón 500ml</span><span class="subtot"><span class="cant"></span> × $1.800 = <span class="submonto"></span></span></li>
-            <li id="fila-fanta" class="fila-fanta"><span class="ico-sel">&#10003;</span><span class="prod-nombre">Fanta Naranja 500ml</span><span class="subtot"><span class="cant"></span> × $1.800 = <span class="submonto"></span></span></li>
-            <li id="fila-schweppes" class="fila-schweppes"><span class="ico-sel">&#10003;</span><span class="prod-nombre">Schweppes Tónica 500ml</span><span class="subtot"><span class="cant"></span> × $2.000 = <span class="submonto"></span></span></li>
+            <li id="fila-coca" class="fila-coca"><span class="ico-sel">&#10003;</span><span class="prod-nombre">Coca-Cola Original 500ml</span><span class="subtot"><span class="cant"></span> × $1.200 = <span class="submonto"></span></span></li>
+            <li id="fila-sprite" class="fila-sprite"><span class="ico-sel">&#10003;</span><span class="prod-nombre">Sprite Lima-Limón 500ml</span><span class="subtot"><span class="cant"></span> × $1.100 = <span class="submonto"></span></span></li>
+            <li id="fila-fanta" class="fila-fanta"><span class="ico-sel">&#10003;</span><span class="prod-nombre">Fanta Naranja 500ml</span><span class="subtot"><span class="cant"></span> × $1.100 = <span class="submonto"></span></span></li>
+            <li id="fila-schweppes" class="fila-schweppes"><span class="ico-sel">&#10003;</span><span class="prod-nombre">Schweppes Tónica 500ml</span><span class="subtot"><span class="cant"></span> × $1.100 = <span class="submonto"></span></span></li>
           </ul>
           <p class="res-total">Total a pagar: <strong id="total-compra"></strong></p>
           <input type="checkbox" id="comprado" class="check-finalizar">
