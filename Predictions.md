@@ -12,5 +12,8 @@ borrar las clases que sobran y que son redundantes
  Agregar mapa,lista de compras en carrito,mejorar el diseño de las paginas
  Armar un un enlace de inicio con una historia de la bebida
  agregar un icono como logo
-
+ quitar lenguaje de java script de carrito
+cambiar unidades dentro de carrito
+adaptar el precio de las gaseosas al valor de estos en Argentina
+Hacer ajustes en el diseño para moviles
 

@@ -23,7 +23,7 @@
   <main>
     <section id="carrito">
       <h2>Tu carrito de compras</h2>
-      <p class="carrito-hint">Elegí cuántas unidades querés comprar de cada gaseosa (de 0 a 30 por producto, total máximo $225.000).</p>
+      <p class="carrito-hint">Elegí cuántas unidades querés comprar de cada gaseosa (hasta 9 por producto).</p>
 
       <div class="carrito-wrap">
         <div class="carrito-grid">
@@ -33,7 +33,7 @@
             <div class="item-info">
               <h4>Coca-Cola Original 500ml</h4>
               <p>Precio unitario: $1.900</p>
-                            <div class="uds uds-coca">
+              <div class="uds uds-coca">
                 <input type="checkbox" id="ab-coca" class="ud-toggle">
                 <div class="pills" role="radiogroup" aria-label="Unidades de Coca-Cola Original 500ml">
                   <input type="radio" id="q-coca-0" name="uds-coca" checked>
@@ -113,7 +113,7 @@
             <div class="item-info">
               <h4>Sprite Lima-Limón 500ml</h4>
               <p>Precio unitario: $1.800</p>
-                            <div class="uds uds-sprite">
+              <div class="uds uds-sprite">
                 <input type="checkbox" id="ab-sprite" class="ud-toggle">
                 <div class="pills" role="radiogroup" aria-label="Unidades de Sprite Lima-Limón 500ml">
                   <input type="radio" id="q-sprite-0" name="uds-sprite" checked>
@@ -193,7 +193,7 @@
             <div class="item-info">
               <h4>Fanta Naranja 500ml</h4>
               <p>Precio unitario: $1.800</p>
-                            <div class="uds uds-fanta">
+              <div class="uds uds-fanta">
                 <input type="checkbox" id="ab-fanta" class="ud-toggle">
                 <div class="pills" role="radiogroup" aria-label="Unidades de Fanta Naranja 500ml">
                   <input type="radio" id="q-fanta-0" name="uds-fanta" checked>
@@ -273,7 +273,7 @@
             <div class="item-info">
               <h4>Schweppes Tónica 500ml</h4>
               <p>Precio unitario: $2.000</p>
-                            <div class="uds uds-schweppes">
+              <div class="uds uds-schweppes">
                 <input type="checkbox" id="ab-schweppes" class="ud-toggle">
                 <div class="pills" role="radiogroup" aria-label="Unidades de Schweppes Tónica 500ml">
                   <input type="radio" id="q-schweppes-0" name="uds-schweppes" checked>
