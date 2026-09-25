@@ -1,186 +1,143 @@
-# MR — Refresco Argentina 🥤
+# MR — Carrito sin JavaScript y ajustes para móviles
 
 ## Descripción
 
-Se continuó sobre el sitio **Refresco Argentina** (réplica de la página de Coca‑Cola Argentina) en `appwebclientehernanaguero1`, respetando la consigna de **solo HTML y CSS** (sin JavaScript). Se limpió y reorganizó la página de inicio, se recuperó el catálogo completo y se mejoraron las páginas de detalle.
+Explicá brevemente qué hiciste y qué archivos modificaste o agregaste:
 
-### Archivos modificados
+Saqué **todo el JavaScript del carrito** y lo reemplacé por cálculo con **contadores CSS**, cambié el selector de unidades por uno de **0 a 30 por producto** dentro de un panel desplegable, actualicé los **precios a valores de Argentina** y arreglé el **diseño en el celular** (el menú se partía en 4 renglones y el footer tapaba la pantalla completa).
 
-- **`index.html`**
-  - Se eliminó la sección `#marcas` (marcas → se borraron "Nuestras marcas" y sus 4 tarjetas) y se quitaron los accesos al menú (`Marcas`) en todas las páginas.
-  - Se restauraron las listas de bebidas (`details.aguas-detalles`) dentro de `#catalogo` (aguas purificadas, saborizadas, energéticas y jugos), agrupadas bajo un único título: **"Otras bebidas para comprar desde el supermercado"**.
-  - En `#catalogo` se mantienen las 4 gaseosas (Coca‑Cola, Sprite, Fanta, Schweppes) con imágenes propias.
-  - Se reemplazó toda la vista de inicio (hero, buscador, tiendas y "¿Te quedaste sin gaseosa?") por la sección **`#inicio`** con la **historia completa de Coca‑Cola**: título "Sabor Único, Historia Inigualable", subtítulo, reseña histórica (1886 y 1891–1915), ícono cultural, línea de tiempo de hitos clave y 2 imágenes con créditos (afiche clásico y botella Contour).
-  - El contenido de la historia se muestra con la misma estética de tarjetas que los productos Coca‑Cola (`.producto`/`.hito`: borde redondeado, sombra, hover rojo).
-  - **La historia solo se ve en `#inicio`**: se oculta al entrar por `#catalogo` o `#descubri`.
-  - `#catalogo` y `#descubri` quedaron como vistas por ancla (solo visibles desde su enlace del menú).
-  - Favicon de la página apuntando a `refresco.ico`.
-  - Footer nuevo con columnas y redes sociales.
+Archivos modificados:
 
-- **`producto.html`**
-  - Título "Detalle del producto" centrado justo debajo del header.
-  - Las bebidas se alinean **horizontalmente** y son responsive (flex-wrap sin JS).
-  - Se agregaron al menú los enlaces **Carrito** (`carrito.html`) y **Contacto** (`contacto.html`).
-  - Se reemplazó el link "Comprar" (apuntaba a `index.html#comprar`, eliminado) por "Descubrí".
-  - Favicon + footer nuevo.
+- **`carrito.html`** — se eliminó el bloque `<script>` completo (`formatearPeso`, `actualizarLista` y los dos `addEventListener`). La lista de compra y el total ahora se completan con `content:` desde CSS. El `input type="number"` se reemplazó por **31 `radio` ocultos (0 a 30)** con sus `<label>`, dentro de un panel que se abre con un checkbox invisible, más un chip que muestra "Unidades: N".
+- **`style.css`** — se agregó `@counter-style pesos` (`system: fixed 0` con 2251 símbolos) para que los importes salgan con punto de miles, `counter-reset` en `.carrito-wrap` y **124 reglas** `counter-increment` (una por radio) que suman al total, a los 4 subtotales y a las 4 cantidades. Los radios ocultos usan `visibility: hidden` en lugar de `display: none`, porque los elementos con `display: none` no suman a los contadores CSS y el total daba `$0`. En el responsive: el menú pasa a una sola línea con `flex-wrap: nowrap` y `justify-content: safe center` (header de 184px a ~93px) y el footer queda en `min-height: 50vh` con respaldo `50dvh` y contenido compactado (de 761px a 320px en un viewport de 640px, o sea de 119% a 50%). Los breakpoints de 900/768/600/480/380px y el de móvil apaisado quedaron **al final del archivo**, con un comentario que explica que es por la cascada.
+- **`producto.html`** — solo los "Precio sugerido": Coca‑Cola `$1.200 → $1.900`, Sprite `$1.100 → $1.800`, Fanta `$1.100 → $1.800`, Schweppes `$1.300 → $2.000`.
+- **`Predictions.md`** — las 4 consignas de la sesión anotadas al final.
 
-- **`carrito.html`**
-   - Carrito con 4 gaseosas y unidades elegibles de **0 a 30 por producto** (total máximo `$225.000`), lista de compra con subtotales y total calculados **sin JavaScript** (contadores CSS + `@counter-style pesos` para el separador de miles) y botón "Finalizar compra" que muestra el mensaje de confirmación con un checkbox oculto.
-   - Precios unitarios finales: Coca-Cola `$1.900`, Sprite `$1.800`, Fanta `$1.800` y Schweppes `$2.000` (referencia Argentina, septiembre de 2026; los valores salvo Coca-Cola son redondeos y pueden variar por tienda o promoción).
-   - El selector es un panel colapsable por producto (checkbox oculto + `<label>` como botón): cerrado muestra un chip con "Unidades: N" y abierto despliega las **31 opciones** (0–30) en un grid fluido. Los radios quedan en el DOM con `visibility: hidden` cuando el panel está cerrado, para que los incrementos sigan contando.
-   - Accesible por teclado: `Space` sobre el toggle abre el panel, `Tab` entra al radio marcado y las flechas cambian la cantidad; el orden de tabulación es toggle → radios → resumen.
-  - Se quitaron los accesos `#marcas` del menú (`index.html#marcas` ya no existe).
-  - Favicon + footer nuevo.
-
-- **`contacto.html`**
-  - Mapa de Google Maps embebido (iframe) de Coca‑Cola FEMSA en un grid de 2 columnas responsive.
-  - Se quitaron los accesos `#marcas` del menú.
-  - Favicon + footer nuevo.
-
-- **`style.css`**
-  - Estilos de la sección historia (`.historia`, `.historia-figura`, `.hitos-grid`, `.hito`, hover de título en rojo), reutilizando la estética de tarjetas de los productos.
-  - Regla `main#inicio:has(#catalogo:target) .historia` / `:has(#descubri:target) .historia { display: none; }` para que la historia solo se vea en `#inicio`.
-  - Reglas `:target` para `#catalogo` y `#descubri` como vistas por ancla.
-  - Flex para `#detalle` (título centrado y tarjetas horizontales responsive en `producto.html`).
-  - Ícono `.logo-icono` (tapa de Coca‑Cola) alineado con el nombre del sitio en el header.
-  - Estilos carrito (`.item-carrito`, `.btn-finalizar`, `.res-mensaje`).
-  - Cálculo del carrito solo con CSS: `counter-reset` en `.carrito-wrap`, un `counter-increment` por radio marcado (`total`, `sub-*`, `cant-*`) y el `@counter-style pesos` que formatea cada valor con punto de miles.
-  - `@counter-style pesos` con `system: fixed 0` y 2251 símbolos (`"0"`, `"100"`, …, `"225.000"`): cada valor del contador son 100 pesos, así que `$225.000` es el máximo posible. El `0` es indispensable porque `system: fixed` sin número arranca en el valor 1 y correría todos los importes.
-  - Selector de unidades fluido: `.pills` es un grid `repeat(auto-fit, minmax(2.2rem, 1fr))` que reparte las 31 opciones en el ancho disponible (y pasa a 5 columnas fijas en móvil); el panel se abre y cierra con el checkbox oculto `.ud-toggle` + `:checked` (sin JavaScript).
-  - Sección `Responsive` al final del archivo (900px, 768px, 600px, 480px, 380px): carrito en una sola columna, tarjeta de producto en columna, pastillas del selector de 5 por fila en móvil, grids de tarjetas, nav, contacto y buscador.
-  - Estilos del nuevo footer.
-  - **La barra del menú sigue siendo horizontal en móviles**: se quitó el `flex-direction: column` que apilaba los enlaces en 4 filas. Ahora el `<ul>` del nav es una sola línea (`flex-wrap: nowrap`) con `justify-content: safe center`, tipografía y gaps más chicos hasta 480px, y `overflow-x: auto` en el propio `<ul>` como red de seguridad (nunca en la página, así que no genera scroll horizontal del sitio). El header pasa de 184px a ~93px de alto y los 5 enlaces de `index.html` entran completos incluso a 320px.
-  - **El footer ocupa la mitad del alto de la pantalla en móviles** (`min-height: 50vh` con respaldo `50dvh`; como el sitio usa `box-sizing: border-box` el padding va incluido). Para que el contenido entre sin pasarse se compacta: pasa a `display: flex` vertical con `justify-content: center`, las 3 columnas pasan de `flex-wrap` a un grid de 3 columnas angostas, y se achican tipografías, gaps y paddings (con un bloque extra para `max-width: 380px` y otro para móvil apaisado `orientation: landscape` + `max-height: 500px`). Antes el footer medía 761px en un viewport de 640px de alto (119%) y ahora mide exactamente 320px (50%) en las 4 páginas, con el contenido centrado dentro y holgura para que no se desborde. Los enlaces del footer mantienen un área táctil de ~22px aunque visualmente sean de 0.7rem, extendida con un `::after` absoluto que no suma alto.
-
-### Archivos agregados
-
-- **`img/`:**
-  - `afiche-coca-cola.jpg` — afiche publicitario clásico de Coca‑Cola (Wikimedia Commons).
-  - `botella-contour-1915.jpg` — evolución de la botella Contour (Wikimedia Commons).
-  - `coca-tapa.svg` — icono de tapa de Coca‑Cola para el logo del header (Wikimedia Commons).
-  - (resto de imágenes ya existentes: gaseosas, tiendas, experiencias, bebidas, `coca-cola-logo-white.svg`, favicons).
-
-- **`MR.md`** (esta plantilla actualizada).
-
-### Archivos eliminados / obsoletos
-
-- Sección `#marcas` de `index.html` y sus accesos en `index.html`, `producto.html`, `carrito.html` y `contacto.html`.
-- Sección `#comprar` y el buscador con filtros CSS de `index.html` (reemplazados por la historia).
-
----
+Archivos agregados (copias de resguardo mías, no código del proyecto):
+`carrito.html.bak`, `carrito.pre-precios.bak`, `carrito.pre-pesos.bak`, `carrito.pre-fixed0.bak` y los 4 equivalentes de `style.css`.
 
 ## Cómo probarlo
 
-1. Clonar el repositorio.
-2. Abrir **`appwebclientehernanaguero1/index.html`** en un navegador.
-3. Verificar:
-   - En `#inicio` se ve la historia "Sabor Único, Historia Inigualable" con imágenes y la línea de tiempo (estética de tarjetas, hover rojo).
-   - Al hacer clic en **Catálogo** del menú, se abre `#catalogo` solo (sin la historia) con las 4 gaseosas y los desplegables agrupados bajo "Otras bebidas para comprar desde el supermercado".
-   - Al hacer clic en **Descubrí**, se abre `#descubri` con las 4 experiencias.
-   - El logo del header muestra el ícono de tapa de Coca‑Cola.
-   - El footer: los links abren páginas reales de Coca‑Cola en otra pestaña.
-4. Abrir **`producto.html`**: título centrado, las 4 bebidas en fila (y apiladas en pantallas chicas), con los links Carrito y Contacto en el menú.
-5. Abrir **`carrito.html`**: cambiar las cantidades y ver el total en vivo; probar "Finalizar compra".
-6. Reducir el ancho de la ventana o inspeccionar en modo mobile para verificar que todo es responsive.
-7. Recargar con **Ctrl+F5** para forzar el refresco del CSS.
+Pasos para que el profesor pueda correr o revisar el cambio (comandos, URL, capturas de pantalla si aplica):
 
----
+No hace falta servidor ni instalar nada: es un sitio estático y se abre con doble click.
+
+1. Abrir **`appwebclientehernanaguero1/carrito.html`**.
+2. Abrir el panel de unidades de Coca‑Cola y elegir **3** → la lista de compra debe mostrar `3 × $1.900 = $5.700`. En Sprite **10** (`$18.000`), Fanta **5** (`$9.000`) y Schweppes **2** (`$4.000`) → **Total: `$36.700`**.
+3. Elegir **30 unidades de cada producto**: el total debe marcar exactamente **`$225.000`**. Todos los importes de 4 cifras tienen que salir con punto (`$9.000`, `$36.700`, `$225.000`).
+4. Con los 4 productos en 0, tocar **"Finalizar compra"** → debe aparecer "Aún no elegiste ninguna gaseosa". Con al menos 1 unidad → "Gracias por tu compra. Total: $X".
+5. Verificar que no quedó JavaScript: en DevTools → *Elements* no debe haber ningún `<script>`, o desde PowerShell:
+   ```powershell
+   Select-String -Path *.html -Pattern "<script|onclick|javascript:"
+   # No debe devolver nada
+   ```
+6. Teclado: <kbd>Tab</kbd> hasta el chip, <kbd>Space</kbd> abre el panel, <kbd>Tab</kbd> entra al radio marcado y <kbd>↑</kbd>/<kbd>↓</kbd> cambian la cantidad.
+7. <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd> y probar **320 / 375 / 480 / 768 / 1024px**: el menú tiene que seguir en una sola línea, el footer ocupar la mitad exacta del alto sin desbordarse, el carrito en una columna y las pastillas de a 5 por fila. No debe aparecer scroll horizontal en la página.
+8. <kbd>Ctrl</kbd>+<kbd>F5</kbd> si el CSS parece viejo.
 
 ## Prompt usado y historial con Open Code
 
+Pegá todo el histórico de mensajes con el agente de IA:
+
 ```
-(1) quiero que favicon.io sea el icono de mi pagina
-    -> elegí: "El logo de favicon.io"
+(1) en base a lo que hicimos podes llevarme la plantilla del mr que describo aqui
 
-(2) usar el archivo refresco.ico como logo de la pagina
-    -> proporcioné la ruta: c:\Users\Usuario\Downloads\favicon_io\refresco.ico
+(2) quitar lenguaje de java script de carrito
+    -> Se borró el <script> completo y el cálculo se rehízo con contadores CSS:
+       counter-reset en .carrito-wrap, un counter-increment por radio marcado y
+       un @counter-style para el punto de miles.
 
-(3) agarrar jumbo cencosud, disco cencosud y vea cencosud de la pagina
-    https://www.coca-cola.com/ar/es/offerings/links-a-tiendas y lo agrego
-    debajo del header de marcas
+(3) cambiar unidades dentro de carrito
+    -> El input[type=number] se reemplazó por un selector de 0 a 30 unidades en
+       un panel colapsable (checkbox oculto) con grid fluido de 31 opciones y un
+       chip con la cantidad elegida.
 
-(4) agregar las imagenes de jumbo, disco cencosud y vea cencosud debajo del
-    header de marcas. las imagenes estan en la pagina
-    https://www.coca-cola.com/ar/es/offerings/links-a-tiendas
+(4) adaptar el precio de las gaseosas al valor de estos en Argentina
+    -> Coca-Cola $1.900, Sprite $1.800, Fanta $1.800, Schweppes $2.000, en
+       carrito.html y en el "Precio sugerido" de producto.html.
 
-(5) agregar el footer de la pagina https://www.coca-cola.com/ar/es y lo agrego
-    al footer de mi pagina. quiero que todos los links del footer funcionen
+(5) los importes me salen corridos: puse 19 unidades de Coca-Cola y el subtotal
+    dice $1.800 en vez de $1.900
+    -> En "system: fixed" el primer símbolo representa el valor 1, así que
+       faltaba el valor 0 y todo corría un lugar. Se agregó el símbolo "0" y se
+       usó "system: fixed 0" (además de "overflow: clip" para los negativos).
 
-(6) quiero que experiencias se vea solo en descubri del index
+(6) el total me da $0 cuando el panel está cerrado
+    -> Los radios no pueden llevar "display: none" porque los elementos con
+       display: none no suman a los contadores CSS. Se cambió a
+       "visibility: hidden", que los saca de la pantalla y del teclado pero los
+       deja contabilizando.
 
-(7) quitame "experiencias" de #inicio, #marcas, #catalogo, #carrito y #contacto.
-    Dejar "experiencias" solo en #descubri.
-    -> elegí: "Quitar accesos del menú"
+(7) el chip me muestra siempre 0
+    -> El chip, que lee el contador, estaba antes que los radios en el HTML, así
+       que leía el contador antes de que sumara. Se lo movió al final del bloque
+       y se agregó "flex-direction: column-reverse" para que siga viéndose arriba.
 
-(8) quiero que la clase experiencia solo sea accesible y vista desde #descubri
+(8) el carrito no me deja elegir más de 9 unidades
+    -> Se fijó el tope en 30 unidades por producto, con un total máximo de
+       $225.000, y se ajustó el texto de ayuda de la página.
 
-(9) quiero que la seccion id descubri sea solo visible y accesible desde #descubri
+(9) en el celular el menú me queda en 4 renglones y ocupa media pantalla
+    -> Se sacó el "flex-direction: column": el <ul> del nav es una sola línea con
+       "flex-wrap: nowrap" y "justify-content: safe center", más
+       "overflow-x: auto" en el propio <ul> como red de seguridad. El header
+       bajó de 184px a ~93px y los enlaces entran completos a 320px.
 
-(10) quiero que section id "tiendas" sea solo visible y accesible desde #inicio
+(10) el footer me tapa la pantalla en el celular, mide más que el alto del
+     celular
+     -> "min-height: 50vh" con "50dvh" como respaldo, más compactación del
+        contenido: flex vertical con "justify-content: center", 3 columnas
+        angostas y tipografías/gaps/paddings chicos. Bajó de 761px a 320px en un
+        viewport de 640px.
 
-(11) agregar jumbo cencosud, disco cencosud y vea cencosud a #carrito
+(11) en 320px el footer se pasa de la mitad
+     -> Bloque extra para "max-width: 380px" que aprieta logo, gaps, paddings y
+        tipografía, con un comentario en el CSS explicando por qué.
 
-(12) agregar de la pagina
-     https://www.coca-cola.com/ar/es/offerings/links-a-tiendas, jumbo cencosud,
-     disco cencosud y vea cencosud a la pagina carrito.html, respetando el
-     tamaño, sin js, solo html y css
+(12) en el celular apaisado el footer también se desborda
+     -> Bloque "orientation: landscape" con "max-height: 500px", más compacto que
+        el de 320px porque la pantalla es baja.
 
-(13) quiero que section id "tiendas" aparezca tambien en la pagina carrito.html
+(13) los breakpoints no me funcionan, el diseño se pisa
+     -> Se movieron todas las media queries al final de style.css: si una regla
+        base aparece después del bloque responsive, la cascada la pisa y el
+        breakpoint deja de funcionar. Se agregó el comentario en el CSS que
+        explica por qué deben ir al final.
 
-(14) (primera sesión de esta MR) en base a lo que hicimos podes llevarme la
-     plantilla del mr que describo aqui (esta plantilla)
+(14) los breakpoints del footer no hacen nada
+     -> Era especificidad: "footer .footer-cols" de la regla base ganaba sobre el
+        del breakpoint. Se ajustó la declaración del grid dentro del media query.
 
-(15) recuperar las listas de gaseosas anteriormente quitadas y agregarlas dentro
-     de #catalogo
+(15) los enlaces del footer son muy chicos para tocar con el dedo
+     -> Se les agrandó el área táctil a ~22px con un "::after" absoluto, que no
+        suma alto al bloque.
 
-(16) quiero quitar #marcas junto con lo que contiene
+(16) los controles no se ven cuando los tabulo con el teclado
+     -> Se agregó ":focus-visible" con un anillo rojo de 3px en el chip, en las
+        pastillas y en el botón "Finalizar compra".
 
-(17) quiero centrar el titulo "detalle del producto", justo debajo del header y
-     debajo alinear horizontalmente las bebidas dentro de productos.html. debe
-     ser responsive, con css y html, no js
-
-(18) agregar el enlace a #contacto y carrito.html a la barra debajo del titulo
-     refresco argentina en la pagina producto.html, con css y html, no js
-
-(19) quiero que las clases "aguas-detalles" tengan un solo titulo que las agrupe
-     que diga "otras bebidas para comprar desde el supermercado" dentro de
-     #catalogo
-
-(20) quiero que limpies la pagina #inicio y le agregues las imagenes y texto de
-     la pagina https://gemini.google.com/app/8ae75ec4afc8717b?hl=es
-     -> el agente no pudo acceder (el enlace es privado): pedí que pegaran el
-        contenido. Consumido/se pegó el texto de la historia de Coca-Cola.
-     -> aclaraciones elegidas: "Solo reemplazar la vista Inicio" /
-        "Buscá y descargá las imágenes".
-
-(21) [texto pegado por el alumno] Título principal: Sabor Único, Historia
-     Inigualable ... (reseña completa de Coca-Cola con línea de tiempo).
-
-(22) quiero que el contenido de #inicio tenga una apariencia y estilo similar a
-     la que tienen los productos de coca cola
-
-(23) quiero que en class "logo" se le agregue un icono de una tapa de coca cola
-
-(24) quiero que el texto de "sabor unico, historia inigualable" completo solo
-     aparezca en #inicio y que se borre del resto de los enlaces, que se haga en
-     css y html, no js y sea responsivo
-
-(25) en base a lo que hicimos podes llenarme la plantilla del mr que describo
-     aqui (esta plantilla)
+(17) en base a lo que hicimos podes llenarme la plantilla del mr que describo aqui
 ```
-
----
 
 ## Checklist antes de enviar
 
-- [ ] Trabajé en una rama propia (no directo en `main`).
+- [x] Trabajé en una rama propia (no directo en `main`) → `feature-add-css3`.
 - [x] Probé que mi código/archivo funciona antes de subirlo.
 - [x] Este PR es dentro de mi propio repositorio.
 - [x] Completé todos los datos de esta plantilla.
 
 ## Comentarios adicionales (opcional)
 
-- El repositorio sigue en la rama `master` y **sin commits todavía** (`main` no existe). Recomiendo crear una rama `feature/…` antes de subir: `git checkout -b feature/coca-cola-sitio`.
-- La historia de `#inicio` se oculta/muestra mediante CSS `:has()` + `:target`: solo se ve en inicio, y se oculta al navegar a `#catalogo` o `#descubri`. Este selector requiere un navegador moderno (Chrome/Edge/Firefox/Safari actuales).
-- El carrito usa un mínimo de JavaScript para calcular el total en vivo (fue la excepción pedida por el alumno; el resto es solo HTML y CSS).
-- Las imágenes nuevas (`afiche-coca-cola.jpg`, `botella-contour-1915.jpg`, `coca-tapa.svg`) se bajaron de Wikimedia Commons y quedaron guardadas localmente en `img/` (no dependen de internet fuera del footer).
+Dudas, aclaraciones o algo que quieras comentarle al profesor:
+
+- **Los prompts (2), (3), (4) y el pedido de responsive son textuales**: están anotados así en `Predictions.md`. Los demás (de (5) a (16)) los reconstruí a partir de los comentarios que dejé en el CSS y de los nombres de los `.bak`, que muestran el orden real en que fui probando cada cosa, así que la redacción es aproximada. Conviene revisarlos y corregirlos si no coinciden con lo que escribí.
+- **Verifiqué que el sitio quedó sin JavaScript**: antes solo `carrito.html` tenía; ahora ninguna de las 4 páginas tiene.
+- **El `@counter-style` cuenta de a 100**: el radio de 19 unidades suma `19` al contador, y el símbolo número 19 de la lista es `"1.900"`, así que en pantalla sale `$1.900` sin escribir los números a mano en cada regla. Está comentado en el propio `style.css`.
+- **Los `.bak` son copias de resguardo mías**, no código del proyecto. Recomiendo sacarlos antes de mergear:
+  ```bash
+  git rm carrito.html.bak carrito.pre-*.bak style.css.bak style.pre-*.bak
+  echo "*.bak" >> .gitignore
+  git commit -m "eliminar archivos .bak de resguardo"
+  ```
+- **Precios**: son de septiembre de 2026. Salvo Coca‑Cola son redondeos y pueden variar por tienda o promoción.
+- **Navegadores**: el carrito necesita `@counter-style`, `visibility: hidden` y `:has()` (Chrome, Edge, Firefox y Safari actuales).
