@@ -17,5 +17,7 @@ cambiar unidades dentro de carrito
 adaptar el precio de las gaseosas al valor de estos en Argentina
 Hacer ajustes en el diseño para moviles
 simplificar codigo
-adaptar a js
+adaptar a js footer
+adaptar a js header
+
 

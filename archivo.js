@@ -1,4 +1,4 @@
-const headerData = {
+const miheader = {
   logo: {
     src: "img/coca-tapa.svg",
     alt: "Tapa de Coca-Cola",
@@ -80,19 +80,19 @@ function crearHeader() {
   const logo = document.createElement("div");
   logo.className = "logo";
   const logoImg = document.createElement("img");
-  logoImg.src = headerData.logo.src;
-  logoImg.alt = headerData.logo.alt;
-  logoImg.className = headerData.logo.className;
+  logoImg.src = miheader.logo.src;
+  logoImg.alt = miheader.logo.alt;
+  logoImg.className = miheader.logo.className;
   logo.appendChild(logoImg);
-  logo.appendChild(document.createTextNode(` ${headerData.logo.text}`));
+  logo.appendChild(document.createTextNode(` ${miheader.logo.text}`));
   header.appendChild(logo);
 
   const nav = document.createElement("nav");
-  nav.setAttribute("aria-label", headerData.nav.label);
+  nav.setAttribute("aria-label", miheader.nav.label);
   const lista = document.createElement("ul");
   const enInicio = esPaginaInicio();
 
-  headerData.nav.links.forEach((link) => {
+  miheader.nav.links.forEach((link) => {
     const item = document.createElement("li");
     const anchor = document.createElement("a");
     anchor.textContent = link.text;
