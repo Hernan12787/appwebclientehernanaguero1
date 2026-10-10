@@ -1246,7 +1246,7 @@ footer p {
 
 /* ===== Responsive ===== */
 /* Todas las media queries van al final: si una regla base aparece despues
-   del bloque responsive, la cascada la pisa y el breakpoint deja de funcionar */
+   del  bloque responsive, la cascada la pisa y el breakpoint deja de funcionar */
 
 @media (max-width: 900px) {
     /* En pantallas angostas el carrito deja de ser de dos columnas */
