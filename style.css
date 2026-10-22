@@ -1011,6 +1011,15 @@ footer p {
     margin: 1rem 0 1.5rem;
 }
 
+#productos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 1.5rem;
+    flex-basis: 100%;
+}
+
 .producto-detalle {
     background: #ffffff;
     border: 1px solid #e5e7eb;
