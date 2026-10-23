@@ -199,7 +199,8 @@ const PAISES_LATINOAMERICA = [
 ];
 
 const COLUMNAS_PLANTA_PREFERIDAS = [
-  "Nombre Planta", "Pais", "Ciudad", "Direccion Planta", "Direccion", "Dirección",
+  "Pais", "Empresa Embotelladora", "Nombre Planta", "Ciudad", "Estado/Región",
+  "Direccion/Domicilio", "Telefono Corporativo", "Correo Electrónico",
 ];
 
 function normalizarTexto(valor) {
