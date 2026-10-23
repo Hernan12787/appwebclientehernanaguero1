@@ -996,6 +996,50 @@ footer p {
     background: #be123c;
 }
 
+/* ===== Plantas de producción (tabla) ===== */
+.contacto-plantas {
+    margin-top: 1.5rem;
+}
+
+.contacto-plantas h3 {
+    margin: 0 0 1rem;
+}
+
+.plantas-estado {
+    color: #6b7280;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.plantas-tabla-wrap {
+    margin-top: 1.5rem;
+    overflow-x: auto;
+}
+
+.plantas-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.plantas-tabla th,
+.plantas-tabla td {
+    padding: 0.65rem 0.85rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.plantas-tabla th {
+    background: #f9fafb;
+    color: #111827;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.plantas-tabla tbody tr:hover {
+    background: #fff1f2;
+}
+
 /* ===== Detalle de producto ===== */
 #detalle {
     display: flex;
