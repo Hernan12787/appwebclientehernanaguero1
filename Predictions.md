@@ -20,6 +20,8 @@ simplificar codigo
 adaptar a js footer
 adaptar a js header
 crear un js de producto y reemplazar en el codigo
-
+agregar tabla supabase al codigo
+introduzo el fetch que le sigue al supabase
+muestro la tabla supabase en mi pagina contactos.html
 
 
