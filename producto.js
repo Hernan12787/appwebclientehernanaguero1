@@ -165,3 +165,12 @@ if (document.readyState === "loading") {
 } else {
   renderProductos();
 }
+const traerDireccionesSupabase = async () => {
+  const url=https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/direcciones?select=*
+const options = {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+    'apikey': 'sb_publishable_caiELbjOQdhK6NS9Ws2wuQ_ZyNeEMHl'}
+  }};
+  
