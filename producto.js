@@ -166,14 +166,15 @@ if (document.readyState === "loading") {
   renderProductos();
 }
 const traerDireccionesSupabase = async () => {
-  const url=https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/direcciones?select=*
-const options = {
-  method: 'GET',
-  headers: {
-    'Content-Type': 'application/json',
-    'apikey': 'sb_publishable_caiELbjOQdhK6NS9Ws2wuQ_ZyNeEMHl'}
-  }};
- return fetch(url, options)
+  const url = "https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/direcciones?select=*";
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": "sb_publishable_caiELbjOQdhK6NS9Ws2wuQ_ZyNeEMHl",
+    },
+  };
+  return fetch(url, options)
   .then(response => {
     if (!response.ok) {
       throw new Error('Error al obtener las direcciones');
@@ -187,3 +188,4 @@ const options = {
     console.error('Error en la solicitud a Spabase:', error);
     return [];
   });
+};
