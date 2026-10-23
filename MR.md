@@ -1,53 +1,71 @@
-# MR — Header y footer generados desde JavaScript
+# MR — Catálogo y detalle de productos generados desde JavaScript
 
 ## Descripción
 
 Explicá brevemente qué hiciste y qué archivos modificaste o agregaste:
 
-Saqué el **header y el footer del HTML** de las 4 páginas y los pasé a un único
-archivo JavaScript, **`archivo.js`**, que los construye con la API DOM
-(`document.createElement`) a partir de dos objetos de datos: `miheader` y
-`footerData`. Ahora el markup de esas dos zonas no está repetido 4 veces en el
-HTML sino definido una sola vez en JS, y las 4 páginas quedan consistentes
-entre sí por construcción.
+Saqué del HTML las tarjetas de producto que estaban **hardcodeadas** y las pasé a
+un archivo JavaScript nuevo, **`producto.js`**, que las construye con la API DOM
+(`document.createElement`) a partir de un único array de datos llamado
+`productos`. Ahora el contenido de los productos vive en un solo lugar (los datos)
+y las dos vistas del sitio que los muestran comparten la misma fuente.
+
+La lista de productos quedó en formato JSON dentro de `producto.js`: cada ítem
+tiene `id`, `slug`, `clase`, `imagen` (`src` + `alt`), `titulo`, `descripcion`
+(para el detalle), `descripcionCatalogo` (texto corto para el catálogo),
+`especificaciones` (las viñetas del detalle) y `volver` (texto y URL del enlace al
+catálogo). El mismo array alimenta las dos páginas.
 
 Archivos agregados:
 
-- **`archivo.js`** — `miheader` (logo + los 5 links del nav) y `footerData` (logo,
-  3 columnas de links, redes y copyright) son solo datos. `crearHeader()` y
-  `crearFooter()` arman los nodos con `createElement` + `textContent`, y
-  `renderLayout()` los coloca en el DOM: el header con
-  `document.body.insertBefore(headerNuevo, main)` y el footer reemplazando el
-  `<footer id="footer">` de anclaje. Se ejecuta en `DOMContentLoaded`.
-- Las imágenes y los textos con acentos se cargan por `textContent` y atributos,
-  **nunca por `innerHTML`**, así que nada se interpreta como HTML. Los links
-  externos usan un helper (`crearLinkExterno`) que setea `target="_blank"` y
-  `rel="noopener noreferrer"` de una sola vez.
+- **`producto.js`** — el array `productos` (los 4 productos: Coca-Cola, Sprite,
+  Fanta y Schweppes) más tres funciones:
+  - `crearProductoCatalogo(producto)` arma la tarjeta del catálogo:
+    `article.producto producto-<marca>` con `img`, `h4`, `p` y el `<a>` "Ver
+    detalle" apuntando a `producto.html?id=<slug>`.
+  - `crearProductoDetalle(producto)` arma la ficha del detalle:
+    `article.producto-detalle` con `img`, `h4`, `p`, la `<ul>` de
+    especificaciones y el enlace "Volver al catálogo".
+  - `renderProductos()` busca el contenedor `#productos` y decide qué renderizado
+    usar según el contenedor: si tiene la clase `item-cards` es el **catálogo**
+    (index), si no es el **detalle** (producto.html). Se ejecuta en
+    `DOMContentLoaded`.
+- Todo el texto y las imágenes se cargan con `textContent`, `src` y atributos,
+  **nunca con `innerHTML`**, así que nada se interpreta como HTML.
 
-Archivos modificados (los 4 quedan igual entre sí, con el mismo patrón):
+Archivos modificados:
 
-- **`index.html`**, **`carrito.html`**, **`producto.html`**, **`contacto.html`** —
-  se borró el `<header>` inline completo (logo + `<nav>`) y el contenido del
-  `<footer>`. Ahora arrancan directo con `<main>`, terminan con
-  `<footer id="footer"></footer>` y cargan `<script src="archivo.js"></script>` al
-  final del `<body>`. No se tocó `style.css`: las clases que genera el JS
-  (`header .logo`, `.logo-icono`, `header nav ul`, `footer .footer-cols`,
-  `footer .footer-social`, etc.) son las mismas que ya usaba el CSS, así que los
-  estilos y los breakpoints móviles siguen aplicando igual.
+- **`index.html`** — borré las 4 tarjetas `<article class="producto producto-*">`
+  hardcodeadas del catálogo y las reemplacé por
+  `<div class="item-cards" id="productos"></div>`. Agregué
+  `<script src="producto.js"></script>` después de `archivo.js`.
+- **`producto.html`** — borré las 4 fichas `<article class="producto-detalle">`
+  hardcodeadas y las reemplacé por `<div id="productos"></div>`. Agregué
+  `<script src="producto.js"></script>` después de `archivo.js`.
+- **`style.css`** — se agregó una regla nueva para `#detalle #productos`
+  (`display:flex`, `flex-wrap`, `gap`, `flex-basis:100%`) para que el contenedor
+  del detalle mantenga el mismo layout de fila centrada que tenían las fichas
+  sueltas dentro del `#detalle` flex. La regla está acotada con `#detalle` para
+  no pisar la grilla `.item-cards` del catálogo. No se tocó ninguna otra regla:
+  las clases que genera el JS (`.producto producto-*`, `.producto-detalle`) son
+  las mismas que ya usaba el CSS, así que los estilos y los breakpoints siguen
+  aplicando igual.
+- **`Predictions.md`** — se agregó el punto "crear un js de producto y reemplazar
+  en el codigo" a la lista de consignas.
 
 Dos detalles que hubo que resolver:
 
-- **Los anchors cambian según la página.** En `index.html` el nav apunta a
-  `#catalogo` / `#descubri`, y en las otras páginas a `index.html#catalogo` /
-  `index.html#descubri`. Esto no es cosmético: el CSS de `style.css:297` usa
-  `main#inicio:has(#catalogo:target)` para mostrar y ocultar la vista de catálogo,
-  y eso **solo funciona si el enlace es un ancla interna sin recargar la página**.
-  Por eso `esPaginaInicio()` decide el `href` según `window.location.pathname`.
-- **Unifiqué el nombre del sitio.** Decía "Refrescante Argentina" en tres páginas y
-  "Refresco Argentina" en `index.html`. Ahora es "Refresco Argentina" en las 4, y
-  el "Descubrí" falta en el header de `carrito.html` y `contacto.html`: se agregó
-  para que las 4 tengan los mismos 5 links, que es lo que pide el comentario de
-  `style.css:1437` sobre los breakpoints de móvil.
+- **El buscador del catálogo es solo HTML/CSS.** El filtro de marcas
+  (`style.css`) usa selectores como
+  `#f-coca-cola:checked ~ #catalogo .item-cards .producto-coca-cola`, así que las
+  tarjetas generadas por JS **tienen que conservar** las clases
+  `producto producto-<marca>`. Por eso `producto.js` arma exactamente esas clases
+  (campo `clase` de cada producto).
+- **La vista de detalle no tenía un contenedor común.** Antes las fichas eran
+  hijas directas del `#detalle` (que es `display:flex`). Al meterlas dentro de un
+  `div#productos` para poder inyectarlas, ese div pasaba a ser un único flex item
+  y las fichas se apilaban. Se resolvió con la regla `#detalle #productos` del
+  punto anterior, dejando el mismo resultado visual que antes.
 
 ## Cómo probarlo
 
@@ -55,105 +73,97 @@ Pasos para que el profesor pueda correr o revisar el cambio (comandos, URL, capt
 
 No hace falta servidor ni instalar nada: es un sitio estático y se abre con doble click.
 
-1. Abrir cualquiera de las 4 páginas: **`appwebclientehernanaguero1/index.html`**,
-   `carrito.html`, `producto.html` o `contacto.html`. El header con el logo y los
-   5 links tiene que verse igual en las 4.
-2. Confirmar que el header **no está en el HTML**: en DevTools → *Elements*,
-   busca `<header>` y vas a ver que está arriba de `<main>`, después de `<body>`,
-   y que su origen es el script (en DevTools → *Sources* aparece dentro de
-   `archivo.js`). En el HTML solo está `<footer id="footer"></footer>`.
-   O desde PowerShell:
+1. Abrir **`appwebclientehernanaguero1/index.html`**. En la sección
+   "Nuestros productos" tienen que verse las 4 tarjetas (Coca-Cola, Sprite, Fanta
+   y Schweppes) con imagen, título, descripción y el enlace **"Ver detalle"**,
+   igual que antes del cambio.
+2. Confirmar que las tarjetas **no están en el HTML**: en DevTools → *Elements*,
+   el `#catalogo` ahora tiene `<div class="item-cards" id="productos">` y las
+   `article.producto` aparecen generadas dentro (en DevTools → *Sources* salen
+   desde `producto.js`). O desde PowerShell:
    ```powershell
-   Select-String -Path appwebclientehernanaguero1\*.html -Pattern "<header|logo-icono"
+   Select-String -Path appwebclientehernanaguero1\index.html -Pattern "producto-coca-cola"
+   # No debe devolver nada: las tarjetas ya no están en el HTML
+   ```
+3. **Buscador de marcas**: probar el filtro por marca (Coca-Cola, Sprite, Fanta,
+   Schweppes) y "Todas". Las tarjetas generadas por JS tienen que seguir
+   apareciendo/ocultándose igual que antes, porque conservan las clases
+   `producto-*`.
+4. Clic en **"Ver detalle"** de cualquier tarjeta: tiene que abrir
+   `producto.html?id=<slug>` (coca-cola, sprite, fanta o schweppes).
+5. Abrir **`appwebclientehernanaguero1/producto.html`**. Tienen que verse las 4
+   fichas de detalle con imagen, título, descripción, la lista de
+   especificaciones ("Contenido neto", "Presentación", "Precio sugerido") y el
+   enlace "Volver al catálogo".
+6. Confirmar que el detalle tampoco está hardcodeado:
+   ```powershell
+   Select-String -Path appwebclientehernanaguero1\producto.html -Pattern "producto-detalle"
    # No debe devolver nada
    ```
-3. **Nav entre páginas**: "Carrito" y "Contacto" tienen que llevar a esas páginas y
-   "Inicio" / "Catálogo" / "Descubrí" tienen que volver a `index.html`.
-4. **Anclas en index.html**: clickear "Catálogo" muestra el catálogo y oculta la
-   historia, sin recargar la página (mismo comportamiento que antes). Lo mismo con
-   "Descubrí". Desde `carrito.html`, el mismo link tiene que abrir
-   `index.html#catalogo` y mostrar la vista de catálogo.
-5. **Footer**: tiene que verse el logo, las 3 columnas (Sobre Nosotros / ¿Necesitas
-   Ayuda? / Legal), las 4 redes y el copyright, en las 4 páginas.
-6. <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd> y probar **320 / 375 / 480 / 768 /
-   1024px**: el menú tiene que seguir en una sola línea con scroll horizontal y el
-   logo arriba, igual que antes del cambio, porque el CSS no se modificó.
-7. <kbd>Ctrl</kbd>+<kbd>F5</kbd> si el header no aparece, para descartar caché.
+7. <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd> y probar **320 / 375 / 480 / 768 /
+   1024px**: el catálogo en grilla y las fichas de detalle tienen que verse igual
+   que antes del cambio.
+8. <kbd>Ctrl</kbd>+<kbd>F5</kbd> si no aparecen los productos, para descartar caché.
 
 ## Prompt usado y historial con Open Code
 
 Pegá todo el histórico de mensajes con el agente de IA:
 
 ```
-=== SESIÓN — header y footer desde JavaScript ===
+=== SESIÓN — productos (catálogo y detalle) desde JavaScript ===
 
-(1)  quiero agregar un js a la web que maneje el footer. Quiero quitarlo del
-     html y migrarlo al formato js como una variable llamada footerjs que
-     tenga adentro todo lo referido al footer
+(1)  quiero agregar un js a la web y que en ese js al cargar el dom se instancie
+     la lista de productos (class= producto-detalle) que hoy esta en harcode en
+     el html y se inserte en el div "productos". quita los del html y que la
+     lista de productos este en un json. La pagina debe seguir funcionando igual
 
-(2)  quiero que el archivo footerjs funcione completamente con js. al archivo
-     footerjs cambiale el nombre por js
+(2)  ¿Cómo abrís normalmente la página para probarla?
+     -> Respuesta: Doble clic al HTML
 
-(3)  cambiar el nombre footerjs por archivo.js
+(3)  Borrame de producto.html el harcode de class=producto-detalle para que
+     funcione con el archivo producto.js
 
-(4)  todo lo que esta dentro de la constante footerjs debe estar configurado
-     con js
+(4)  quiero que mi pagina web trabaje con producto.js en vez de html.
+     -> Alcance elegido: También index.html (mover las 4 tarjetas del catálogo
+        "Nuestros productos" a producto.js)
 
-(5)  quiero agregar en archivo.js los parametros para utilizar el header como
-     un js completo en vez de ser html. Borrame la configuracion html y dejame
-     el header funcional en js
-
-(6)  quiero que el header de index.html y demas archivos html funcione desde el
-     header de archivo.js y que el header sea manejado completamente desde
-     archivo.js para todas las paginas utilizando el formato js
-
-(7)  quiero que los archivos del header en archivo.js esten dentro de una
-     variable llamada miheader
-
-(8)  configurame el header en archivo.js para que funcione en mi pagina
-
-(9)  el header esta oculto. lo quiero ver
-
-(10) en base a lo que hicimos podes llenarme la plantilla del mr que describo
-     aqui [+ la plantilla completa]
+(5)  en base a todo lo que hicimos en la rama feature- js podes llenarme la
+     plantilla del mr que describo aqui [+ la plantilla completa]
 ```
 
 ## Checklist antes de enviar
 
-- [ ] Trabajé en una rama propia (no directo en `main`) — **pendiente**: el repo
-      todavía no tiene ningún commit y estoy sobre `master`. Hay que crear la rama
-      antes de commitear.
-- [x] Probé que mi código/archivo funciona antes de subirlo (corrí `archivo.js`
-      contra un stub de DOM en Node para verificar que el header se genera con los
-      links y los `href` correctos en cada página, y `node --check` para validar
-      la sintaxis).
-- [ ] Este PR es dentro de mi propio repositorio.
+- [x] Trabajé en una rama propia (no directo en `main`) — se trabajó en la rama
+      **`feature/adapt-to-js`**.
+- [x] Probé que mi código/archivo funciona antes de subirlo (validé la sintaxis
+      con `node --check producto.js` y verifiqué el DOM renderizado con Chrome
+      headless: `index.html` genera las 4 tarjetas del catálogo con sus enlaces y
+      `producto.html` genera las 4 fichas de detalle).
+- [x] Este PR es dentro de mi propio repositorio.
 - [x] Completé todos los datos de esta plantilla.
 
 ## Comentarios adicionales (opcional)
 
 Dudas, aclaraciones o algo que quieras comentarle al profesor:
 
-- **El drawback de mover el header a JS**: el HTML ya no lo contiene, así que sin
-  JavaScript el sitio queda sin barra de navegación, y para buscadores el header
-  no existe. Es el mismo criterio que se venga usando en el proyecto de dejar el
-  carrito sin JS, pero acá va al revés: se agregó JS. Lo dejo aclarado por si el
-  profe pregunta por el criterio.
-- **Verifiqué que el DOM queda igual**: corrí `archivo.js` en Node con un stub
-  mínimo de DOM y el header generado tiene el mismo árbol que el que estaba en el
-  HTML (`div.logo > img.logo-icono` + texto, y `nav[aria-label] > ul > li > a`),
-  solo cambia quién lo genera.
-- **Dos cosas que se arreglaron de paso y no estaban pedidas**: `index.html` había
-  quedado sin la etiqueta `<body>` (por eso el header no se veía y el JS no
-  inyectaba nada), y el nombre del sitio era distinto en cada página. Si preferís
-  mantener "Refrescante Argentina", se cambia en `miheader.logo.text`.
-- **Los `.bak` que siguen en la carpeta son de la sesión anterior** (el trabajo
-  del carrito sin JS), no de este cambio. Recomiendo sacarlos antes de mergear:
-  ```bash
-  git rm appwebclientehernanaguero1/carrito*.bak appwebclientehernanaguero1/style*.bak
-  echo "*.bak" >> .gitignore
-  ```
-- **Navegadores**: no usa nada exclusivo, `createElement`, `insertBefore` y
-  `replaceWith` andan en cualquier navegador actual. El `:has()` del CSS de
-  `index.html` sí requiere un navegador con soporte (Chrome, Edge, Firefox y
-  Safari actuales), pero eso ya estaba antes de este cambio.
+- **Por qué el JSON está dentro del `.js` y no en un `productos.json` aparte**:
+  como la página se abre con doble click (`file://`), un `fetch` a un `.json`
+  externo lo bloquea el navegador por política de origen. Por eso la lista de
+  productos queda como un array JSON dentro de `producto.js`. Si en algún momento
+  se sirve por HTTP (Live Server o GitHub Pages), se puede mover a un
+  `productos.json` y cargarlo con `fetch` sin cambiar el resto.
+- **El drawback de generar el catálogo desde JS**: igual que pasó con el header y
+  footer, el HTML ya no contiene las tarjetas, así que sin JavaScript el catálogo
+  no se ve y para buscadores no existe. Es el mismo criterio que se viene usando
+  en el proyecto al mover partes del markup a JS.
+- **Verifiqué que el DOM queda igual**: corrí las páginas en Chrome headless y el
+  árbol generado por `producto.js` es el mismo que estaba en el HTML
+  (`article.producto producto-*` con `img`/`h4`/`p`/`a` en el catálogo, y
+  `article.producto-detalle` con `img`/`h4`/`p`/`ul`/`a` en el detalle), solo
+  cambia quién lo genera.
+- **El `id="productos"` se usa en las dos páginas** con el mismo `renderProductos()`,
+  que decide el formato según si el contenedor tiene la clase `item-cards`. Es a
+  propósito, para no duplicar la lógica de renderizado.
+- **Navegadores**: no usa nada exclusivo, `createElement` y
+  `createDocumentFragment` andan en cualquier navegador actual. El `:has()` del
+  CSS de `index.html` ya estaba antes de este cambio.
