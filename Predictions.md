@@ -19,5 +19,7 @@ Hacer ajustes en el diseño para moviles
 simplificar codigo
 adaptar a js footer
 adaptar a js header
+crear un js de producto y reemplazar en el codigo
+
 
 
