@@ -1011,7 +1011,7 @@ footer p {
     margin: 1rem 0 1.5rem;
 }
 
-#productos {
+#detalle #productos {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
