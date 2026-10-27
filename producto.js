@@ -165,3 +165,75 @@ if (document.readyState === "loading") {
 } else {
   renderProductos();
 }
+
+var plantasCargadas = false;
+
+function inicializarPlantas() {
+  var tituloPlantas = document.getElementById("plantas-titulo");
+  if (!tituloPlantas) {
+    return;
+  }
+  tituloPlantas.addEventListener("click", function() {
+    var tabla = document.getElementById("plantas-tabla");
+    if (!tabla) {
+      return;
+    }
+    if (plantasCargadas && tabla.innerHTML !== "") {
+      tabla.innerHTML = "";
+      var estado = document.getElementById("plantas-estado");
+      if (estado) {
+        estado.textContent = "";
+      }
+      plantasCargadas = false;
+      return;
+    }
+
+    fetch("https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/Coca-Cola?select=*", {
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": "sb_publishable_caiELbjOQdhK6NS9Ws2wuQ_ZyNeEMHl"
+      }
+    })
+    .then(function(r) { return r.ok ? r.json() : []; })
+    .then(function(data) {
+      var estado = document.getElementById("plantas-estado");
+      if (!Array.isArray(data) || !data.length) {
+        if (estado) {
+          estado.textContent = "Sin datos.";
+        }
+        return;
+      }
+      tabla.innerHTML = "";
+      var thead = document.createElement("thead");
+      var trh = document.createElement("tr");
+      Object.keys(data[0]).forEach(function(k) {
+        var th = document.createElement("th");
+        th.textContent = k;
+        trh.appendChild(th);
+      });
+      thead.appendChild(trh);
+      tabla.appendChild(thead);
+      var tbody = document.createElement("tbody");
+      data.forEach(function(fila) {
+        var tr = document.createElement("tr");
+        Object.keys(data[0]).forEach(function(k) {
+          var td = document.createElement("td");
+          td.textContent = fila[k] == null ? "" : fila[k];
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+      tabla.appendChild(tbody);
+      if (estado) {
+        estado.textContent = "";
+      }
+      plantasCargadas = true;
+    });
+  });
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", inicializarPlantas);
+} else {
+  inicializarPlantas();
+}
