@@ -165,148 +165,75 @@ if (document.readyState === "loading") {
 } else {
   renderProductos();
 }
-const traerDireccionesSupabase = async () => {
-  const url = "https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/Coca-Cola?select=*";
-  const options = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "apikey": "sb_publishable_caiELbjOQdhK6NS9Ws2wuQ_ZyNeEMHl",
-    },
-  };
-  return fetch(url, options)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Error al obtener las direcciones');
+
+var plantasCargadas = false;
+
+function inicializarPlantas() {
+  var tituloPlantas = document.getElementById("plantas-titulo");
+  if (!tituloPlantas) {
+    return;
+  }
+  tituloPlantas.addEventListener("click", function() {
+    var tabla = document.getElementById("plantas-tabla");
+    if (!tabla) {
+      return;
     }
-    return response.json();
-  })
-  .then(data => { 
-    return data;
-  })
-  .catch(error => {
-    console.error('Error en la solicitud a Spabase:', error);
-    return [];
-  });
-};
-
-const PAISES_LATINOAMERICA = [
-  "argentina", "bolivia", "brasil", "brazil", "chile", "colombia", "costa rica",
-  "cuba", "ecuador", "el salvador", "guatemala", "haiti", "honduras",
-  "mexico", "méxico", "nicaragua", "panama", "panamá", "paraguay", "peru",
-  "perú", "republica dominicana", "república dominicana", "uruguay", "venezuela",
-  "puerto rico",
-];
-
-const COLUMNAS_PLANTA_PREFERIDAS = [
-  "Pais", "Empresa Embotelladora", "Nombre Planta", "Ciudad", "Estado/Región",
-  "Direccion/Domicilio", "Telefono Corporativo", "Correo Electrónico",
-];
-
-function normalizarTexto(valor) {
-  return String(valor == null ? "" : valor).toLowerCase().trim();
-}
-
-function esPaisLatinoamericano(valorPais) {
-  const pais = normalizarTexto(valorPais);
-  return PAISES_LATINOAMERICA.some((p) => pais === p || pais.includes(p));
-}
-
-function elegirColumnasPlanta(filas) {
-  const claves = [];
-  filas.forEach((fila) => {
-    Object.keys(fila).forEach((clave) => {
-      if (!claves.includes(clave)) {
-        claves.push(clave);
+    if (plantasCargadas && tabla.innerHTML !== "") {
+      tabla.innerHTML = "";
+      var estado = document.getElementById("plantas-estado");
+      if (estado) {
+        estado.textContent = "";
       }
+      plantasCargadas = false;
+      return;
+    }
+
+    fetch("https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/Coca-Cola?select=*", {
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": "sb_publishable_caiELbjOQdhK6NS9Ws2wuQ_ZyNeEMHl"
+      }
+    })
+    .then(function(r) { return r.ok ? r.json() : []; })
+    .then(function(data) {
+      var estado = document.getElementById("plantas-estado");
+      if (!Array.isArray(data) || !data.length) {
+        if (estado) {
+          estado.textContent = "Sin datos.";
+        }
+        return;
+      }
+      tabla.innerHTML = "";
+      var thead = document.createElement("thead");
+      var trh = document.createElement("tr");
+      Object.keys(data[0]).forEach(function(k) {
+        var th = document.createElement("th");
+        th.textContent = k;
+        trh.appendChild(th);
+      });
+      thead.appendChild(trh);
+      tabla.appendChild(thead);
+      var tbody = document.createElement("tbody");
+      data.forEach(function(fila) {
+        var tr = document.createElement("tr");
+        Object.keys(data[0]).forEach(function(k) {
+          var td = document.createElement("td");
+          td.textContent = fila[k] == null ? "" : fila[k];
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+      tabla.appendChild(tbody);
+      if (estado) {
+        estado.textContent = "";
+      }
+      plantasCargadas = true;
     });
   });
-
-  const preferidas = COLUMNAS_PLANTA_PREFERIDAS.filter((clave) => claves.includes(clave));
-  const restantes = claves.filter((clave) => !preferidas.includes(clave) && normalizarTexto(clave) !== "id");
-  return preferidas.concat(restantes);
-}
-
-function etiquetaColumna(clave) {
-  return clave.replace(/_/g, " ");
-}
-
-function crearTablaPlantas(filas) {
-  const columnas = elegirColumnasPlanta(filas);
-  const tabla = document.createElement("table");
-
-  const thead = document.createElement("thead");
-  const filaEncabezado = document.createElement("tr");
-  columnas.forEach((clave) => {
-    const th = document.createElement("th");
-    th.scope = "col";
-    th.textContent = etiquetaColumna(clave);
-    filaEncabezado.appendChild(th);
-  });
-  thead.appendChild(filaEncabezado);
-  tabla.appendChild(thead);
-
-  const tbody = document.createElement("tbody");
-  filas.forEach((fila) => {
-    const tr = document.createElement("tr");
-    columnas.forEach((clave) => {
-      const td = document.createElement("td");
-      td.textContent = fila[clave] == null ? "" : fila[clave];
-      tr.appendChild(td);
-    });
-    tbody.appendChild(tr);
-  });
-  tabla.appendChild(tbody);
-
-  return tabla;
-}
-
-function setEstadoPlantas(texto) {
-  const estado = document.querySelector("#plantas-estado");
-  if (!estado) {
-    return;
-  }
-  estado.textContent = texto;
-  estado.hidden = !texto;
-}
-
-async function fillTablaPlantas() {
-  const contenedor = document.querySelector("#abrir-plantas");
-  const tablaVieja = document.querySelector("#plantas-tabla");
-  if (!contenedor || !tablaVieja) {
-    return;
-  }
-
-  setEstadoPlantas("Cargando plantas…");
-
-  const direcciones = await traerDireccionesSupabase();
-  const filas = (Array.isArray(direcciones) ? direcciones : []).filter((fila) =>
-    esPaisLatinoamericano(fila && (fila.Pais || fila.pais))
-  );
-
-  if (filas.length === 0) {
-    tablaVieja.hidden = true;
-    setEstadoPlantas("No hay plantas de producción para mostrar.");
-    return;
-  }
-
-  const nuevaTabla = crearTablaPlantas(filas);
-  nuevaTabla.id = "plantas-tabla";
-  nuevaTabla.classList.add("plantas-tabla");
-  nuevaTabla.hidden = false;
-  tablaVieja.replaceWith(nuevaTabla);
-  setEstadoPlantas("");
-}
-
-function iniciarPlantas() {
-  if (!document.querySelector("#abrir-plantas")) {
-    return;
-  }
-  fillTablaPlantas();
 }
 
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", iniciarPlantas);
+  document.addEventListener("DOMContentLoaded", inicializarPlantas);
 } else {
-  iniciarPlantas();
+  inicializarPlantas();
 }
