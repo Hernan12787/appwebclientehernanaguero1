@@ -61,10 +61,10 @@
       </div>
 
       <div class="contacto-plantas" id="abrir-plantas">
-        <h3>Plantas de produccion de Coca Cola en Latinoamérica</h3>
+        <h3 id="plantas-titulo" style="cursor:pointer;">Plantas de produccion de Coca Cola en Latinoamérica</h3>
         <p class="plantas-estado" id="plantas-estado" hidden></p>
         <div class="plantas-tabla-wrap">
-          <table class="plantas-tabla" id="plantas-tabla" hidden></table>
+          <table class="plantas-tabla" id="plantas-tabla" style="display:none;"></table>
         </div>
       </div>
     </section>
@@ -73,6 +73,196 @@
   <footer id="footer"></footer>
 
   <script src="archivo.js"></script>
+  <script>
+    (function() {
+      const url = "https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/Coca-Cola?select=*";
+      const titulo = document.getElementById("plantas-titulo");
+      const estado = document.getElementById("plantas-estado");
+      const tabla = document.getElementById("plantas-tabla");
+      const wrap = document.querySelector(".plantas-tabla-wrap");
+      let cargado = false;
+
+      if (!titulo) return;
+
+      titulo.addEventListener("click", function() {
+        let tablaActual = document.getElementById("plantas-tabla");
+        if (tablaActual && tablaActual.style.display === "table") {
+          tablaActual.style.display = "none";
+          if (estado) estado.hidden = true;
+          return;
+        }
+        if (cargado) {
+          if (tablaActual) tablaActual.style.display = "table";
+          return;
+        }
+        cargado = true;
+
+        if (estado) {
+          estado.textContent = "Cargando plantas…";
+          estado.hidden = false;
+        }
+        if (tabla) tabla.style.display = "none";
+
+        fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "apikey": "sb_publishable_caiELbjOQdhK6NS9Ws2wuQ_ZyNeEMHl"
+          }
+        })
+        .then(function(res) { return res.ok ? res.json() : []; })
+        .then(function(data) {
+          const filas = Array.isArray(data) ? data : [];
+          if (!filas.length) {
+            if (estado) {
+              estado.textContent = "No hay plantas de producción para mostrar.";
+              estado.hidden = false;
+            }
+            let t = document.getElementById("plantas-tabla");
+            if (t) t.style.display = "none";
+            return;
+          }
+
+          const claves = [];
+          filas.forEach(function(fila) {
+            Object.keys(fila).forEach(function(clave) {
+              if (claves.indexOf(clave) === -1) claves.push(clave);
+            });
+          });
+          const preferidas = ["Pais", "Ciudad", "Direccion/Domicilio", "Nombre Planta", "Empresa Embotelladora"].filter(function(c){ return claves.indexOf(c) !== -1; });
+          const columnas = preferidas.length ? preferidas.concat(claves.filter(function(c){ return preferidas.indexOf(c) === -1; })) : claves;
+
+          const nuevaTabla = document.createElement("table");
+          nuevaTabla.className = "plantas-tabla";
+          nuevaTabla.id = "plantas-tabla";
+
+          const thead = document.createElement("thead");
+          const trh = document.createElement("tr");
+          columnas.forEach(function(clave) {
+            const th = document.createElement("th");
+            th.scope = "col";
+            th.textContent = clave;
+            trh.appendChild(th);
+          });
+          thead.appendChild(trh);
+          nuevaTabla.appendChild(thead);
+
+          const tbody = document.createElement("tbody");
+          filas.forEach(function(fila) {
+            const tr = document.createElement("tr");
+            columnas.forEach(function(clave) {
+              const td = document.createElement("td");
+              td.textContent = fila[clave] == null ? "" : fila[clave];
+              tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+          });
+          nuevaTabla.appendChild(tbody);
+
+          let tablaVieja = document.getElementById("plantas-tabla");
+          if (tablaVieja) tablaVieja.replaceWith(nuevaTabla);
+          else if (wrap) wrap.appendChild(nuevaTabla);
+
+          if (estado) {
+            estado.textContent = "";
+            estado.hidden = true;
+          }
+          nuevaTabla.style.display = "table";
+        })
+        .catch(function(err) {
+          console.error(err);
+          cargado = false;
+          if (estado) {
+            estado.textContent = "Error al cargar las plantas.";
+            estado.hidden = false;
+          }
+          let t = document.getElementById("plantas-tabla");
+          if (t) t.style.display = "none";
+        });
+      });
+    })();
+  </script>
   <script src="producto.js"></script>
+  <script>
+    (function() {
+      const url = "https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/Coca-Cola?select=*";
+      const estado = document.getElementById("plantas-estado");
+      const tabla = document.getElementById("plantas-tabla");
+      const wrap = document.querySelector(".plantas-tabla-wrap");
+
+      fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": "sb_publishable_caiELbjOQdhK6NS9Ws2wuQ_ZyNeEMHl"
+        }
+      })
+      .then(function(res) { return res.ok ? res.json() : []; })
+      .then(function(data) {
+        const filas = Array.isArray(data) ? data : [];
+        if (!filas.length) {
+          if (estado) {
+            estado.textContent = "No hay plantas de producción para mostrar.";
+            estado.hidden = false;
+          }
+          if (tabla) tabla.hidden = true;
+          return;
+        }
+
+        const claves = [];
+        filas.forEach(function(fila) {
+          Object.keys(fila).forEach(function(clave) {
+            if (claves.indexOf(clave) === -1) claves.push(clave);
+          });
+        });
+        const preferidas = ["Pais", "Ciudad", "Direccion/Domicilio", "Nombre Planta", "Empresa Embotelladora"].filter(function(c){ return claves.indexOf(c) !== -1; });
+        const columnas = preferidas.length ? preferidas.concat(claves.filter(function(c){ return preferidas.indexOf(c) === -1; })) : claves;
+
+        const nuevaTabla = document.createElement("table");
+        nuevaTabla.className = "plantas-tabla";
+        nuevaTabla.id = "plantas-tabla";
+
+        const thead = document.createElement("thead");
+        const trh = document.createElement("tr");
+        columnas.forEach(function(clave) {
+          const th = document.createElement("th");
+          th.scope = "col";
+          th.textContent = String(clave).replace(/_/g, " ").replace(/\b\w/g, function(l){ return l.toUpperCase(); });
+          trh.appendChild(th);
+        });
+        thead.appendChild(trh);
+        nuevaTabla.appendChild(thead);
+
+        const tbody = document.createElement("tbody");
+        filas.forEach(function(fila) {
+          const tr = document.createElement("tr");
+          columnas.forEach(function(clave) {
+            const td = document.createElement("td");
+            td.textContent = fila[clave] == null ? "" : fila[clave];
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+        nuevaTabla.appendChild(tbody);
+
+        if (tabla) tabla.replaceWith(nuevaTabla);
+        else if (wrap) wrap.appendChild(nuevaTabla);
+
+        if (estado) {
+          estado.textContent = "";
+          estado.hidden = true;
+        }
+        nuevaTabla.hidden = false;
+      })
+      .catch(function(err) {
+        console.error("Error en la solicitud a Supabase:", err);
+        if (estado) {
+          estado.textContent = "Error al cargar las plantas.";
+          estado.hidden = false;
+        }
+        if (tabla) tabla.hidden = true;
+      });
+    })();
+  </script>
 </body>
 </html>
