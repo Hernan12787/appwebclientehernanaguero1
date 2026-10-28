@@ -1,4 +1,4 @@
- /* ===== Reset y base ===== */
+﻿ /* ===== Reset y base ===== */
 * {
     margin: 0;
     padding: 0;
@@ -293,13 +293,13 @@ header nav a:hover {
     color: #ffffff;
 }
 
-/* ===== Historia solo visible en #inicio, oculta en las vistas de catálogo y descubrí ===== */
+/* ===== Historia solo visible en #inicio, oculta en las vistas de catÃ¡logo y descubrÃ­ ===== */
 main#inicio:has(#catalogo:target) .historia,
 main#inicio:has(#descubri:target) .historia {
     display: none;
 }
 
-/* ===== Vistas por ancla: catálogo y descubrí solo desde su enlace ===== */
+/* ===== Vistas por ancla: catÃ¡logo y descubrÃ­ solo desde su enlace ===== */
 main#inicio #catalogo,
 main#inicio #descubri {
     display: none;
@@ -996,7 +996,7 @@ footer p {
     background: #be123c;
 }
 
-/* ===== Plantas de producción (tabla) ===== */
+/* ===== Plantas de producciÃ³n (tabla) ===== */
 .contacto-plantas {
     margin-top: 1.5rem;
 }
@@ -1014,6 +1014,16 @@ footer p {
 .plantas-tabla-wrap {
     margin-top: 1.5rem;
     overflow-x: auto;
+}
+.plantas-tabla-wrap {
+    display: none;
+    margin-top: 1.5rem;
+    overflow-x: auto;
+}
+
+.contacto-plantas.abierta .plantas-tabla-wrap,
+.contacto-plantas.abierta #plantas-tabla-wrap {
+    display: block !important;
 }
 
 .plantas-tabla {
@@ -1246,7 +1256,7 @@ footer p {
 #f-sprite:checked ~ .buscador-barra .bus-opciones label[for="f-sprite"]::before,
 #f-fanta:checked ~ .buscador-barra .bus-opciones label[for="f-fanta"]::before,
 #f-schweppes:checked ~ .buscador-barra .bus-opciones label[for="f-schweppes"]::before {
-    content: "✓ ";
+    content: "âœ“ ";
 }
 
 /* Filtrado de marcas y productos */
@@ -1668,4 +1678,52 @@ footer p {
 
 #catalogo .aguas-detalles .agua:hover h4 {
     color: #e11d48;
+}
+
+
+.encuesta-wrap {
+    margin-top: 1rem;
+}
+
+.encuesta-tabla-wrap {
+    display: none;
+    margin-top: 0.75rem;
+    overflow-x: auto;
+}
+
+.encuesta-wrap.abierta .encuesta-tabla-wrap {
+    display: block;
+}
+
+.encuesta-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.encuesta-tabla th,
+.encuesta-tabla td {
+    padding: 0.65rem 0.85rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.encuesta-tabla th {
+    background: #f9fafb;
+    color: #111827;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+#encuesta {
+    margin-top: 1rem;
+}
+#encuesta .encuesta-tabla-wrap {
+    display: none;
+    margin-top: 0.75rem;
+    overflow-x: auto;
+}
+#encuesta.abierta .encuesta-tabla-wrap,
+.encuesta.abierta .encuesta-tabla-wrap {
+    display: block !important;
 }

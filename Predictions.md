@@ -24,5 +24,5 @@ agregar tabla supabase al codigo
 introduzo el fetch que le sigue al supabase
 muestro la tabla supabase en mi pagina contactos.html
 modifico supabase para que trabaje directamente desde la pagina
-
+agrego encuesta, con una tabla supabase
 

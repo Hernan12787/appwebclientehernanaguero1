@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -11,7 +11,7 @@
   <main>
     <section id="contacto">
       <h2>Contacto de clientes</h2>
-      <p>Completá el formulario y te responderemos a la brevedad, o visitanos en nuestra planta de Coca-Cola FEMSA.</p>
+      <p>CompletÃ¡ el formulario y te responderemos a la brevedad, o visitanos en nuestra planta de Coca-Cola FEMSA.</p>
       <div class="contacto-grid">
         <aside class="contacto-mapa">
           <h3>Nuestra planta</h3>
@@ -31,40 +31,58 @@
         </aside>
         <form action="#" method="post">
         <div>
+          <input type="hidden" id="encuesta-id" name="encuesta-id">
+        </div>
+        <div>
           <label for="nombre">Nombre y apellido</label>
           <input type="text" id="nombre" name="nombre" required>
         </div>
         <div>
-          <label for="email">Correo electrónico</label>
+          <label for="email">Correo electrÃ³nico</label>
           <input type="email" id="email" name="email" required>
         </div>
         <div>
-          <label for="telefono">Teléfono</label>
+          <label for="telefono">TelÃ©fono</label>
           <input type="tel" id="telefono" name="telefono">
         </div>
         <div>
           <label for="asunto">Asunto</label>
           <select id="asunto" name="asunto" required>
-            <option value="">Seleccioná una opción</option>
+            <option value="">SeleccionÃ¡ una opciÃ³n</option>
             <option value="consulta">Consulta</option>
-            <option value="pedido">Información de pedido</option>
+            <option value="pedido">InformaciÃ³n de pedido</option>
             <option value="reclamo">Reclamo</option>
             <option value="otro">Otro</option>
           </select>
         </div>
         <div>
-          <label for="mensaje">Mensaje</label>
+          <label for="mensaje" id="label-mensaje" style="cursor:pointer;">Mensaje</label>
           <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+        </div>
+        <div id="encuesta-wrap" class="encuesta-wrap">
+          <p id="encuesta-estado"></p>
+          <div class="encuesta-tabla-wrap">
+            <table class="encuesta-tabla" id="encuesta-tabla"></table>
+          </div>
         </div>
         <button type="submit">Enviar</button>
         </form>
       </div>
 
+      <div class="encuesta" id="encuesta" id="encuesta">
+        <h3 id="encuesta-titulo" style="cursor:pointer;">Me interesa tu opinion ¿te gusta mi pagina?</h3>
+        <p id="encuesta-estado2"></p>
+        <div class="encuesta-tabla-wrap">
+          <table class="encuesta-tabla" id="encuesta-tabla2"></table>
+        </div>
+      </div>
 
-      <div class="contacto-plantas">
-        <h3 id="plantas-titulo" style="cursor:pointer;">Plantas de producción de Coca Cola en Latinoamérica</h3>
+      <div class="contacto-plantas" id="contacto-plantas">
+        <h3 id="plantas-titulo" style="cursor:pointer;">Plantas de producciÃ³n de Coca Cola en LatinoamÃ©rica</h3>
         <p id="plantas-estado"></p>
-        <table class="plantas-tabla" id="plantas-tabla"></table>
+        <div class="plantas-tabla-wrap">
+          <table class="plantas-tabla" id="plantas-tabla"></table>
+        </div>
       </div>
     </section>
   </main>
