@@ -91,6 +91,10 @@ function inyectarEstilosModalEncuesta() {
     '.encuesta-modal-guardar{border:none;border-radius:2rem;background:#e11d48;color:#fff;font-weight:600;padding:.5rem 1rem;cursor:pointer;white-space:nowrap;}',
     '.encuesta-modal-guardar:hover{background:#be123c;}',
     '.encuesta-modal-guardar:disabled{opacity:.6;cursor:wait;}',
+    '.encuesta-modal-salir{display:block;margin-top:.5rem;border:1px solid #d1d5db;border-radius:2rem;background:#fff;color:#374151;font-weight:600;padding:.5rem 1rem;cursor:pointer;white-space:nowrap;}',
+    '.encuesta-modal-salir:hover{background:#f3f4f6;color:#111827;}',
+    '.encuesta-modal-borrar{display:block;margin-top:.5rem;border:1px solid #e11d48;border-radius:2rem;background:#fff;color:#e11d48;font-weight:600;padding:.5rem 1rem;cursor:pointer;white-space:nowrap;}',
+    '.encuesta-modal-borrar:hover{background:#e11d48;color:#fff;}',
     '.encuesta-modal-fila-estado{display:inline-block;margin-left:.5rem;font-size:.85rem;vertical-align:middle;}',
     '.encuesta-modal-fila-ok{color:#15803d;}',
     '.encuesta-modal-fila-error{color:#b91c1c;}',
@@ -172,17 +176,39 @@ function obtenerEncuestasGuardadas() {
 function guardarEncuestaEnLocalStorage(encuesta) {
   if (!encuesta) return;
   var guardadas = obtenerEncuestasGuardadas();
-  if (encuesta.id !== null && encuesta.id !== undefined) {
-    guardadas = guardadas.filter(function (item) {
-      return String(item.id) !== String(encuesta.id);
-    });
-  }
   guardadas.unshift(encuesta);
   try {
     localStorage.setItem('encuestasguardadas', JSON.stringify(guardadas));
   } catch (error) {
     console.error('No se pudo guardar en encuestasguardadas:', error);
   }
+}
+
+function borrarUnaEncuestaGuardadaDeRegistro(id) {
+  var guardadas = obtenerEncuestasGuardadas();
+  var indice = -1;
+  for (var i = 0; i < guardadas.length; i++) {
+    if (String(guardadas[i].id) === String(id)) {
+      indice = i;
+      break;
+    }
+  }
+  if (indice === -1) {
+    renderEncuestasGuardadas();
+    return { eliminada: false, quedan: 0 };
+  }
+  guardadas.splice(indice, 1);
+  try {
+    localStorage.setItem('encuestasguardadas', JSON.stringify(guardadas));
+  } catch (error) {
+    console.error('No se pudo borrar de encuestasguardadas:', error);
+    return { eliminada: false, quedan: 0 };
+  }
+  renderEncuestasGuardadas();
+  var quedan = guardadas.filter(function (item) {
+    return String(item.id) === String(id);
+  }).length;
+  return { eliminada: true, quedan: quedan };
 }
 
 function crearElementoEncuestaGuardada(encuesta) {
@@ -296,12 +322,7 @@ function guardarFilaEncuesta(boton, estado, fila, registro) {
   estado.className = 'encuesta-modal-fila-estado encuesta-modal-fila-ok';
   estado.textContent = 'Guardado';
   setTimeout(function () { estado.textContent = ''; }, 2500);
-  window.actualizarEncuesta(registro.id, cambios).then(function (respuesta) {
-    var delServidor = Array.isArray(respuesta) ? respuesta[0] : respuesta;
-    if (delServidor) {
-      guardarEncuestaEnLocalStorage(delServidor);
-      renderEncuestasGuardadas();
-    }
+  window.actualizarEncuesta(registro.id, cambios).then(function () {
     boton.disabled = false;
     boton.textContent = 'Guardar';
   }).catch(function (error) {
@@ -362,6 +383,25 @@ function renderTablaEncuesta(tabla, datos) {
     }
     tdAcciones.appendChild(boton);
     tdAcciones.appendChild(estadoFila);
+    var botonSalir = document.createElement('button');
+    botonSalir.type = 'button';
+    botonSalir.className = 'encuesta-modal-salir';
+    botonSalir.textContent = 'Salir';
+    botonSalir.addEventListener('click', cerrarModalEncuesta);
+    tdAcciones.appendChild(botonSalir);
+    var botonBorrar = document.createElement('button');
+    botonBorrar.type = 'button';
+    botonBorrar.className = 'encuesta-modal-borrar';
+    botonBorrar.textContent = 'Borrar';
+    botonBorrar.addEventListener('click', function () {
+      var resultado = borrarUnaEncuestaGuardadaDeRegistro(registro.id);
+      estadoFila.className = 'encuesta-modal-fila-estado ' + (resultado.eliminada ? 'encuesta-modal-fila-ok' : 'encuesta-modal-fila-error');
+      estadoFila.textContent = resultado.eliminada
+        ? (resultado.quedan ? 'Borrada 1 (quedan ' + resultado.quedan + ')' : 'Borrado')
+        : 'No había guardadas';
+      setTimeout(function () { estadoFila.textContent = ''; }, 2500);
+    });
+    tdAcciones.appendChild(botonBorrar);
     tr.appendChild(tdAcciones);
     tbody.appendChild(tr);
   });
