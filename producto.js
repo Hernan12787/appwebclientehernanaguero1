@@ -165,13 +165,13 @@ if (document.readyState === "loading") {
 } else {
   renderProductos();
 }
-const traerDireccionesSupabase = async () => {
-        const url = 'https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/Coca-Cola?select=*';\r\n  const options = {
+async function traerDireccionesSupabase() {
+  const url = 'https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/DireccionesSupabase?select=*';
+  const options = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "apikey": sb_publishable_caiELbjOQdhK6NS9Ws2wuQ_ZyNeEMHl
-
+      "apikey": "sb_publishable_caiELbjOQdhK6NS9Ws2wuQ_ZyNeEMHl"
     },
   };
   return fetch(url, options)
@@ -181,21 +181,23 @@ const traerDireccionesSupabase = async () => {
     }
     return response.json();
   })
-  .then(data => { 
+  .then(data => {
     return data;
   })
   .catch(error => {
-    console.error('Error en la solicitud a Spabase:', error);
+    console.error('Error en la solicitud a Supabase:', error);
     return [];
   });
-};
+}
+window.traerDireccionesSupabase = traerDireccionesSupabase;
 
-const  encuestasupabase = async () => {
-          const url = 'https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/Coca-Cola?select=*';\r\n  const options = {
+async function encuestasupabase() {
+  const url = 'https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/Coca-Cola?select=*';
+  const options = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "apikey": sb_publishable_AsYscH20ZSRlzNTpffXfqQ_fEkb_8Mt
+      "apikey": "sb_publishable_AsYscH20ZSRlzNTpffXfqQ_fEkb_8Mt"
     }
     };
     return fetch(url, options)
