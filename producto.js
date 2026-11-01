@@ -1,4 +1,4 @@
-const productos = [
+﻿const productos = [
   {
     "id": "detalle-coca-cola",
     "slug": "coca-cola",
@@ -12,11 +12,11 @@ const productos = [
     "descripcionCatalogo": "El sabor original en botella de 500ml.",
     "especificaciones": [
       "Contenido neto: 500 ml",
-      "Presentación: Botella PET",
+      "PresentaciÃ³n: Botella PET",
       "Precio sugerido: $1.900"
     ],
     "volver": {
-      "texto": "Volver al catálogo",
+      "texto": "Volver al catÃ¡logo",
       "url": "index.html#catalogo"
     }
   },
@@ -26,18 +26,18 @@ const productos = [
     "clase": "producto-sprite",
     "imagen": {
       "src": "img/sprite.jpg",
-      "alt": "Sprite Lima-Limón 500ml"
+      "alt": "Sprite Lima-LimÃ³n 500ml"
     },
-    "titulo": "Sprite Lima-Limón 500ml",
-    "descripcion": "Frescura lima-limón con burbujas que despiertan los sentidos. En botella de 500ml.",
-    "descripcionCatalogo": "Frescura lima-limón en botella de 500ml.",
+    "titulo": "Sprite Lima-LimÃ³n 500ml",
+    "descripcion": "Frescura lima-limÃ³n con burbujas que despiertan los sentidos. En botella de 500ml.",
+    "descripcionCatalogo": "Frescura lima-limÃ³n en botella de 500ml.",
     "especificaciones": [
       "Contenido neto: 500 ml",
-      "Presentación: Botella PET",
+      "PresentaciÃ³n: Botella PET",
       "Precio sugerido: $1.800"
     ],
     "volver": {
-      "texto": "Volver al catálogo",
+      "texto": "Volver al catÃ¡logo",
       "url": "index.html#catalogo"
     }
   },
@@ -50,15 +50,15 @@ const productos = [
       "alt": "Fanta Naranja 500ml"
     },
     "titulo": "Fanta Naranja 500ml",
-    "descripcion": "Diversión y sabor a naranja en cada sorbo. En botella de 500ml.",
-    "descripcionCatalogo": "Diversión y sabor naranja en botella de 500ml.",
+    "descripcion": "DiversiÃ³n y sabor a naranja en cada sorbo. En botella de 500ml.",
+    "descripcionCatalogo": "DiversiÃ³n y sabor naranja en botella de 500ml.",
     "especificaciones": [
       "Contenido neto: 500 ml",
-      "Presentación: Botella PET",
+      "PresentaciÃ³n: Botella PET",
       "Precio sugerido: $1.800"
     ],
     "volver": {
-      "texto": "Volver al catálogo",
+      "texto": "Volver al catÃ¡logo",
       "url": "index.html#catalogo"
     }
   },
@@ -68,18 +68,18 @@ const productos = [
     "clase": "producto-schweppes",
     "imagen": {
       "src": "img/schweppes.jpg",
-      "alt": "Schweppes Tónica 500ml"
+      "alt": "Schweppes TÃ³nica 500ml"
     },
-    "titulo": "Schweppes Tónica 500ml",
-    "descripcion": "Un clásico para grandes ocasiones. Agua tónica en botella de 500ml.",
-    "descripcionCatalogo": "Un clásico para grandes ocasiones en botella de 500ml.",
+    "titulo": "Schweppes TÃ³nica 500ml",
+    "descripcion": "Un clÃ¡sico para grandes ocasiones. Agua tÃ³nica en botella de 500ml.",
+    "descripcionCatalogo": "Un clÃ¡sico para grandes ocasiones en botella de 500ml.",
     "especificaciones": [
       "Contenido neto: 500 ml",
-      "Presentación: Botella PET",
+      "PresentaciÃ³n: Botella PET",
       "Precio sugerido: $2.000"
     ],
     "volver": {
-      "texto": "Volver al catálogo",
+      "texto": "Volver al catÃ¡logo",
       "url": "index.html#catalogo"
     }
   }
@@ -165,75 +165,55 @@ if (document.readyState === "loading") {
 } else {
   renderProductos();
 }
-
-var plantasCargadas = false;
-
-function inicializarPlantas() {
-  var tituloPlantas = document.getElementById("plantas-titulo");
-  if (!tituloPlantas) {
-    return;
-  }
-  tituloPlantas.addEventListener("click", function() {
-    var tabla = document.getElementById("plantas-tabla");
-    if (!tabla) {
-      return;
+async function traerDireccionesSupabase() {
+  const url = 'https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/DireccionesSupabase?select=*';
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": "sb_publishable_caiELbjOQdhK6NS9Ws2wuQ_ZyNeEMHl"
+    },
+  };
+  return fetch(url, options)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Error al obtener las direcciones');
     }
-    if (plantasCargadas && tabla.innerHTML !== "") {
-      tabla.innerHTML = "";
-      var estado = document.getElementById("plantas-estado");
-      if (estado) {
-        estado.textContent = "";
-      }
-      plantasCargadas = false;
-      return;
-    }
-
-    fetch("https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/Coca-Cola?select=*", {
-      headers: {
-        "Content-Type": "application/json",
-        "apikey": "sb_publishable_caiELbjOQdhK6NS9Ws2wuQ_ZyNeEMHl"
-      }
-    })
-    .then(function(r) { return r.ok ? r.json() : []; })
-    .then(function(data) {
-      var estado = document.getElementById("plantas-estado");
-      if (!Array.isArray(data) || !data.length) {
-        if (estado) {
-          estado.textContent = "Sin datos.";
-        }
-        return;
-      }
-      tabla.innerHTML = "";
-      var thead = document.createElement("thead");
-      var trh = document.createElement("tr");
-      Object.keys(data[0]).forEach(function(k) {
-        var th = document.createElement("th");
-        th.textContent = k;
-        trh.appendChild(th);
-      });
-      thead.appendChild(trh);
-      tabla.appendChild(thead);
-      var tbody = document.createElement("tbody");
-      data.forEach(function(fila) {
-        var tr = document.createElement("tr");
-        Object.keys(data[0]).forEach(function(k) {
-          var td = document.createElement("td");
-          td.textContent = fila[k] == null ? "" : fila[k];
-          tr.appendChild(td);
-        });
-        tbody.appendChild(tr);
-      });
-      tabla.appendChild(tbody);
-      if (estado) {
-        estado.textContent = "";
-      }
-      plantasCargadas = true;
-    });
+    return response.json();
+  })
+  .then(data => {
+    return data;
+  })
+  .catch(error => {
+    console.error('Error en la solicitud a Supabase:', error);
+    return [];
   });
 }
+window.traerDireccionesSupabase = traerDireccionesSupabase;
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", inicializarPlantas);
-} else {
-  inicializarPlantas();
-}
+async function encuestasupabase() {
+  const url = 'https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/Coca-Cola?select=*';
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": "sb_publishable_AsYscH20ZSRlzNTpffXfqQ_fEkb_8Mt"
+    }
+    };
+    return fetch(url, options)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Error al obtener las encuestas');
+      }
+      return response.json();
+    })
+    .then(data => { 
+      return data;
+    })
+    .catch(error => {
+      console.error('Error en la solicitud a Supabase:', error);
+      return [];
+    })
+  };
+
+
