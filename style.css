@@ -996,6 +996,17 @@ footer p {
     background: #be123c;
 }
 
+#contacto button.btn-encuesta {
+    width: auto;
+    background: #facc15;
+    color: #111827;
+    border: 1px solid #eab308;
+}
+
+#contacto button.btn-encuesta:hover {
+    background: #eab308;
+}
+
 /* ===== Plantas de producciÃ³n (tabla) ===== */
 .contacto-plantas {
     margin-top: 1.5rem;

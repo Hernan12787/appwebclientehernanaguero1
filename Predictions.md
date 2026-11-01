@@ -24,5 +24,13 @@ agregar tabla supabase al codigo
 introduzo el fetch que le sigue al supabase
 muestro la tabla supabase en mi pagina contactos.html
 modifico supabase para que trabaje directamente desde la pagina
+configuro la tabla de Coca cola
 agrego encuesta, con una tabla supabase
+agrego boton ¿Te gusta mi página?
+asocio el boton con mi tabla encuestas
+lo guardo en un local storage
+agrego boton guardar y salir a mi encuesta
+
+
+
 

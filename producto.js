@@ -192,28 +192,42 @@ async function traerDireccionesSupabase() {
 window.traerDireccionesSupabase = traerDireccionesSupabase;
 
 async function encuestasupabase() {
-  const url = 'https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/Coca-Cola?select=*';
+  const url = 'https://ytyjalgshnjfaqpckuxr.supabase.co/rest/v1/Encuesta?select=*';
   const options = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
       "apikey": "sb_publishable_AsYscH20ZSRlzNTpffXfqQ_fEkb_8Mt"
     }
-    };
-    return fetch(url, options)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Error al obtener las encuestas');
-      }
-      return response.json();
-    })
-    .then(data => { 
-      return data;
-    })
-    .catch(error => {
-      console.error('Error en la solicitud a Supabase:', error);
-      return [];
-    })
   };
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    const detalle = await response.text();
+    throw new Error('Error al obtener las encuestas: ' + response.status + ' ' + detalle);
+  }
+  return response.json();
+}
+window.encuestasupabase = encuestasupabase;
+
+async function actualizarEncuesta(id, cambios) {
+  const url = 'https://ytyjalgshnjfaqpckuxr.supabase.co/rest/v1/Encuesta?id=eq.' + encodeURIComponent(id);
+  const options = {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': 'sb_publishable_AsYscH20ZSRlzNTpffXfqQ_fEkb_8Mt',
+      'Authorization': 'Bearer sb_publishable_AsYscH20ZSRlzNTpffXfqQ_fEkb_8Mt',
+      'Prefer': 'return=representation'
+    },
+    body: JSON.stringify(cambios)
+  };
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    const detalle = await response.text();
+    throw new Error('Error al actualizar la encuesta: ' + response.status + ' ' + detalle);
+  }
+  return response.json();
+}
+window.actualizarEncuesta = actualizarEncuesta;
 
 
