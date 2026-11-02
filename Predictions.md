@@ -30,7 +30,7 @@ agrego boton ¿Te gusta mi página?
 asocio el boton con mi tabla encuestas
 lo guardo en un local storage
 agrego boton guardar y salir a mi encuesta
-
+ajustar la configuracion para móviles
 
 
 

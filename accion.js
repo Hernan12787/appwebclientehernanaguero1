@@ -444,3 +444,29 @@ function activarTodo() {
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', activarTodo);
 else activarTodo();
+
+function togglePlantaMovil() {
+    const btn = document.querySelector('#contacto-mapa .btn-planta-movil');
+    const contenido = document.querySelector('#contacto-mapa .contenido-mapa');
+    if (!btn || !contenido) {
+        console.error('No se encontraron los elementos del mapa de planta');
+        return;
+    }
+    
+    btn.classList.toggle('abierto');
+    contenido.classList.toggle('abierto');
+    
+    if (contenido.classList.contains('abierto')) {
+        btn.textContent = 'Contraer planta';
+    } else {
+        btn.textContent = 'Nuestra planta';
+    }
+}
+
+// Asegurar que el evento se attache después de cargar el DOM
+document.addEventListener('DOMContentLoaded', () => {
+    const btns = document.querySelectorAll('#contacto-mapa .btn-planta-movil');
+    btns.forEach(btn => {
+        btn.addEventListener('click', togglePlantaMovil);
+    });
+});
