@@ -31,6 +31,8 @@ asocio el boton con mi tabla encuestas
 lo guardo en un local storage
 agrego boton guardar y salir a mi encuesta
 ajustar la configuracion para móviles
+Corregir errores señalados por el profesor
+Adaptar carrito a los nuevos parámetros
 
 
 
