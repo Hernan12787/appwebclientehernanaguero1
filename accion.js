@@ -437,9 +437,52 @@ function activarEncuesta() {
   titulo.onclick = abrirModalEncuesta;
 }
 
+function activarFormularioContacto() {
+  var form = document.querySelector('#contacto form');
+  if (!form) return;
+  var estado = document.getElementById('contacto-estado');
+  var boton = form.querySelector('button[type="submit"]');
+
+  form.addEventListener('submit', function (evento) {
+    evento.preventDefault();
+
+    if (typeof window.insertarContactoSupabase !== 'function') {
+      if (estado) estado.textContent = 'No se encontró insertarContactoSupabase().';
+      return;
+    }
+
+    var datos = {
+      nombre: document.getElementById('nombre').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      telefono: document.getElementById('telefono').value.trim(),
+      asunto: document.getElementById('asunto').value,
+      mensaje: document.getElementById('mensaje').value.trim()
+    };
+
+    if (!datos.nombre || !datos.email || !datos.asunto || !datos.mensaje) {
+      if (estado) estado.textContent = 'Completá los campos obligatorios.';
+      return;
+    }
+
+    if (boton) boton.disabled = true;
+    if (estado) estado.textContent = 'Guardando...';
+
+    window.insertarContactoSupabase(datos).then(function () {
+      if (estado) estado.textContent = 'Mensaje guardado correctamente.';
+      form.reset();
+    }).catch(function (error) {
+      console.error(error);
+      if (estado) estado.textContent = 'No se pudo guardar. Intentá de nuevo.';
+    }).finally(function () {
+      if (boton) boton.disabled = false;
+    });
+  });
+}
+
 function activarTodo() {
   activarPlantas();
   activarEncuesta();
+  activarFormularioContacto();
 }
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', activarTodo);
