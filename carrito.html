@@ -255,6 +255,7 @@
     const itemsCarrito = Array.from(document.querySelectorAll('#carrito .item-carrito'));
     const listaSeleccion = document.getElementById('lista-seleccion');
     const totalCompra = document.getElementById('total-compra');
+    const STORAGE_KEY = 'carritoRefrescante';
 
     function formatearPesos(valor) {
       return '$' + valor.toLocaleString('es-AR');
@@ -325,6 +326,7 @@
       totalCompra.textContent = formatearPesos(total);
       document.querySelector('.msg-total').textContent = formatearPesos(total);
       actualizarMensaje(total);
+      guardarCarrito();
     }
 
     function actualizarMensaje(total) {
@@ -369,6 +371,64 @@
       actualizarCarrito();
     }
 
+    function migrarCarritoASession() {
+      try {
+        if (sessionStorage.getItem(STORAGE_KEY) === null) {
+          const guardado = localStorage.getItem(STORAGE_KEY);
+          if (guardado !== null) {
+            sessionStorage.setItem(STORAGE_KEY, guardado);
+          }
+        }
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (error) {
+        console.warn('No se pudo migrar el carrito a sessionStorage:', error);
+      }
+    }
+
+    function cargarCarrito() {
+      let guardado = null;
+
+      try {
+        guardado = JSON.parse(sessionStorage.getItem(STORAGE_KEY));
+      } catch (error) {
+        console.warn('No se pudo leer el carrito guardado:', error);
+        return;
+      }
+
+      if (!guardado) {
+        return;
+      }
+
+      const cantidades = guardado.cantidades || {};
+      itemsCarrito.forEach(item => {
+        const input = item.querySelector('.cantidad-input');
+        const cantidad = parseInt(cantidades[item.dataset.id], 10);
+        input.value = Number.isFinite(cantidad) && cantidad > 0 ? cantidad : 0;
+      });
+
+      document.getElementById('comprado').checked = guardado.finalizado === true;
+    }
+
+    function guardarCarrito() {
+      const cantidades = {};
+
+      itemsCarrito.forEach(item => {
+        const cantidad = parseInt(item.querySelector('.cantidad-input').value, 10);
+        cantidades[item.dataset.id] = Number.isFinite(cantidad) && cantidad > 0 ? cantidad : 0;
+      });
+
+      try {
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
+          cantidades,
+          finalizado: document.getElementById('comprado').checked
+        }));
+      } catch (error) {
+        console.warn('No se pudo guardar el carrito:', error);
+      }
+    }
+
+    migrarCarritoASession();
+    cargarCarrito();
     construirResumen();
 
     itemsCarrito.forEach(item => {
