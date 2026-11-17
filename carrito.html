@@ -11,327 +11,197 @@
   <main>
     <section id="carrito">
       <h2>Tu carrito de compras</h2>
-      <p class="carrito-hint">Elegí cuántas unidades querés comprar de cada gaseosa (de 0 a 30 por producto, total máximo $225.000).</p>
+      <div class="buscador-carrito">
+        <input type="text" id="buscador-carrito" placeholder="Buscar tipos de gaseosa: aguas, deportivas, energéticas, jugos...">
+        <div class="opciones-filtro">
+          <label><input type="radio" name="filtro-tipo" value="todas" checked> Todas</label>
+          <label><input type="radio" name="filtro-tipo" value="aguas"> Aguas</label>
+          <label><input type="radio" name="filtro-tipo" value="deportivas"> Deportivas</label>
+          <label><input type="radio" name="filtro-tipo" value="energeticas"> Energéticas</label>
+          <label><input type="radio" name="filtro-tipo" value="jugos"> Jugos</label>
+        </div>
+      </div>
+      <p class="carrito-hint">Elegí la cantidad de cada gaseosa .</p>
 
       <div class="carrito-wrap">
         <div class="carrito-grid">
 
-          <article class="item-carrito card-coca">
+          <article class="item-carrito card-coca" data-id="coca" data-tipo="gaseosa">
             <img src="img/coca-cola.jpg" alt="Coca-Cola Original 500ml">
             <div class="item-info">
               <h4>Coca-Cola Original 500ml</h4>
-              <p>Precio unitario: $1.900</p>
-                            <div class="uds uds-coca">
-                <input type="checkbox" id="ab-coca" class="ud-toggle">
-                <div class="pills" role="radiogroup" aria-label="Unidades de Coca-Cola Original 500ml">
-                  <input type="radio" id="q-coca-0" name="uds-coca" checked>
-                  <label for="q-coca-0">0</label>
-                  <input type="radio" id="q-coca-1" name="uds-coca">
-                  <label for="q-coca-1">1</label>
-                  <input type="radio" id="q-coca-2" name="uds-coca">
-                  <label for="q-coca-2">2</label>
-                  <input type="radio" id="q-coca-3" name="uds-coca">
-                  <label for="q-coca-3">3</label>
-                  <input type="radio" id="q-coca-4" name="uds-coca">
-                  <label for="q-coca-4">4</label>
-                  <input type="radio" id="q-coca-5" name="uds-coca">
-                  <label for="q-coca-5">5</label>
-                  <input type="radio" id="q-coca-6" name="uds-coca">
-                  <label for="q-coca-6">6</label>
-                  <input type="radio" id="q-coca-7" name="uds-coca">
-                  <label for="q-coca-7">7</label>
-                  <input type="radio" id="q-coca-8" name="uds-coca">
-                  <label for="q-coca-8">8</label>
-                  <input type="radio" id="q-coca-9" name="uds-coca">
-                  <label for="q-coca-9">9</label>
-                  <input type="radio" id="q-coca-10" name="uds-coca">
-                  <label for="q-coca-10">10</label>
-                  <input type="radio" id="q-coca-11" name="uds-coca">
-                  <label for="q-coca-11">11</label>
-                  <input type="radio" id="q-coca-12" name="uds-coca">
-                  <label for="q-coca-12">12</label>
-                  <input type="radio" id="q-coca-13" name="uds-coca">
-                  <label for="q-coca-13">13</label>
-                  <input type="radio" id="q-coca-14" name="uds-coca">
-                  <label for="q-coca-14">14</label>
-                  <input type="radio" id="q-coca-15" name="uds-coca">
-                  <label for="q-coca-15">15</label>
-                  <input type="radio" id="q-coca-16" name="uds-coca">
-                  <label for="q-coca-16">16</label>
-                  <input type="radio" id="q-coca-17" name="uds-coca">
-                  <label for="q-coca-17">17</label>
-                  <input type="radio" id="q-coca-18" name="uds-coca">
-                  <label for="q-coca-18">18</label>
-                  <input type="radio" id="q-coca-19" name="uds-coca">
-                  <label for="q-coca-19">19</label>
-                  <input type="radio" id="q-coca-20" name="uds-coca">
-                  <label for="q-coca-20">20</label>
-                  <input type="radio" id="q-coca-21" name="uds-coca">
-                  <label for="q-coca-21">21</label>
-                  <input type="radio" id="q-coca-22" name="uds-coca">
-                  <label for="q-coca-22">22</label>
-                  <input type="radio" id="q-coca-23" name="uds-coca">
-                  <label for="q-coca-23">23</label>
-                  <input type="radio" id="q-coca-24" name="uds-coca">
-                  <label for="q-coca-24">24</label>
-                  <input type="radio" id="q-coca-25" name="uds-coca">
-                  <label for="q-coca-25">25</label>
-                  <input type="radio" id="q-coca-26" name="uds-coca">
-                  <label for="q-coca-26">26</label>
-                  <input type="radio" id="q-coca-27" name="uds-coca">
-                  <label for="q-coca-27">27</label>
-                  <input type="radio" id="q-coca-28" name="uds-coca">
-                  <label for="q-coca-28">28</label>
-                  <input type="radio" id="q-coca-29" name="uds-coca">
-                  <label for="q-coca-29">29</label>
-                  <input type="radio" id="q-coca-30" name="uds-coca">
-                  <label for="q-coca-30">30</label>
-                </div>
-                <label for="ab-coca" class="ud-sum">
-                  <span class="ud-txt">Unidades:</span>
-                  <span class="ud-val"></span>
-                  <span class="ud-caret" aria-hidden="true"></span>
-                </label>
+              <p class="precio" data-precio="1900">Precio unitario: $1.900</p>
+              <div class="cantidad">
+                <label for="q-coca">Cantidad:</label>
+                <input type="number" id="q-coca" name="uds-coca" min="0" value="0" class="cantidad-input">
               </div>
             </div>
           </article>
 
-          <article class="item-carrito card-sprite">
+          <article class="item-carrito card-sprite" data-id="sprite" data-tipo="gaseosa">
             <img src="img/sprite.jpg" alt="Sprite Lima-Limón 500ml">
             <div class="item-info">
               <h4>Sprite Lima-Limón 500ml</h4>
-              <p>Precio unitario: $1.800</p>
-                            <div class="uds uds-sprite">
-                <input type="checkbox" id="ab-sprite" class="ud-toggle">
-                <div class="pills" role="radiogroup" aria-label="Unidades de Sprite Lima-Limón 500ml">
-                  <input type="radio" id="q-sprite-0" name="uds-sprite" checked>
-                  <label for="q-sprite-0">0</label>
-                  <input type="radio" id="q-sprite-1" name="uds-sprite">
-                  <label for="q-sprite-1">1</label>
-                  <input type="radio" id="q-sprite-2" name="uds-sprite">
-                  <label for="q-sprite-2">2</label>
-                  <input type="radio" id="q-sprite-3" name="uds-sprite">
-                  <label for="q-sprite-3">3</label>
-                  <input type="radio" id="q-sprite-4" name="uds-sprite">
-                  <label for="q-sprite-4">4</label>
-                  <input type="radio" id="q-sprite-5" name="uds-sprite">
-                  <label for="q-sprite-5">5</label>
-                  <input type="radio" id="q-sprite-6" name="uds-sprite">
-                  <label for="q-sprite-6">6</label>
-                  <input type="radio" id="q-sprite-7" name="uds-sprite">
-                  <label for="q-sprite-7">7</label>
-                  <input type="radio" id="q-sprite-8" name="uds-sprite">
-                  <label for="q-sprite-8">8</label>
-                  <input type="radio" id="q-sprite-9" name="uds-sprite">
-                  <label for="q-sprite-9">9</label>
-                  <input type="radio" id="q-sprite-10" name="uds-sprite">
-                  <label for="q-sprite-10">10</label>
-                  <input type="radio" id="q-sprite-11" name="uds-sprite">
-                  <label for="q-sprite-11">11</label>
-                  <input type="radio" id="q-sprite-12" name="uds-sprite">
-                  <label for="q-sprite-12">12</label>
-                  <input type="radio" id="q-sprite-13" name="uds-sprite">
-                  <label for="q-sprite-13">13</label>
-                  <input type="radio" id="q-sprite-14" name="uds-sprite">
-                  <label for="q-sprite-14">14</label>
-                  <input type="radio" id="q-sprite-15" name="uds-sprite">
-                  <label for="q-sprite-15">15</label>
-                  <input type="radio" id="q-sprite-16" name="uds-sprite">
-                  <label for="q-sprite-16">16</label>
-                  <input type="radio" id="q-sprite-17" name="uds-sprite">
-                  <label for="q-sprite-17">17</label>
-                  <input type="radio" id="q-sprite-18" name="uds-sprite">
-                  <label for="q-sprite-18">18</label>
-                  <input type="radio" id="q-sprite-19" name="uds-sprite">
-                  <label for="q-sprite-19">19</label>
-                  <input type="radio" id="q-sprite-20" name="uds-sprite">
-                  <label for="q-sprite-20">20</label>
-                  <input type="radio" id="q-sprite-21" name="uds-sprite">
-                  <label for="q-sprite-21">21</label>
-                  <input type="radio" id="q-sprite-22" name="uds-sprite">
-                  <label for="q-sprite-22">22</label>
-                  <input type="radio" id="q-sprite-23" name="uds-sprite">
-                  <label for="q-sprite-23">23</label>
-                  <input type="radio" id="q-sprite-24" name="uds-sprite">
-                  <label for="q-sprite-24">24</label>
-                  <input type="radio" id="q-sprite-25" name="uds-sprite">
-                  <label for="q-sprite-25">25</label>
-                  <input type="radio" id="q-sprite-26" name="uds-sprite">
-                  <label for="q-sprite-26">26</label>
-                  <input type="radio" id="q-sprite-27" name="uds-sprite">
-                  <label for="q-sprite-27">27</label>
-                  <input type="radio" id="q-sprite-28" name="uds-sprite">
-                  <label for="q-sprite-28">28</label>
-                  <input type="radio" id="q-sprite-29" name="uds-sprite">
-                  <label for="q-sprite-29">29</label>
-                  <input type="radio" id="q-sprite-30" name="uds-sprite">
-                  <label for="q-sprite-30">30</label>
-                </div>
-                <label for="ab-sprite" class="ud-sum">
-                  <span class="ud-txt">Unidades:</span>
-                  <span class="ud-val"></span>
-                  <span class="ud-caret" aria-hidden="true"></span>
-                </label>
+              <p class="precio" data-precio="1800">Precio unitario: $1.800</p>
+              <div class="cantidad">
+                <label for="q-sprite">Cantidad:</label>
+                <input type="number" id="q-sprite" name="uds-sprite" min="0" value="0" class="cantidad-input">
               </div>
             </div>
           </article>
 
-          <article class="item-carrito card-fanta">
+          <article class="item-carrito card-fanta" data-id="fanta" data-tipo="gaseosa">
             <img src="img/fanta.jpg" alt="Fanta Naranja 500ml">
             <div class="item-info">
               <h4>Fanta Naranja 500ml</h4>
-              <p>Precio unitario: $1.800</p>
-                            <div class="uds uds-fanta">
-                <input type="checkbox" id="ab-fanta" class="ud-toggle">
-                <div class="pills" role="radiogroup" aria-label="Unidades de Fanta Naranja 500ml">
-                  <input type="radio" id="q-fanta-0" name="uds-fanta" checked>
-                  <label for="q-fanta-0">0</label>
-                  <input type="radio" id="q-fanta-1" name="uds-fanta">
-                  <label for="q-fanta-1">1</label>
-                  <input type="radio" id="q-fanta-2" name="uds-fanta">
-                  <label for="q-fanta-2">2</label>
-                  <input type="radio" id="q-fanta-3" name="uds-fanta">
-                  <label for="q-fanta-3">3</label>
-                  <input type="radio" id="q-fanta-4" name="uds-fanta">
-                  <label for="q-fanta-4">4</label>
-                  <input type="radio" id="q-fanta-5" name="uds-fanta">
-                  <label for="q-fanta-5">5</label>
-                  <input type="radio" id="q-fanta-6" name="uds-fanta">
-                  <label for="q-fanta-6">6</label>
-                  <input type="radio" id="q-fanta-7" name="uds-fanta">
-                  <label for="q-fanta-7">7</label>
-                  <input type="radio" id="q-fanta-8" name="uds-fanta">
-                  <label for="q-fanta-8">8</label>
-                  <input type="radio" id="q-fanta-9" name="uds-fanta">
-                  <label for="q-fanta-9">9</label>
-                  <input type="radio" id="q-fanta-10" name="uds-fanta">
-                  <label for="q-fanta-10">10</label>
-                  <input type="radio" id="q-fanta-11" name="uds-fanta">
-                  <label for="q-fanta-11">11</label>
-                  <input type="radio" id="q-fanta-12" name="uds-fanta">
-                  <label for="q-fanta-12">12</label>
-                  <input type="radio" id="q-fanta-13" name="uds-fanta">
-                  <label for="q-fanta-13">13</label>
-                  <input type="radio" id="q-fanta-14" name="uds-fanta">
-                  <label for="q-fanta-14">14</label>
-                  <input type="radio" id="q-fanta-15" name="uds-fanta">
-                  <label for="q-fanta-15">15</label>
-                  <input type="radio" id="q-fanta-16" name="uds-fanta">
-                  <label for="q-fanta-16">16</label>
-                  <input type="radio" id="q-fanta-17" name="uds-fanta">
-                  <label for="q-fanta-17">17</label>
-                  <input type="radio" id="q-fanta-18" name="uds-fanta">
-                  <label for="q-fanta-18">18</label>
-                  <input type="radio" id="q-fanta-19" name="uds-fanta">
-                  <label for="q-fanta-19">19</label>
-                  <input type="radio" id="q-fanta-20" name="uds-fanta">
-                  <label for="q-fanta-20">20</label>
-                  <input type="radio" id="q-fanta-21" name="uds-fanta">
-                  <label for="q-fanta-21">21</label>
-                  <input type="radio" id="q-fanta-22" name="uds-fanta">
-                  <label for="q-fanta-22">22</label>
-                  <input type="radio" id="q-fanta-23" name="uds-fanta">
-                  <label for="q-fanta-23">23</label>
-                  <input type="radio" id="q-fanta-24" name="uds-fanta">
-                  <label for="q-fanta-24">24</label>
-                  <input type="radio" id="q-fanta-25" name="uds-fanta">
-                  <label for="q-fanta-25">25</label>
-                  <input type="radio" id="q-fanta-26" name="uds-fanta">
-                  <label for="q-fanta-26">26</label>
-                  <input type="radio" id="q-fanta-27" name="uds-fanta">
-                  <label for="q-fanta-27">27</label>
-                  <input type="radio" id="q-fanta-28" name="uds-fanta">
-                  <label for="q-fanta-28">28</label>
-                  <input type="radio" id="q-fanta-29" name="uds-fanta">
-                  <label for="q-fanta-29">29</label>
-                  <input type="radio" id="q-fanta-30" name="uds-fanta">
-                  <label for="q-fanta-30">30</label>
-                </div>
-                <label for="ab-fanta" class="ud-sum">
-                  <span class="ud-txt">Unidades:</span>
-                  <span class="ud-val"></span>
-                  <span class="ud-caret" aria-hidden="true"></span>
-                </label>
+              <p class="precio" data-precio="1800">Precio unitario: $1.800</p>
+              <div class="cantidad">
+                <label for="q-fanta">Cantidad:</label>
+                <input type="number" id="q-fanta" name="uds-fanta" min="0" value="0" class="cantidad-input">
               </div>
             </div>
           </article>
 
-          <article class="item-carrito card-schweppes">
+          <article class="item-carrito card-schweppes" data-id="schweppes" data-tipo="gaseosa">
             <img src="img/schweppes.jpg" alt="Schweppes Tónica 500ml">
             <div class="item-info">
               <h4>Schweppes Tónica 500ml</h4>
-              <p>Precio unitario: $2.000</p>
-                            <div class="uds uds-schweppes">
-                <input type="checkbox" id="ab-schweppes" class="ud-toggle">
-                <div class="pills" role="radiogroup" aria-label="Unidades de Schweppes Tónica 500ml">
-                  <input type="radio" id="q-schweppes-0" name="uds-schweppes" checked>
-                  <label for="q-schweppes-0">0</label>
-                  <input type="radio" id="q-schweppes-1" name="uds-schweppes">
-                  <label for="q-schweppes-1">1</label>
-                  <input type="radio" id="q-schweppes-2" name="uds-schweppes">
-                  <label for="q-schweppes-2">2</label>
-                  <input type="radio" id="q-schweppes-3" name="uds-schweppes">
-                  <label for="q-schweppes-3">3</label>
-                  <input type="radio" id="q-schweppes-4" name="uds-schweppes">
-                  <label for="q-schweppes-4">4</label>
-                  <input type="radio" id="q-schweppes-5" name="uds-schweppes">
-                  <label for="q-schweppes-5">5</label>
-                  <input type="radio" id="q-schweppes-6" name="uds-schweppes">
-                  <label for="q-schweppes-6">6</label>
-                  <input type="radio" id="q-schweppes-7" name="uds-schweppes">
-                  <label for="q-schweppes-7">7</label>
-                  <input type="radio" id="q-schweppes-8" name="uds-schweppes">
-                  <label for="q-schweppes-8">8</label>
-                  <input type="radio" id="q-schweppes-9" name="uds-schweppes">
-                  <label for="q-schweppes-9">9</label>
-                  <input type="radio" id="q-schweppes-10" name="uds-schweppes">
-                  <label for="q-schweppes-10">10</label>
-                  <input type="radio" id="q-schweppes-11" name="uds-schweppes">
-                  <label for="q-schweppes-11">11</label>
-                  <input type="radio" id="q-schweppes-12" name="uds-schweppes">
-                  <label for="q-schweppes-12">12</label>
-                  <input type="radio" id="q-schweppes-13" name="uds-schweppes">
-                  <label for="q-schweppes-13">13</label>
-                  <input type="radio" id="q-schweppes-14" name="uds-schweppes">
-                  <label for="q-schweppes-14">14</label>
-                  <input type="radio" id="q-schweppes-15" name="uds-schweppes">
-                  <label for="q-schweppes-15">15</label>
-                  <input type="radio" id="q-schweppes-16" name="uds-schweppes">
-                  <label for="q-schweppes-16">16</label>
-                  <input type="radio" id="q-schweppes-17" name="uds-schweppes">
-                  <label for="q-schweppes-17">17</label>
-                  <input type="radio" id="q-schweppes-18" name="uds-schweppes">
-                  <label for="q-schweppes-18">18</label>
-                  <input type="radio" id="q-schweppes-19" name="uds-schweppes">
-                  <label for="q-schweppes-19">19</label>
-                  <input type="radio" id="q-schweppes-20" name="uds-schweppes">
-                  <label for="q-schweppes-20">20</label>
-                  <input type="radio" id="q-schweppes-21" name="uds-schweppes">
-                  <label for="q-schweppes-21">21</label>
-                  <input type="radio" id="q-schweppes-22" name="uds-schweppes">
-                  <label for="q-schweppes-22">22</label>
-                  <input type="radio" id="q-schweppes-23" name="uds-schweppes">
-                  <label for="q-schweppes-23">23</label>
-                  <input type="radio" id="q-schweppes-24" name="uds-schweppes">
-                  <label for="q-schweppes-24">24</label>
-                  <input type="radio" id="q-schweppes-25" name="uds-schweppes">
-                  <label for="q-schweppes-25">25</label>
-                  <input type="radio" id="q-schweppes-26" name="uds-schweppes">
-                  <label for="q-schweppes-26">26</label>
-                  <input type="radio" id="q-schweppes-27" name="uds-schweppes">
-                  <label for="q-schweppes-27">27</label>
-                  <input type="radio" id="q-schweppes-28" name="uds-schweppes">
-                  <label for="q-schweppes-28">28</label>
-                  <input type="radio" id="q-schweppes-29" name="uds-schweppes">
-                  <label for="q-schweppes-29">29</label>
-                  <input type="radio" id="q-schweppes-30" name="uds-schweppes">
-                  <label for="q-schweppes-30">30</label>
-                </div>
-                <label for="ab-schweppes" class="ud-sum">
-                  <span class="ud-txt">Unidades:</span>
-                  <span class="ud-val"></span>
-                  <span class="ud-caret" aria-hidden="true"></span>
-                </label>
+              <p class="precio" data-precio="2000">Precio unitario: $2.000</p>
+              <div class="cantidad">
+                <label for="q-schweppes">Cantidad:</label>
+                <input type="number" id="q-schweppes" name="uds-schweppes" min="0" value="0" class="cantidad-input">
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-bonaqua" data-id="bonaqua" data-tipo="aguas">
+            <img src="img/bonaqua.jpg" alt="Bonaqua Agua Purificada 500ml">
+            <div class="item-info">
+              <h4>Bonaqua Agua Purificada 500ml</h4>
+              <p class="precio" data-precio="1500">Precio unitario: $1.500</p>
+              <div class="cantidad">
+                <label for="q-bonaqua">Cantidad:</label>
+                <input type="number" id="q-bonaqua" name="uds-bonaqua" min="0" value="0" class="cantidad-input">
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-dasani" data-id="dasani" data-tipo="aguas">
+            <img src="img/dasani.png" alt="Dasani Agua Mineralizada 500ml">
+            <div class="item-info">
+              <h4>Dasani Agua Mineralizada 500ml</h4>
+              <p class="precio" data-precio="1600">Precio unitario: $1.600</p>
+              <div class="cantidad">
+                <label for="q-dasani">Cantidad:</label>
+                <input type="number" id="q-dasani" name="uds-dasani" min="0" value="0" class="cantidad-input">
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-aquarius" data-id="aquarius" data-tipo="deportivas">
+            <img src="img/aquarius.jpg" alt="Aquarius Bebida Deportiva 500ml">
+            <div class="item-info">
+              <h4>Aquarius Bebida Deportiva 500ml</h4>
+              <p class="precio" data-precio="2000">Precio unitario: $2.000</p>
+              <div class="cantidad">
+                <label for="q-aquarius">Cantidad:</label>
+                <input type="number" id="q-aquarius" name="uds-aquarius" min="0" value="0" class="cantidad-input">
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-powerade" data-id="powerade" data-tipo="deportivas">
+            <img src="img/powerade.jpg" alt="Powerade Bebida Deportiva 500ml">
+            <div class="item-info">
+              <h4>Powerade Bebida Deportiva 500ml</h4>
+              <p class="precio" data-precio="2200">Precio unitario: $2.200</p>
+              <div class="cantidad">
+                <label for="q-powerade">Cantidad:</label>
+                <input type="number" id="q-powerade" name="uds-powerade" min="0" value="0" class="cantidad-input">
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-monster" data-id="monster" data-tipo="energeticas">
+            <img src="img/monster.jpg" alt="Monster Energética 500ml">
+            <div class="item-info">
+              <h4>Monster Energética 500ml</h4>
+              <p class="precio" data-precio="3000">Precio unitario: $3.000</p>
+              <div class="cantidad">
+                <label for="q-monster">Cantidad:</label>
+                <input type="number" id="q-monster" name="uds-monster" min="0" value="0" class="cantidad-input">
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-relentless" data-id="relentless" data-tipo="energeticas">
+            <img src="img/relentless.jpg" alt="Relentless Energética 500ml">
+            <div class="item-info">
+              <h4>Relentless Energética 500ml</h4>
+              <p class="precio" data-precio="3200">Precio unitario: $3.200</p>
+              <div class="cantidad">
+                <label for="q-relentless">Cantidad:</label>
+                <input type="number" id="q-relentless" name="uds-relentless" min="0" value="0" class="cantidad-input">
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-kin" data-id="kin" data-tipo="energeticas">
+            <img src="img/kin.jpg" alt="Kin Energética 500ml">
+            <div class="item-info">
+              <h4>Kin Energética 500ml</h4>
+              <p class="precio" data-precio="2800">Precio unitario: $2.800</p>
+              <div class="cantidad">
+                <label for="q-kin">Cantidad:</label>
+                <input type="number" id="q-kin" name="uds-kin" min="0" value="0" class="cantidad-input">
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-minutemaid" data-id="minutemaid" data-tipo="jugos">
+            <img src="img/minutemaid.jpg" alt="Minutemaid Jugos 500ml">
+            <div class="item-info">
+              <h4>Minutemaid Jugos 500ml</h4>
+              <p class="precio" data-precio="2500">Precio unitario: $2.500</p>
+              <div class="cantidad">
+                <label for="q-minutemaid">Cantidad:</label>
+                <input type="number" id="q-minutemaid" name="uds-minutemaid" min="0" value="0" class="cantidad-input">
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-delvalle" data-id="delvalle" data-tipo="jugos">
+            <img src="img/delvalle.jpg" alt="Del Valle Bebida a Base de Fruta 500ml">
+            <div class="item-info">
+              <h4>Del Valle Bebida a Base de Fruta 500ml</h4>
+              <p class="precio" data-precio="2800">Precio unitario: $2.800</p>
+              <div class="cantidad">
+                <label for="q-delvalle">Cantidad:</label>
+                <input type="number" id="q-delvalle" name="uds-delvalle" min="0" value="0" class="cantidad-input">
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-simply-orange" data-id="simply-orange" data-tipo="jugos">
+            <img src="img/simply-orange.jpg" alt="Simply Orange Bebida a Base de Fruta 500ml">
+            <div class="item-info">
+              <h4>Simply Orange Bebida a Base de Fruta 500ml</h4>
+              <p class="precio" data-precio="3500">Precio unitario: $3.500</p>
+              <div class="cantidad">
+                <label for="q-simply-orange">Cantidad:</label>
+                <input type="number" id="q-simply-orange" name="uds-simply-orange" min="0" value="0" class="cantidad-input">
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-simply-lemonade" data-id="simply-lemonade" data-tipo="jugos">
+            <img src="img/simply-lemonade.jpg" alt="Simply Lemonade Bebida a Base de Fruta 500ml">
+            <div class="item-info">
+              <h4>Simply Lemonade Bebida a Base de Fruta 500ml</h4>
+              <p class="precio" data-precio="3300">Precio unitario: $3.300</p>
+              <div class="cantidad">
+                <label for="q-simply-lemonade">Cantidad:</label>
+                <input type="number" id="q-simply-lemonade" name="uds-simply-lemonade" min="0" value="0" class="cantidad-input">
               </div>
             </div>
           </article>
@@ -340,19 +210,15 @@
 
         <aside class="resumen">
           <h3>Tu lista de compra</h3>
-          <ul class="lista-seleccion">
-            <li id="fila-coca" class="fila-coca"><span class="ico-sel">&#10003;</span><span class="prod-nombre">Coca-Cola Original 500ml</span><span class="subtot"><span class="cant"></span> × $1.900 = <span class="submonto"></span></span></li>
-            <li id="fila-sprite" class="fila-sprite"><span class="ico-sel">&#10003;</span><span class="prod-nombre">Sprite Lima-Limón 500ml</span><span class="subtot"><span class="cant"></span> × $1.800 = <span class="submonto"></span></span></li>
-            <li id="fila-fanta" class="fila-fanta"><span class="ico-sel">&#10003;</span><span class="prod-nombre">Fanta Naranja 500ml</span><span class="subtot"><span class="cant"></span> × $1.800 = <span class="submonto"></span></span></li>
-            <li id="fila-schweppes" class="fila-schweppes"><span class="ico-sel">&#10003;</span><span class="prod-nombre">Schweppes Tónica 500ml</span><span class="subtot"><span class="cant"></span> × $2.000 = <span class="submonto"></span></span></li>
-          </ul>
-          <p class="res-total">Total a pagar: <strong id="total-compra"></strong></p>
+          <ul class="lista-seleccion" id="lista-seleccion"></ul>
+          <p class="res-total">Total a pagar: <strong id="total-compra">$0</strong></p>
           <input type="checkbox" id="comprado" class="check-finalizar">
           <p class="res-mensaje">
-            <span class="msg-ok">Gracias por tu compra. Total: <span class="msg-total"></span>.</span>
+            <span class="msg-ok">Gracias por tu compra. Total: <span class="msg-total">$0</span>.</span>
             <span class="msg-vacio">Aún no elegiste ninguna gaseosa.</span>
           </p>
           <label for="comprado" class="btn-finalizar">Finalizar compra</label>
+          <button type="button" id="cancelar-compra" class="btn-cancelar">Cancelar compra</button>
         </aside>
       </div>
     </section>
@@ -385,5 +251,200 @@
   <footer id="footer"></footer>
 
   <script src="archivo.js"></script>
+  <script>
+    const itemsCarrito = Array.from(document.querySelectorAll('#carrito .item-carrito'));
+    const listaSeleccion = document.getElementById('lista-seleccion');
+    const totalCompra = document.getElementById('total-compra');
+    const STORAGE_KEY = 'carritoRefrescante';
+
+    function formatearPesos(valor) {
+      return '$' + valor.toLocaleString('es-AR');
+    }
+
+    function construirResumen() {
+      listaSeleccion.innerHTML = '';
+      itemsCarrito.forEach(item => {
+        const id = item.dataset.id;
+        const nombre = item.querySelector('h4').textContent;
+        const precio = parseInt(item.querySelector('.precio').dataset.precio, 10) || 0;
+
+        const li = document.createElement('li');
+        li.id = 'fila-' + id;
+        li.dataset.id = id;
+
+        const ico = document.createElement('span');
+        ico.className = 'ico-sel';
+        ico.textContent = '\u2713';
+
+        const prodNombre = document.createElement('span');
+        prodNombre.className = 'prod-nombre';
+        prodNombre.textContent = nombre;
+
+        const subtot = document.createElement('span');
+        subtot.className = 'subtot';
+        subtot.innerHTML = '<span class="cant">0</span> &times; ' + formatearPesos(precio) +
+          ' = <span class="submonto">$0</span>';
+
+        li.append(ico, prodNombre, subtot);
+        listaSeleccion.appendChild(li);
+      });
+    }
+
+    function calcularTotal() {
+      let total = 0;
+      itemsCarrito.forEach(item => {
+        const precio = parseInt(item.querySelector('.precio').dataset.precio, 10) || 0;
+        const cantidad = parseInt(item.querySelector('.cantidad-input').value, 10) || 0;
+        total += precio * cantidad;
+      });
+      return total;
+    }
+
+    function actualizarCarrito() {
+      let total = 0;
+
+      itemsCarrito.forEach(item => {
+        const id = item.dataset.id;
+        const precio = parseInt(item.querySelector('.precio').dataset.precio, 10) || 0;
+        const input = item.querySelector('.cantidad-input');
+        let cantidad = parseInt(input.value, 10);
+        if (isNaN(cantidad) || cantidad < 0) {
+          cantidad = 0;
+        }
+
+        const subtotal = precio * cantidad;
+        total += subtotal;
+
+        const fila = document.getElementById('fila-' + id);
+        if (fila) {
+          fila.querySelector('.cant').textContent = cantidad;
+          fila.querySelector('.submonto').textContent = formatearPesos(subtotal);
+          fila.style.display = cantidad > 0 ? 'flex' : 'none';
+        }
+      });
+
+      totalCompra.textContent = formatearPesos(total);
+      document.querySelector('.msg-total').textContent = formatearPesos(total);
+      actualizarMensaje(total);
+      guardarCarrito();
+    }
+
+    function actualizarMensaje(total) {
+      const comprado = document.getElementById('comprado');
+      const msgOk = document.querySelector('.msg-ok');
+      const msgVacio = document.querySelector('.msg-vacio');
+
+      msgOk.style.display = 'none';
+      msgVacio.style.display = 'none';
+
+      if (comprado.checked) {
+        if (total > 0) {
+          msgOk.style.display = 'inline';
+        } else {
+          msgVacio.style.display = 'inline';
+        }
+      }
+    }
+
+    function filtrarProductos() {
+      const texto = document.getElementById('buscador-carrito').value.trim().toLowerCase();
+      const filtro = document.querySelector('input[name="filtro-tipo"]:checked').value;
+
+      const visibles = itemsCarrito.filter(item => {
+        const nombre = item.querySelector('h4').textContent.toLowerCase();
+        const tipo = item.dataset.tipo;
+        const coincideTipo = filtro === 'todas' || tipo === filtro;
+        const coincideTexto = !texto || nombre.includes(texto);
+        return coincideTipo && coincideTexto;
+      });
+
+      itemsCarrito.forEach(item => {
+        item.style.display = visibles.includes(item) ? '' : 'none';
+      });
+    }
+
+    function cancelarCompra() {
+      itemsCarrito.forEach(item => {
+        item.querySelector('.cantidad-input').value = 0;
+      });
+      document.getElementById('comprado').checked = false;
+      actualizarCarrito();
+    }
+
+    function migrarCarritoASession() {
+      try {
+        if (sessionStorage.getItem(STORAGE_KEY) === null) {
+          const guardado = localStorage.getItem(STORAGE_KEY);
+          if (guardado !== null) {
+            sessionStorage.setItem(STORAGE_KEY, guardado);
+          }
+        }
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (error) {
+        console.warn('No se pudo migrar el carrito a sessionStorage:', error);
+      }
+    }
+
+    function cargarCarrito() {
+      let guardado = null;
+
+      try {
+        guardado = JSON.parse(sessionStorage.getItem(STORAGE_KEY));
+      } catch (error) {
+        console.warn('No se pudo leer el carrito guardado:', error);
+        return;
+      }
+
+      if (!guardado) {
+        return;
+      }
+
+      const cantidades = guardado.cantidades || {};
+      itemsCarrito.forEach(item => {
+        const input = item.querySelector('.cantidad-input');
+        const cantidad = parseInt(cantidades[item.dataset.id], 10);
+        input.value = Number.isFinite(cantidad) && cantidad > 0 ? cantidad : 0;
+      });
+
+      document.getElementById('comprado').checked = guardado.finalizado === true;
+    }
+
+    function guardarCarrito() {
+      const cantidades = {};
+
+      itemsCarrito.forEach(item => {
+        const cantidad = parseInt(item.querySelector('.cantidad-input').value, 10);
+        cantidades[item.dataset.id] = Number.isFinite(cantidad) && cantidad > 0 ? cantidad : 0;
+      });
+
+      try {
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
+          cantidades,
+          finalizado: document.getElementById('comprado').checked
+        }));
+      } catch (error) {
+        console.warn('No se pudo guardar el carrito:', error);
+      }
+    }
+
+    migrarCarritoASession();
+    cargarCarrito();
+    construirResumen();
+
+    itemsCarrito.forEach(item => {
+      const input = item.querySelector('.cantidad-input');
+      input.addEventListener('input', actualizarCarrito);
+      input.addEventListener('change', actualizarCarrito);
+    });
+
+    document.getElementById('buscador-carrito').addEventListener('input', filtrarProductos);
+    document.querySelectorAll('input[name="filtro-tipo"]').forEach(radio => {
+      radio.addEventListener('change', filtrarProductos);
+    });
+    document.getElementById('comprado').addEventListener('change', actualizarCarrito);
+    document.getElementById('cancelar-compra').addEventListener('click', cancelarCompra);
+
+    actualizarCarrito();
+  </script>
 </body>
 </html>
