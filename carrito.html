@@ -20,7 +20,24 @@
           <label><input type="radio" name="filtro-tipo" value="energeticas"> Energéticas</label>
           <label><input type="radio" name="filtro-tipo" value="jugos"> Jugos</label>
         </div>
+        <div class="rango-precio">
+          <label for="precio-desde">Precio desde</label>
+          <input type="number" id="precio-desde" min="0" step="100" placeholder="$ mínimo">
+          <label for="precio-hasta">hasta</label>
+          <input type="number" id="precio-hasta" min="0" step="100" placeholder="$ máximo">
+        </div>
+        <div class="orden-filtro">
+          <label for="ordenar-carrito">Ordenar:</label>
+          <select id="ordenar-carrito">
+            <option value="defecto" selected>Por defecto</option>
+            <option value="precio-asc">Precio: menor a mayor</option>
+            <option value="precio-desc">Precio: mayor a menor</option>
+            <option value="nombre-asc">Nombre A-Z</option>
+            <option value="nombre-desc">Nombre Z-A</option>
+          </select>
+        </div>
       </div>
+      <p id="carrito-sin-resultados" class="carrito-sin-resultados" hidden>No hay ningún producto con esa descripción</p>
       <p class="carrito-hint">Elegí la cantidad de cada gaseosa .</p>
 
       <div class="carrito-wrap">
@@ -253,6 +270,7 @@
   <script src="archivo.js"></script>
   <script>
     const itemsCarrito = Array.from(document.querySelectorAll('#carrito .item-carrito'));
+    const ordenOriginal = itemsCarrito.slice();
     const listaSeleccion = document.getElementById('lista-seleccion');
     const totalCompra = document.getElementById('total-compra');
     const STORAGE_KEY = 'carritoRefrescante';
@@ -349,18 +367,44 @@
     function filtrarProductos() {
       const texto = document.getElementById('buscador-carrito').value.trim().toLowerCase();
       const filtro = document.querySelector('input[name="filtro-tipo"]:checked').value;
+      const desde = parseFloat(document.getElementById('precio-desde').value);
+      const hasta = parseFloat(document.getElementById('precio-hasta').value);
 
       const visibles = itemsCarrito.filter(item => {
         const nombre = item.querySelector('h4').textContent.toLowerCase();
         const tipo = item.dataset.tipo;
+        const precio = parseInt(item.querySelector('.precio').dataset.precio, 10) || 0;
         const coincideTipo = filtro === 'todas' || tipo === filtro;
         const coincideTexto = !texto || nombre.includes(texto);
-        return coincideTipo && coincideTexto;
+        const coincideDesde = isNaN(desde) || precio >= desde;
+        const coincideHasta = isNaN(hasta) || precio <= hasta;
+        return coincideTipo && coincideTexto && coincideDesde && coincideHasta;
       });
 
       itemsCarrito.forEach(item => {
         item.style.display = visibles.includes(item) ? '' : 'none';
       });
+
+      document.getElementById('carrito-sin-resultados').hidden = visibles.length > 0;
+    }
+
+    function ordenarProductos() {
+      const modo = document.getElementById('ordenar-carrito').value;
+      const grid = document.querySelector('#carrito .carrito-grid');
+      const precioDe = item => parseInt(item.querySelector('.precio').dataset.precio, 10) || 0;
+      const nombreDe = item => item.querySelector('h4').textContent.toLowerCase();
+
+      let orden = ordenOriginal.slice();
+      if (modo === 'precio-asc') {
+        orden.sort((a, b) => precioDe(a) - precioDe(b));
+      } else if (modo === 'precio-desc') {
+        orden.sort((a, b) => precioDe(b) - precioDe(a));
+      } else if (modo === 'nombre-asc') {
+        orden.sort((a, b) => nombreDe(a).localeCompare(nombreDe(b), 'es'));
+      } else if (modo === 'nombre-desc') {
+        orden.sort((a, b) => nombreDe(b).localeCompare(nombreDe(a), 'es'));
+      }
+      orden.forEach(item => grid.appendChild(item));
     }
 
     function cancelarCompra() {
@@ -441,6 +485,9 @@
     document.querySelectorAll('input[name="filtro-tipo"]').forEach(radio => {
       radio.addEventListener('change', filtrarProductos);
     });
+    document.getElementById('precio-desde').addEventListener('input', filtrarProductos);
+    document.getElementById('precio-hasta').addEventListener('input', filtrarProductos);
+    document.getElementById('ordenar-carrito').addEventListener('change', ordenarProductos);
     document.getElementById('comprado').addEventListener('change', actualizarCarrito);
     document.getElementById('cancelar-compra').addEventListener('click', cancelarCompra);
 
