@@ -293,6 +293,7 @@ header nav a:hover {
     color: #ffffff;
 }
 
+
 /* ===== Historia solo visible en #inicio, oculta en las vistas de catÃ¡logo y descubrÃ­ ===== */
 main#inicio:has(#catalogo:target) .historia,
 main#inicio:has(#descubri:target) .historia {
@@ -1918,4 +1919,10 @@ footer p {
 .uds-schweppes .ud-val::after,
 .check-finalizar:checked ~ .res-mensaje .msg-ok .msg-total::after {
     content: none;
+}
+
+/* ===== Borde rojo para los productos de #catalogo ===== */
+#catalogo .item-cards .producto,
+#catalogo .aguas-detalles .agua {
+    border: 1px solid #ff0000;
 }

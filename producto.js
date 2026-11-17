@@ -1,89 +1,4 @@
-﻿const productos = [
-  {
-    "id": "detalle-coca-cola",
-    "slug": "coca-cola",
-    "clase": "producto-coca-cola",
-    "imagen": {
-      "src": "img/coca-cola.jpg",
-      "alt": "Coca-Cola Original 500ml"
-    },
-    "titulo": "Coca-Cola Original 500ml",
-    "descripcion": "El sabor original de siempre, en botella de 500ml. Perfecta para compartir cada momento.",
-    "descripcionCatalogo": "El sabor original en botella de 500ml.",
-    "especificaciones": [
-      "Contenido neto: 500 ml",
-      "PresentaciÃ³n: Botella PET",
-      "Precio sugerido: $1.900"
-    ],
-    "volver": {
-      "texto": "Volver al catÃ¡logo",
-      "url": "index.html#catalogo"
-    }
-  },
-  {
-    "id": "detalle-sprite",
-    "slug": "sprite",
-    "clase": "producto-sprite",
-    "imagen": {
-      "src": "img/sprite.jpg",
-      "alt": "Sprite Lima-LimÃ³n 500ml"
-    },
-    "titulo": "Sprite Lima-LimÃ³n 500ml",
-    "descripcion": "Frescura lima-limÃ³n con burbujas que despiertan los sentidos. En botella de 500ml.",
-    "descripcionCatalogo": "Frescura lima-limÃ³n en botella de 500ml.",
-    "especificaciones": [
-      "Contenido neto: 500 ml",
-      "PresentaciÃ³n: Botella PET",
-      "Precio sugerido: $1.800"
-    ],
-    "volver": {
-      "texto": "Volver al catÃ¡logo",
-      "url": "index.html#catalogo"
-    }
-  },
-  {
-    "id": "detalle-fanta",
-    "slug": "fanta",
-    "clase": "producto-fanta",
-    "imagen": {
-      "src": "img/fanta.jpg",
-      "alt": "Fanta Naranja 500ml"
-    },
-    "titulo": "Fanta Naranja 500ml",
-    "descripcion": "DiversiÃ³n y sabor a naranja en cada sorbo. En botella de 500ml.",
-    "descripcionCatalogo": "DiversiÃ³n y sabor naranja en botella de 500ml.",
-    "especificaciones": [
-      "Contenido neto: 500 ml",
-      "PresentaciÃ³n: Botella PET",
-      "Precio sugerido: $1.800"
-    ],
-    "volver": {
-      "texto": "Volver al catÃ¡logo",
-      "url": "index.html#catalogo"
-    }
-  },
-  {
-    "id": "detalle-schweppes",
-    "slug": "schweppes",
-    "clase": "producto-schweppes",
-    "imagen": {
-      "src": "img/schweppes.jpg",
-      "alt": "Schweppes TÃ³nica 500ml"
-    },
-    "titulo": "Schweppes TÃ³nica 500ml",
-    "descripcion": "Un clÃ¡sico para grandes ocasiones. Agua tÃ³nica en botella de 500ml.",
-    "descripcionCatalogo": "Un clÃ¡sico para grandes ocasiones en botella de 500ml.",
-    "especificaciones": [
-      "Contenido neto: 500 ml",
-      "PresentaciÃ³n: Botella PET",
-      "Precio sugerido: $2.000"
-    ],
-    "volver": {
-      "texto": "Volver al catÃ¡logo",
-      "url": "index.html#catalogo"
-    }
-  }
-];
+﻿
 
 function crearProductoCatalogo(producto) {
   const articulo = document.createElement("article");
@@ -154,7 +69,7 @@ function renderProductos() {
   const crearProducto = esCatalogo ? crearProductoCatalogo : crearProductoDetalle;
   const fragmento = document.createDocumentFragment();
 
-  productos.forEach((producto) => {
+  obtenerProductos().forEach((producto) => {
     fragmento.appendChild(crearProducto(producto));
   });
   contenedor.appendChild(fragmento);
@@ -165,8 +80,8 @@ if (document.readyState === "loading") {
 } else {
   renderProductos();
 }
-async function traerDireccionesSupabase() {
-  const url = 'https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/DireccionesSupabase?select=*';
+const DireccionesSupabase = async () => {
+  const url = "https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/Coca-Cola";
   const options = {
     method: "GET",
     headers: {
@@ -188,46 +103,62 @@ async function traerDireccionesSupabase() {
     console.error('Error en la solicitud a Supabase:', error);
     return [];
   });
-}
-window.traerDireccionesSupabase = traerDireccionesSupabase;
+};
 
-async function encuestasupabase() {
-  const url = 'https://ytyjalgshnjfaqpckuxr.supabase.co/rest/v1/Encuesta?select=*';
+const  encuestasupabase = async () => {
+  const url = "https://ytyjalgshnjfaqpckuxr.supabase.co/rest/v1/encuestas";
+
   const options = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
       "apikey": "sb_publishable_AsYscH20ZSRlzNTpffXfqQ_fEkb_8Mt"
     }
-  };
-  const response = await fetch(url, options);
-  if (!response.ok) {
-    const detalle = await response.text();
-    throw new Error('Error al obtener las encuestas: ' + response.status + ' ' + detalle);
-  }
-  return response.json();
-}
-window.encuestasupabase = encuestasupabase;
+    };
+    return fetch(url, options)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Error al obtener las encuestas');
+      }
+      return response.json();
+    })
+    .then(data => { 
+      return data;
+    })
+    .catch(error => {
+    console.error('Error en la solicitud a Supabase:', error);
+    return [];
+  });
+};
+window.traerDireccionesSupabase = DireccionesSupabase;
 
-async function actualizarEncuesta(id, cambios) {
-  const url = 'https://ytyjalgshnjfaqpckuxr.supabase.co/rest/v1/Encuesta?id=eq.' + encodeURIComponent(id);
+const SUPABASE_CONTACTOS_URL = "https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/supabasecontactos";
+const SUPABASE_CONTACTOS_KEY = "sb_publishable_caiELbjOQdhK6NS9Ws2wuQ_ZyNeEMHl";
+
+const insertarContactoSupabase = async (datos) => {
+  const fila = {
+    "nombre y apellido": datos.nombre,
+    email: datos.email,
+    telefono: datos.telefono,
+    asunto: datos.asunto,
+    mensaje: datos.mensaje
+  };
   const options = {
-    method: 'PATCH',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'apikey': 'sb_publishable_AsYscH20ZSRlzNTpffXfqQ_fEkb_8Mt',
-      'Authorization': 'Bearer sb_publishable_AsYscH20ZSRlzNTpffXfqQ_fEkb_8Mt',
-      'Prefer': 'return=representation'
+      "Content-Type": "application/json",
+      "apikey": SUPABASE_CONTACTOS_KEY,
+      "Authorization": "Bearer " + SUPABASE_CONTACTOS_KEY,
+      "Prefer": "return=representation"
     },
-    body: JSON.stringify(cambios)
+    body: JSON.stringify(fila)
   };
-  const response = await fetch(url, options);
+  const response = await fetch(SUPABASE_CONTACTOS_URL, options);
   if (!response.ok) {
     const detalle = await response.text();
-    throw new Error('Error al actualizar la encuesta: ' + response.status + ' ' + detalle);
+    throw new Error('Error al guardar el contacto: ' + response.status + ' ' + detalle);
   }
   return response.json();
-}
-window.actualizarEncuesta = actualizarEncuesta;
-
+};
+window.insertarContactoSupabase = insertarContactoSupabase;
 
