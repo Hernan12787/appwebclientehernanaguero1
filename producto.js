@@ -81,7 +81,7 @@ if (document.readyState === "loading") {
   renderProductos();
 }
 const DireccionesSupabase = async () => {
-  const url = "https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/Coca-Cola";
+  const url = "https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/DireccionesSupabase";
   const options = {
     method: "GET",
     headers: {
@@ -106,7 +106,7 @@ const DireccionesSupabase = async () => {
 };
 
 const  encuestasupabase = async () => {
-  const url = "https://ytyjalgshnjfaqpckuxr.supabase.co/rest/v1/encuestas";
+  const url = "https://ytyjalgshnjfaqpckuxr.supabase.co/rest/v1/Encuesta";
 
   const options = {
     method: "GET",
@@ -131,6 +131,58 @@ const  encuestasupabase = async () => {
   });
 };
 window.traerDireccionesSupabase = DireccionesSupabase;
+window.encuestasupabase = encuestasupabase;
+
+async function actualizarEncuesta(id, cambios) {
+  const url = 'https://ytyjalgshnjfaqpckuxr.supabase.co/rest/v1/Encuesta?id=eq.' + encodeURIComponent(id);
+  const options = {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': 'sb_publishable_AsYscH20ZSRlzNTpffXfqQ_fEkb_8Mt',
+      'Authorization': 'Bearer sb_publishable_AsYscH20ZSRlzNTpffXfqQ_fEkb_8Mt',
+      'Prefer': 'return=representation'
+    },
+    body: JSON.stringify(cambios)
+  };
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    const detalle = await response.text();
+    throw new Error('Error al actualizar la encuesta: ' + response.status + ' ' + detalle);
+  }
+  return response.json();
+}
+window.actualizarEncuesta = actualizarEncuesta;
+
+const SUPABASE_CONTACTOS_URL = "https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/supabasecontactos";
+const SUPABASE_CONTACTOS_KEY = "sb_publishable_caiELbjOQdhK6NS9Ws2wuQ_ZyNeEMHl";
+
+const insertarContactoSupabase = async (datos) => {
+  const fila = {
+    "nombre y apellido": datos.nombre,
+    email: datos.email,
+    telefono: datos.telefono,
+    asunto: datos.asunto,
+    mensaje: datos.mensaje
+  };
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": SUPABASE_CONTACTOS_KEY,
+      "Authorization": "Bearer " + SUPABASE_CONTACTOS_KEY,
+      "Prefer": "return=representation"
+    },
+    body: JSON.stringify(fila)
+  };
+  const response = await fetch(SUPABASE_CONTACTOS_URL, options);
+  if (!response.ok) {
+    const detalle = await response.text();
+    throw new Error('Error al guardar el contacto: ' + response.status + ' ' + detalle);
+  }
+  return response.json();
+};
+window.insertarContactoSupabase = insertarContactoSupabase;
 
 const supabasecontactos = async () => {
   const url = "https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/supabasecontactos";
@@ -170,7 +222,7 @@ const  supabasemap = async () => {
     return fetch(url, options)
     .then(response => {
       if (!response.ok) {
-        throw new Error('Error al obtener las encuestas');
+        throw new Error('Error al obtener el mapa');
       }
       return response.json();
     })
@@ -182,3 +234,4 @@ const  supabasemap = async () => {
     return [];
   });
 };
+window.supabasemap = supabasemap;
