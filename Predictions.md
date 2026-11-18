@@ -35,6 +35,11 @@ Corregir errores señalados por el profesor
 Adaptar carrito a los nuevos parámetros
 Agregue borde rojo a los productos
 Conectar Contactos a supabase contactos
+conectar mi mapa de google a un supabase
+Agregar filtros a mi buscador.
+Crear un admin.
+
+
 
 
 

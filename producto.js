@@ -81,7 +81,7 @@ if (document.readyState === "loading") {
   renderProductos();
 }
 const DireccionesSupabase = async () => {
-  const url = "https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/Coca-Cola";
+  const url = "https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/DireccionesSupabase";
   const options = {
     method: "GET",
     headers: {
@@ -106,7 +106,7 @@ const DireccionesSupabase = async () => {
 };
 
 const  encuestasupabase = async () => {
-  const url = "https://ytyjalgshnjfaqpckuxr.supabase.co/rest/v1/encuestas";
+  const url = "https://ytyjalgshnjfaqpckuxr.supabase.co/rest/v1/Encuesta";
 
   const options = {
     method: "GET",
@@ -131,6 +131,28 @@ const  encuestasupabase = async () => {
   });
 };
 window.traerDireccionesSupabase = DireccionesSupabase;
+window.encuestasupabase = encuestasupabase;
+
+async function actualizarEncuesta(id, cambios) {
+  const url = 'https://ytyjalgshnjfaqpckuxr.supabase.co/rest/v1/Encuesta?id=eq.' + encodeURIComponent(id);
+  const options = {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': 'sb_publishable_AsYscH20ZSRlzNTpffXfqQ_fEkb_8Mt',
+      'Authorization': 'Bearer sb_publishable_AsYscH20ZSRlzNTpffXfqQ_fEkb_8Mt',
+      'Prefer': 'return=representation'
+    },
+    body: JSON.stringify(cambios)
+  };
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    const detalle = await response.text();
+    throw new Error('Error al actualizar la encuesta: ' + response.status + ' ' + detalle);
+  }
+  return response.json();
+}
+window.actualizarEncuesta = actualizarEncuesta;
 
 const SUPABASE_CONTACTOS_URL = "https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/supabasecontactos";
 const SUPABASE_CONTACTOS_KEY = "sb_publishable_caiELbjOQdhK6NS9Ws2wuQ_ZyNeEMHl";
@@ -162,3 +184,54 @@ const insertarContactoSupabase = async (datos) => {
 };
 window.insertarContactoSupabase = insertarContactoSupabase;
 
+const supabasecontactos = async () => {
+  const url = "https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/supabasecontactos";
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": "sb_publishable_caiELbjOQdhK6NS9Ws2wuQ_ZyNeEMHl"
+
+    },
+  };
+  return fetch(url, options)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Error al conectar los contactos');
+    }
+    return response.json();
+  })
+  .then(data => {
+    return data;
+  })
+  .catch(error => {
+    console.error('Error en la solicitud a Supabase:', error);
+    return [];
+  });
+};
+const  supabasemap = async () => {
+  const url = "https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/supabasemap";
+
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": "sb_publishable_caiELbjOQdhK6NS9Ws2wuQ_ZyNeEMHl"
+    }
+    };
+    return fetch(url, options)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Error al obtener el mapa');
+      }
+      return response.json();
+    })
+    .then(data => { 
+      return data;
+    })
+    .catch(error => {
+    console.error('Error en la solicitud a Supabase:', error);
+    return [];
+  });
+};
+window.supabasemap = supabasemap;

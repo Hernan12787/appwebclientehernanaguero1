@@ -6,6 +6,12 @@
   <title>Carrito | Refrescante Argentina</title>
   <link rel="icon" type="image/x-icon" href="refresco.ico">
   <link rel="stylesheet" href="style.css">
+  <style>
+    .item-carrito[data-tipo="gaseosa"] {
+      border: 2px solid #ff0000;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 <body>
   <main>
@@ -15,12 +21,30 @@
         <input type="text" id="buscador-carrito" placeholder="Buscar tipos de gaseosa: aguas, deportivas, energéticas, jugos...">
         <div class="opciones-filtro">
           <label><input type="radio" name="filtro-tipo" value="todas" checked> Todas</label>
+          <label><input type="radio" name="filtro-tipo" value="gaseosa"> Gaseosas</label>
           <label><input type="radio" name="filtro-tipo" value="aguas"> Aguas</label>
           <label><input type="radio" name="filtro-tipo" value="deportivas"> Deportivas</label>
           <label><input type="radio" name="filtro-tipo" value="energeticas"> Energéticas</label>
           <label><input type="radio" name="filtro-tipo" value="jugos"> Jugos</label>
         </div>
+        <div class="rango-precio">
+          <label for="precio-desde">Precio desde</label>
+          <input type="number" id="precio-desde" min="0" step="100" placeholder="$ mínimo">
+          <label for="precio-hasta">hasta</label>
+          <input type="number" id="precio-hasta" min="0" step="100" placeholder="$ máximo">
+        </div>
+        <div class="orden-filtro">
+          <label for="ordenar-carrito">Ordenar:</label>
+          <select id="ordenar-carrito">
+            <option value="defecto" selected>Por defecto</option>
+            <option value="precio-asc">Precio: menor a mayor</option>
+            <option value="precio-desc">Precio: mayor a menor</option>
+            <option value="nombre-asc">Nombre A-Z</option>
+            <option value="nombre-desc">Nombre Z-A</option>
+          </select>
+        </div>
       </div>
+      <p id="modal-sin-resultados" class="alerta-sin-resultados oculto" role="alert">No hay ninguna gaseosa con ese nombre</p>
       <p class="carrito-hint">Elegí la cantidad de cada gaseosa .</p>
 
       <div class="carrito-wrap">
@@ -98,6 +122,42 @@
             </div>
           </article>
 
+          <article class="item-carrito card-ciel" data-id="ciel" data-tipo="aguas">
+            <img src="img/ciel.png" alt="Ciel Agua Purificada 1 L">
+            <div class="item-info">
+              <h4>Ciel Agua Purificada 1 L</h4>
+              <p class="precio" data-precio="1400">Precio unitario: $1.400</p>
+              <div class="cantidad">
+                <label for="q-ciel">Cantidad:</label>
+                <input type="number" id="q-ciel" name="uds-ciel" min="0" value="0" class="cantidad-input">
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-ciel-exprim" data-id="ciel-exprim" data-tipo="aguas">
+            <img src="img/ciel-exprim.jpg" alt="Ciel Exprimir Pepino Piña 600 ml">
+            <div class="item-info">
+              <h4>Ciel Exprimir Pepino Piña 600 ml</h4>
+              <p class="precio" data-precio="1700">Precio unitario: $1.700</p>
+              <div class="cantidad">
+                <label for="q-ciel-exprim">Cantidad:</label>
+                <input type="number" id="q-ciel-exprim" name="uds-ciel-exprim" min="0" value="0" class="cantidad-input">
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-smartwater" data-id="smartwater" data-tipo="aguas">
+            <img src="img/smartwater-flavors.jpg" alt="Smartwater Flavors Sparkling">
+            <div class="item-info">
+              <h4>Smartwater Flavors Sparkling</h4>
+              <p class="precio" data-precio="2600">Precio unitario: $2.600</p>
+              <div class="cantidad">
+                <label for="q-smartwater">Cantidad:</label>
+                <input type="number" id="q-smartwater" name="uds-smartwater" min="0" value="0" class="cantidad-input">
+              </div>
+            </div>
+          </article>
+
           <article class="item-carrito card-aquarius" data-id="aquarius" data-tipo="deportivas">
             <img src="img/aquarius.jpg" alt="Aquarius Bebida Deportiva 500ml">
             <div class="item-info">
@@ -158,6 +218,30 @@
             </div>
           </article>
 
+          <article class="item-carrito card-burn" data-id="burn" data-tipo="energeticas">
+            <img src="img/burn.jpg" alt="Burn Energy Drink 473 ml">
+            <div class="item-info">
+              <h4>Burn Energética 473 ml</h4>
+              <p class="precio" data-precio="2900">Precio unitario: $2.900</p>
+              <div class="cantidad">
+                <label for="q-burn">Cantidad:</label>
+                <input type="number" id="q-burn" name="uds-burn" min="0" value="0" class="cantidad-input">
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-predator" data-id="predator" data-tipo="energeticas">
+            <img src="img/predator.jpg" alt="Predator Energy 473 ml">
+            <div class="item-info">
+              <h4>Predator Energy 473 ml</h4>
+              <p class="precio" data-precio="2700">Precio unitario: $2.700</p>
+              <div class="cantidad">
+                <label for="q-predator">Cantidad:</label>
+                <input type="number" id="q-predator" name="uds-predator" min="0" value="0" class="cantidad-input">
+              </div>
+            </div>
+          </article>
+
           <article class="item-carrito card-minutemaid" data-id="minutemaid" data-tipo="jugos">
             <img src="img/minutemaid.jpg" alt="Minutemaid Jugos 500ml">
             <div class="item-info">
@@ -202,6 +286,42 @@
               <div class="cantidad">
                 <label for="q-simply-lemonade">Cantidad:</label>
                 <input type="number" id="q-simply-lemonade" name="uds-simply-lemonade" min="0" value="0" class="cantidad-input">
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-innocent" data-id="innocent" data-tipo="jugos">
+            <img src="img/innocent.jpg" alt="Innocent Fruit Smoothie">
+            <div class="item-info">
+              <h4>Innocent Fruit Smoothie</h4>
+              <p class="precio" data-precio="3400">Precio unitario: $3.400</p>
+              <div class="cantidad">
+                <label for="q-innocent">Cantidad:</label>
+                <input type="number" id="q-innocent" name="uds-innocent" min="0" value="0" class="cantidad-input">
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-cepita" data-id="cepita" data-tipo="jugos">
+            <img src="img/cepita.jpg" alt="Cepita del Valle Naranja 1 L">
+            <div class="item-info">
+              <h4>Cepita del Valle Naranja 1 L</h4>
+              <p class="precio" data-precio="2400">Precio unitario: $2.400</p>
+              <div class="cantidad">
+                <label for="q-cepita">Cantidad:</label>
+                <input type="number" id="q-cepita" name="uds-cepita" min="0" value="0" class="cantidad-input">
+              </div>
+            </div>
+          </article>
+
+          <article class="item-carrito card-andina" data-id="andina" data-tipo="jugos">
+            <img src="img/andina.jpg" alt="Andina del Valle Durazno">
+            <div class="item-info">
+              <h4>Andina del Valle Durazno</h4>
+              <p class="precio" data-precio="2300">Precio unitario: $2.300</p>
+              <div class="cantidad">
+                <label for="q-andina">Cantidad:</label>
+                <input type="number" id="q-andina" name="uds-andina" min="0" value="0" class="cantidad-input">
               </div>
             </div>
           </article>
@@ -253,6 +373,7 @@
   <script src="archivo.js"></script>
   <script>
     const itemsCarrito = Array.from(document.querySelectorAll('#carrito .item-carrito'));
+    const ordenOriginal = itemsCarrito.slice();
     const listaSeleccion = document.getElementById('lista-seleccion');
     const totalCompra = document.getElementById('total-compra');
     const STORAGE_KEY = 'carritoRefrescante';
@@ -346,21 +467,56 @@
       }
     }
 
-    function filtrarProductos() {
-      const texto = document.getElementById('buscador-carrito').value.trim().toLowerCase();
+    function filtrarProductos(mantenerModal) {
+      const buscador = document.getElementById('buscador-carrito');
+      const texto = buscador.value.trim().toLowerCase();
       const filtro = document.querySelector('input[name="filtro-tipo"]:checked').value;
+      const desde = parseFloat(document.getElementById('precio-desde').value);
+      const hasta = parseFloat(document.getElementById('precio-hasta').value);
 
       const visibles = itemsCarrito.filter(item => {
         const nombre = item.querySelector('h4').textContent.toLowerCase();
         const tipo = item.dataset.tipo;
+        const precio = parseInt(item.querySelector('.precio').dataset.precio, 10) || 0;
         const coincideTipo = filtro === 'todas' || tipo === filtro;
         const coincideTexto = !texto || nombre.includes(texto);
-        return coincideTipo && coincideTexto;
+        const coincideDesde = isNaN(desde) || precio >= desde;
+        const coincideHasta = isNaN(hasta) || precio <= hasta;
+        return coincideTipo && coincideTexto && coincideDesde && coincideHasta;
       });
 
       itemsCarrito.forEach(item => {
         item.style.display = visibles.includes(item) ? '' : 'none';
       });
+
+      if (visibles.length === 0) {
+        document.getElementById('modal-sin-resultados').classList.remove('oculto');
+        if (!mantenerModal && buscador.value !== '') {
+          buscador.value = '';
+          filtrarProductos(true);
+        }
+      } else if (!mantenerModal) {
+        document.getElementById('modal-sin-resultados').classList.add('oculto');
+      }
+    }
+
+    function ordenarProductos() {
+      const modo = document.getElementById('ordenar-carrito').value;
+      const grid = document.querySelector('#carrito .carrito-grid');
+      const precioDe = item => parseInt(item.querySelector('.precio').dataset.precio, 10) || 0;
+      const nombreDe = item => item.querySelector('h4').textContent.toLowerCase();
+
+      let orden = ordenOriginal.slice();
+      if (modo === 'precio-asc') {
+        orden.sort((a, b) => precioDe(a) - precioDe(b));
+      } else if (modo === 'precio-desc') {
+        orden.sort((a, b) => precioDe(b) - precioDe(a));
+      } else if (modo === 'nombre-asc') {
+        orden.sort((a, b) => nombreDe(a).localeCompare(nombreDe(b), 'es'));
+      } else if (modo === 'nombre-desc') {
+        orden.sort((a, b) => nombreDe(b).localeCompare(nombreDe(a), 'es'));
+      }
+      orden.forEach(item => grid.appendChild(item));
     }
 
     function cancelarCompra() {
@@ -437,10 +593,13 @@
       input.addEventListener('change', actualizarCarrito);
     });
 
-    document.getElementById('buscador-carrito').addEventListener('input', filtrarProductos);
+    document.getElementById('buscador-carrito').addEventListener('input', () => filtrarProductos());
     document.querySelectorAll('input[name="filtro-tipo"]').forEach(radio => {
-      radio.addEventListener('change', filtrarProductos);
+      radio.addEventListener('change', () => filtrarProductos());
     });
+    document.getElementById('precio-desde').addEventListener('input', () => filtrarProductos());
+    document.getElementById('precio-hasta').addEventListener('input', () => filtrarProductos());
+    document.getElementById('ordenar-carrito').addEventListener('change', ordenarProductos);
     document.getElementById('comprado').addEventListener('change', actualizarCarrito);
     document.getElementById('cancelar-compra').addEventListener('click', cancelarCompra);
 

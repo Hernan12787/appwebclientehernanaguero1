@@ -479,10 +479,30 @@ function activarFormularioContacto() {
   });
 }
 
+function activarMapaContacto() {
+  var iframe = document.getElementById('mapa-embed');
+  var enlace = document.getElementById('mapa-enlace');
+  var titulo = document.getElementById('mapa-titulo');
+  var direccion = document.getElementById('mapa-direccion');
+  if (!iframe || typeof window.supabasemap !== 'function') return;
+
+  window.supabasemap().then(function (filas) {
+    var mapa = filas && filas[0];
+    if (!mapa) return;
+    if (mapa.titulo && titulo) titulo.textContent = mapa.titulo;
+    if (mapa.direccion && direccion) direccion.textContent = mapa.direccion;
+    if (mapa.embed_url) iframe.src = mapa.embed_url;
+    if (mapa.mapa_url && enlace) enlace.href = mapa.mapa_url;
+  }).catch(function (error) {
+    console.error('No se pudo cargar el mapa desde Supabase:', error);
+  });
+}
+
 function activarTodo() {
   activarPlantas();
   activarEncuesta();
   activarFormularioContacto();
+  activarMapaContacto();
 }
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', activarTodo);
