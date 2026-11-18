@@ -38,6 +38,10 @@
           </select>
         </div>
       </div>
+      <div id="modal-sin-resultados" class="alerta-sin-resultados" role="alert" hidden>
+        <p id="carrito-sin-resultados">No hay ninguna gaseosa con ese nombre</p>
+        <button type="button" id="cerrar-modal-sin-resultados" class="btn-cerrar-alerta">Cerrar</button>
+      </div>
       <p class="carrito-hint">Elegí la cantidad de cada gaseosa .</p>
 
       <div class="carrito-wrap">
@@ -363,13 +367,6 @@
 
   <footer id="footer"></footer>
 
-  <div id="modal-sin-resultados" class="modal-sin-resultados" hidden>
-    <div class="modal-contenido" role="alertdialog" aria-modal="true" aria-labelledby="carrito-sin-resultados">
-      <p id="carrito-sin-resultados">No hay ninguna gaseosa con ese nombre</p>
-      <button type="button" id="cerrar-modal-sin-resultados" class="btn-cerrar-modal">Cerrar</button>
-    </div>
-  </div>
-
   <script src="archivo.js"></script>
   <script>
     const itemsCarrito = Array.from(document.querySelectorAll('#carrito .item-carrito'));
@@ -607,11 +604,6 @@
     document.getElementById('comprado').addEventListener('change', actualizarCarrito);
     document.getElementById('cancelar-compra').addEventListener('click', cancelarCompra);
     document.getElementById('cerrar-modal-sin-resultados').addEventListener('click', cerrarModalSinResultados);
-    document.getElementById('modal-sin-resultados').addEventListener('click', function (evento) {
-      if (evento.target === this) {
-        cerrarModalSinResultados();
-      }
-    });
     document.addEventListener('keydown', function (evento) {
       if (evento.key === 'Escape') {
         cerrarModalSinResultados();
