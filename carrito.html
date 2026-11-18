@@ -374,7 +374,6 @@
   <script>
     const itemsCarrito = Array.from(document.querySelectorAll('#carrito .item-carrito'));
     const ordenOriginal = itemsCarrito.slice();
-    let modalSinResultadosCerrado = false;
     const listaSeleccion = document.getElementById('lista-seleccion');
     const totalCompra = document.getElementById('total-compra');
     const STORAGE_KEY = 'carritoRefrescante';
@@ -468,8 +467,9 @@
       }
     }
 
-    function filtrarProductos() {
-      const texto = document.getElementById('buscador-carrito').value.trim().toLowerCase();
+    function filtrarProductos(mantenerModal) {
+      const buscador = document.getElementById('buscador-carrito');
+      const texto = buscador.value.trim().toLowerCase();
       const filtro = document.querySelector('input[name="filtro-tipo"]:checked').value;
       const desde = parseFloat(document.getElementById('precio-desde').value);
       const hasta = parseFloat(document.getElementById('precio-hasta').value);
@@ -490,18 +490,18 @@
       });
 
       if (visibles.length === 0) {
-        if (!modalSinResultadosCerrado) {
-          document.getElementById('modal-sin-resultados').hidden = false;
+        document.getElementById('modal-sin-resultados').hidden = false;
+        if (!mantenerModal && buscador.value !== '') {
+          buscador.value = '';
+          filtrarProductos(true);
         }
-      } else {
+      } else if (!mantenerModal) {
         document.getElementById('modal-sin-resultados').hidden = true;
-        modalSinResultadosCerrado = false;
       }
     }
 
     function cerrarModalSinResultados() {
       document.getElementById('modal-sin-resultados').hidden = true;
-      modalSinResultadosCerrado = true;
     }
 
     function ordenarProductos() {
@@ -597,12 +597,12 @@
       input.addEventListener('change', actualizarCarrito);
     });
 
-    document.getElementById('buscador-carrito').addEventListener('input', filtrarProductos);
+    document.getElementById('buscador-carrito').addEventListener('input', () => filtrarProductos());
     document.querySelectorAll('input[name="filtro-tipo"]').forEach(radio => {
-      radio.addEventListener('change', filtrarProductos);
+      radio.addEventListener('change', () => filtrarProductos());
     });
-    document.getElementById('precio-desde').addEventListener('input', filtrarProductos);
-    document.getElementById('precio-hasta').addEventListener('input', filtrarProductos);
+    document.getElementById('precio-desde').addEventListener('input', () => filtrarProductos());
+    document.getElementById('precio-hasta').addEventListener('input', () => filtrarProductos());
     document.getElementById('ordenar-carrito').addEventListener('change', ordenarProductos);
     document.getElementById('comprado').addEventListener('change', actualizarCarrito);
     document.getElementById('cancelar-compra').addEventListener('click', cancelarCompra);
