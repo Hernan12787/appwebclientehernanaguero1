@@ -31,7 +31,7 @@ Archivos agregados:
     (index), si no es el **detalle** (producto.html). Se ejecuta en
     `DOMContentLoaded`.
 - Todo el texto y las imágenes se cargan con `textContent`, `src` y atributos,
-  **nunca con `innerHTML`**, así que nada se interpreta como HTML.
+**nunca con `innerHTML`**, así que nada se interpreta como HTML.
 
 Archivos modificados:
 
@@ -118,14 +118,14 @@ Pegá todo el histórico de mensajes con el agente de IA:
      lista de productos este en un json. La pagina debe seguir funcionando igual
 
 (2)  ¿Cómo abrís normalmente la página para probarla?
-     -> Respuesta: Doble clic al HTML
+      -> Respuesta: Doble clic al HTML
 
-(3)  Borrame de producto.html el harcode de class=producto-detalle para que
+(3)  Borrome de producto.html el harcode de class=producto-detalle para que
      funcione con el archivo producto.js
 
 (4)  quiero que mi pagina web trabaje con producto.js en vez de html.
-     -> Alcance elegido: También index.html (mover las 4 tarjetas del catálogo
-        "Nuestros productos" a producto.js)
+      -> Alcance elegido: También index.html (mover las 4 tarjetas del catálogo
+         "Nuestros productos" a producto.js)
 
 (5)  en base a todo lo que hicimos en la rama feature- js podes llenarme la
      plantilla del mr que describo aqui [+ la plantilla completa]
@@ -134,11 +134,11 @@ Pegá todo el histórico de mensajes con el agente de IA:
 ## Checklist antes de enviar
 
 - [x] Trabajé en una rama propia (no directo en `main`) — se trabajó en la rama
-      **`feature/adapt-to-js`**.
+  **`feature/adapt-to-js`**.
 - [x] Probé que mi código/archivo funciona antes de subirlo (validé la sintaxis
-      con `node --check producto.js` y verifiqué el DOM renderizado con Chrome
-      headless: `index.html` genera las 4 tarjetas del catálogo con sus enlaces y
-      `producto.html` genera las 4 fichas de detalle).
+  con `node --check producto.js` y verifiqué el DOM renderizado con Chrome
+  headless: `index.html` genera las 4 tarjetas del catálogo con sus enlaces y
+  `producto.html` genera las 4 fichas de detalle).
 - [x] Este PR es dentro de mi propio repositorio.
 - [x] Completé todos los datos de esta plantilla.
 

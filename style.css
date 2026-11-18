@@ -1946,7 +1946,7 @@ footer p {
     border-radius: 0;
 }
 
-.alerta-sin-resultados[hidden] {
+.alerta-sin-resultados.oculto {
     display: none;
 }
 

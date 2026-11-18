@@ -6,6 +6,12 @@
   <title>Carrito | Refrescante Argentina</title>
   <link rel="icon" type="image/x-icon" href="refresco.ico">
   <link rel="stylesheet" href="style.css">
+  <style>
+    .item-carrito[data-tipo="gaseosa"] {
+      border: 2px solid #ff0000;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 <body>
   <main>
@@ -38,7 +44,7 @@
           </select>
         </div>
       </div>
-      <p id="modal-sin-resultados" class="alerta-sin-resultados" role="alert" hidden>No hay ninguna gaseosa con ese nombre</p>
+      <p id="modal-sin-resultados" class="alerta-sin-resultados oculto" role="alert">No hay ninguna gaseosa con ese nombre</p>
       <p class="carrito-hint">Elegí la cantidad de cada gaseosa .</p>
 
       <div class="carrito-wrap">
@@ -484,13 +490,13 @@
       });
 
       if (visibles.length === 0) {
-        document.getElementById('modal-sin-resultados').hidden = false;
+        document.getElementById('modal-sin-resultados').classList.remove('oculto');
         if (!mantenerModal && buscador.value !== '') {
           buscador.value = '';
           filtrarProductos(true);
         }
       } else if (!mantenerModal) {
-        document.getElementById('modal-sin-resultados').hidden = true;
+        document.getElementById('modal-sin-resultados').classList.add('oculto');
       }
     }
 
