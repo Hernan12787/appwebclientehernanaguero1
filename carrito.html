@@ -38,7 +38,6 @@
           </select>
         </div>
       </div>
-      <p id="carrito-sin-resultados" class="carrito-sin-resultados" hidden>No se encontró esa gaseosa</p>
       <p class="carrito-hint">Elegí la cantidad de cada gaseosa .</p>
 
       <div class="carrito-wrap">
@@ -364,10 +363,18 @@
 
   <footer id="footer"></footer>
 
+  <div id="modal-sin-resultados" class="modal-sin-resultados" hidden>
+    <div class="modal-contenido" role="alertdialog" aria-modal="true" aria-labelledby="carrito-sin-resultados">
+      <p id="carrito-sin-resultados">No hay ninguna gaseosa con ese nombre</p>
+      <button type="button" id="cerrar-modal-sin-resultados" class="btn-cerrar-modal">Cerrar</button>
+    </div>
+  </div>
+
   <script src="archivo.js"></script>
   <script>
     const itemsCarrito = Array.from(document.querySelectorAll('#carrito .item-carrito'));
     const ordenOriginal = itemsCarrito.slice();
+    let modalSinResultadosCerrado = false;
     const listaSeleccion = document.getElementById('lista-seleccion');
     const totalCompra = document.getElementById('total-compra');
     const STORAGE_KEY = 'carritoRefrescante';
@@ -482,7 +489,19 @@
         item.style.display = visibles.includes(item) ? '' : 'none';
       });
 
-      document.getElementById('carrito-sin-resultados').hidden = visibles.length > 0;
+      if (visibles.length === 0) {
+        if (!modalSinResultadosCerrado) {
+          document.getElementById('modal-sin-resultados').hidden = false;
+        }
+      } else {
+        document.getElementById('modal-sin-resultados').hidden = true;
+        modalSinResultadosCerrado = false;
+      }
+    }
+
+    function cerrarModalSinResultados() {
+      document.getElementById('modal-sin-resultados').hidden = true;
+      modalSinResultadosCerrado = true;
     }
 
     function ordenarProductos() {
@@ -587,6 +606,17 @@
     document.getElementById('ordenar-carrito').addEventListener('change', ordenarProductos);
     document.getElementById('comprado').addEventListener('change', actualizarCarrito);
     document.getElementById('cancelar-compra').addEventListener('click', cancelarCompra);
+    document.getElementById('cerrar-modal-sin-resultados').addEventListener('click', cerrarModalSinResultados);
+    document.getElementById('modal-sin-resultados').addEventListener('click', function (evento) {
+      if (evento.target === this) {
+        cerrarModalSinResultados();
+      }
+    });
+    document.addEventListener('keydown', function (evento) {
+      if (evento.key === 'Escape') {
+        cerrarModalSinResultados();
+      }
+    });
 
     actualizarCarrito();
   </script>

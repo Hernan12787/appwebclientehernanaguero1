@@ -1934,21 +1934,50 @@ footer p {
     box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.15);
 }
 
-.carrito-sin-resultados {
-    display: block;
-    max-width: 520px;
-    margin: 0 auto 1rem;
+.modal-sin-resultados {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 1rem;
-    text-align: center;
-    font-size: 1rem;
-    color: #6b7280;
-    background: #f9fafb;
-    border: 2px dashed #d1d5db;
-    border-radius: 1rem;
+    background: rgba(17, 24, 39, 0.55);
 }
 
-.carrito-sin-resultados[hidden] {
+.modal-sin-resultados[hidden] {
     display: none;
+}
+
+.modal-sin-resultados .modal-contenido {
+    width: min(340px, 100%);
+    padding: 1.5rem;
+    text-align: center;
+    background: #ffffff;
+    border: 2px solid #e11d48;
+    border-radius: 1rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.modal-sin-resultados .modal-contenido p {
+    margin: 0 0 1rem;
+    font-size: 1rem;
+    color: #1f2937;
+}
+
+.modal-sin-resultados .btn-cerrar-modal {
+    padding: 0.55rem 1.2rem;
+    border: none;
+    border-radius: 2rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: #ffffff;
+    background: #e11d48;
+    cursor: pointer;
+}
+
+.modal-sin-resultados .btn-cerrar-modal:hover {
+    background: #be123c;
 }
 
 .cantidad input[type="number"],
