@@ -38,10 +38,7 @@
           </select>
         </div>
       </div>
-      <div id="modal-sin-resultados" class="alerta-sin-resultados" role="alert" hidden>
-        <p id="carrito-sin-resultados">No hay ninguna gaseosa con ese nombre</p>
-        <button type="button" id="cerrar-modal-sin-resultados" class="btn-cerrar-alerta">Cerrar</button>
-      </div>
+      <p id="modal-sin-resultados" class="alerta-sin-resultados" role="alert" hidden>No hay ninguna gaseosa con ese nombre</p>
       <p class="carrito-hint">Elegí la cantidad de cada gaseosa .</p>
 
       <div class="carrito-wrap">
@@ -497,10 +494,6 @@
       }
     }
 
-    function cerrarModalSinResultados() {
-      document.getElementById('modal-sin-resultados').hidden = true;
-    }
-
     function ordenarProductos() {
       const modo = document.getElementById('ordenar-carrito').value;
       const grid = document.querySelector('#carrito .carrito-grid');
@@ -603,12 +596,6 @@
     document.getElementById('ordenar-carrito').addEventListener('change', ordenarProductos);
     document.getElementById('comprado').addEventListener('change', actualizarCarrito);
     document.getElementById('cancelar-compra').addEventListener('click', cancelarCompra);
-    document.getElementById('cerrar-modal-sin-resultados').addEventListener('click', cerrarModalSinResultados);
-    document.addEventListener('keydown', function (evento) {
-      if (evento.key === 'Escape') {
-        cerrarModalSinResultados();
-      }
-    });
 
     actualizarCarrito();
   </script>
