@@ -7,9 +7,8 @@
   <link rel="icon" type="image/x-icon" href="refresco.ico">
   <link rel="stylesheet" href="style.css">
   <style>
-    .item-carrito[data-tipo="gaseosa"] {
+    #carrito .item-carrito {
       border: 2px solid #ff0000;
-      border-radius: 8px;
     }
   </style>
 </head>
@@ -45,7 +44,10 @@
         </div>
       </div>
       <p id="modal-sin-resultados" class="alerta-sin-resultados oculto" role="alert">No hay ninguna gaseosa con ese nombre</p>
-      <p class="carrito-hint">Elegí la cantidad de cada gaseosa .</p>
+      <p class="carrito-hint">Elegí la cantidad de cada gaseosa.</p>
+
+      <p id="estado-nuevos-productos" class="estado-nuevos-productos" aria-live="polite"></p>
+      <div id="nuevos-productos-panel" class="nuevos-productos-panel"></div>
 
       <div class="carrito-wrap">
         <div class="carrito-grid">
@@ -371,44 +373,49 @@
   <footer id="footer"></footer>
 
   <script src="archivo.js"></script>
+  <script src="producto.js"></script>
   <script>
-    const itemsCarrito = Array.from(document.querySelectorAll('#carrito .item-carrito'));
-    const ordenOriginal = itemsCarrito.slice();
+    const STORAGE_KEY = 'carritoRefrescante';
+    let itemsCarrito = Array.from(document.querySelectorAll('#carrito .item-carrito'));
+    let ordenOriginal = itemsCarrito.slice();
     const listaSeleccion = document.getElementById('lista-seleccion');
     const totalCompra = document.getElementById('total-compra');
-    const STORAGE_KEY = 'carritoRefrescante';
+    let datosCarrito = { cantidades: {}, finalizado: false, productosNuevos: {} };
 
     function formatearPesos(valor) {
-      return '$' + valor.toLocaleString('es-AR');
+      return '$' + Number(valor || 0).toLocaleString('es-AR');
+    }
+
+    function agregarFilaResumen(item) {
+      const id = item.dataset.id;
+      if (!id || document.getElementById('fila-' + id)) return;
+      const nombre = item.querySelector('h4').textContent;
+      const precio = parseInt(item.querySelector('.precio').dataset.precio, 10) || 0;
+
+      const li = document.createElement('li');
+      li.id = 'fila-' + id;
+      li.dataset.id = id;
+
+      const ico = document.createElement('span');
+      ico.className = 'ico-sel';
+      ico.textContent = '\u2713';
+
+      const prodNombre = document.createElement('span');
+      prodNombre.className = 'prod-nombre';
+      prodNombre.textContent = nombre;
+
+      const subtot = document.createElement('span');
+      subtot.className = 'subtot';
+      subtot.innerHTML = '<span class="cant">0</span> &times; ' + formatearPesos(precio) +
+        ' = <span class="submonto">$0</span>';
+
+      li.append(ico, prodNombre, subtot);
+      listaSeleccion.appendChild(li);
     }
 
     function construirResumen() {
       listaSeleccion.innerHTML = '';
-      itemsCarrito.forEach(item => {
-        const id = item.dataset.id;
-        const nombre = item.querySelector('h4').textContent;
-        const precio = parseInt(item.querySelector('.precio').dataset.precio, 10) || 0;
-
-        const li = document.createElement('li');
-        li.id = 'fila-' + id;
-        li.dataset.id = id;
-
-        const ico = document.createElement('span');
-        ico.className = 'ico-sel';
-        ico.textContent = '\u2713';
-
-        const prodNombre = document.createElement('span');
-        prodNombre.className = 'prod-nombre';
-        prodNombre.textContent = nombre;
-
-        const subtot = document.createElement('span');
-        subtot.className = 'subtot';
-        subtot.innerHTML = '<span class="cant">0</span> &times; ' + formatearPesos(precio) +
-          ' = <span class="submonto">$0</span>';
-
-        li.append(ico, prodNombre, subtot);
-        listaSeleccion.appendChild(li);
-      });
+      itemsCarrito.forEach(agregarFilaResumen);
     }
 
     function calcularTotal() {
@@ -445,7 +452,8 @@
       });
 
       totalCompra.textContent = formatearPesos(total);
-      document.querySelector('.msg-total').textContent = formatearPesos(total);
+      const msgTotal = document.querySelector('.msg-total');
+      if (msgTotal) msgTotal.textContent = formatearPesos(total);
       actualizarMensaje(total);
       guardarCarrito();
     }
@@ -455,6 +463,7 @@
       const msgOk = document.querySelector('.msg-ok');
       const msgVacio = document.querySelector('.msg-vacio');
 
+      if (!msgOk || !msgVacio || !comprado) return;
       msgOk.style.display = 'none';
       msgVacio.style.display = 'none';
 
@@ -521,7 +530,8 @@
 
     function cancelarCompra() {
       itemsCarrito.forEach(item => {
-        item.querySelector('.cantidad-input').value = 0;
+        const input = item.querySelector('.cantidad-input');
+        if (input) input.value = 0;
       });
       document.getElementById('comprado').checked = false;
       actualizarCarrito();
@@ -541,28 +551,20 @@
       }
     }
 
-    function cargarCarrito() {
-      let guardado = null;
-
+    function leerStorage() {
       try {
-        guardado = JSON.parse(sessionStorage.getItem(STORAGE_KEY));
+        const data = JSON.parse(sessionStorage.getItem(STORAGE_KEY));
+        if (data && typeof data === 'object') {
+          return {
+            cantidades: data.cantidades || {},
+            finalizado: data.finalizado === true,
+            productosNuevos: data.productosNuevos || {}
+          };
+        }
       } catch (error) {
         console.warn('No se pudo leer el carrito guardado:', error);
-        return;
       }
-
-      if (!guardado) {
-        return;
-      }
-
-      const cantidades = guardado.cantidades || {};
-      itemsCarrito.forEach(item => {
-        const input = item.querySelector('.cantidad-input');
-        const cantidad = parseInt(cantidades[item.dataset.id], 10);
-        input.value = Number.isFinite(cantidad) && cantidad > 0 ? cantidad : 0;
-      });
-
-      document.getElementById('comprado').checked = guardado.finalizado === true;
+      return { cantidades: {}, finalizado: false, productosNuevos: {} };
     }
 
     function guardarCarrito() {
@@ -576,32 +578,184 @@
       try {
         sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
           cantidades,
-          finalizado: document.getElementById('comprado').checked
+          finalizado: document.getElementById('comprado').checked,
+          productosNuevos: datosCarrito.productosNuevos || {}
         }));
       } catch (error) {
         console.warn('No se pudo guardar el carrito:', error);
       }
     }
 
+    function crearElementoItemNuevo(prodInfo) {
+      const article = document.createElement('article');
+      article.className = 'item-carrito card-nuevo-' + prodInfo.dbId + ' item-carrito-nuevo';
+      article.dataset.id = prodInfo.id;
+      article.dataset.tipo = prodInfo.tipo || 'nuevo';
+
+      const img = document.createElement('img');
+      img.src = prodInfo.url || 'refresco.ico';
+      img.alt = prodInfo.nombre || 'Producto nuevo';
+      img.onerror = function () { this.onerror = null; this.src = 'refresco.ico'; };
+
+      const info = document.createElement('div');
+      info.className = 'item-info';
+
+      const h4 = document.createElement('h4');
+      h4.textContent = prodInfo.nombre || 'Producto';
+
+      const precioNum = Number(prodInfo.precio) || 0;
+      const pPrecio = document.createElement('p');
+      pPrecio.className = 'precio';
+      pPrecio.dataset.precio = String(precioNum);
+      pPrecio.textContent = 'Precio unitario: ' + formatearPesos(precioNum);
+
+      const divCant = document.createElement('div');
+      divCant.className = 'cantidad';
+
+      const label = document.createElement('label');
+      label.setAttribute('for', 'q-' + prodInfo.id);
+      label.textContent = 'Cantidad:';
+
+      const input = document.createElement('input');
+      input.type = 'number';
+      input.id = 'q-' + prodInfo.id;
+      input.name = 'uds-' + prodInfo.id;
+      input.min = '0';
+      input.value = '0';
+      input.className = 'cantidad-input';
+
+      divCant.append(label, input);
+      info.append(h4, pPrecio, divCant);
+      article.append(img, info);
+      return article;
+    }
+
+    function registrarItem(item) {
+      if (!itemsCarrito.includes(item)) itemsCarrito.push(item);
+      if (!ordenOriginal.includes(item)) ordenOriginal.push(item);
+      const input = item.querySelector('.cantidad-input');
+      if (input && !input.dataset.listener) {
+        input.addEventListener('input', actualizarCarrito);
+        input.addEventListener('change', actualizarCarrito);
+        input.dataset.listener = '1';
+      }
+    }
+
+    function restaurarProductosNuevos(productosNuevos) {
+      Object.keys(productosNuevos || {}).forEach(function (key) {
+        const prodInfo = productosNuevos[key];
+        if (!prodInfo || !prodInfo.id) return;
+        if (document.querySelector('.item-carrito[data-id="' + prodInfo.id + '"]')) return;
+        const item = crearElementoItemNuevo(prodInfo);
+        document.querySelector('#carrito .carrito-grid').appendChild(item);
+        registrarItem(item);
+      });
+    }
+
+    function agregarNuevoProductoAlCarrito(dbProd) {
+      const cartId = 'nuevo-' + dbProd.id;
+      let item = document.querySelector('.item-carrito[data-id="' + cartId + '"]');
+      if (!item) {
+        const prodInfo = {
+          id: cartId,
+          dbId: dbProd.id,
+          nombre: dbProd.nombre || 'Producto nuevo',
+          precio: Number(dbProd.precio) || 0,
+          url: dbProd.url || '',
+          tipo: 'nuevo'
+        };
+        datosCarrito.productosNuevos[cartId] = prodInfo;
+        item = crearElementoItemNuevo(prodInfo);
+        document.querySelector('#carrito .carrito-grid').appendChild(item);
+        registrarItem(item);
+        agregarFilaResumen(item);
+        const input = item.querySelector('.cantidad-input');
+        if (input) input.value = 1;
+      } else {
+        const input = item.querySelector('.cantidad-input');
+        if (input) input.value = (parseInt(input.value, 10) || 0) + 1;
+      }
+      actualizarCarrito();
+      const estado = document.getElementById('estado-nuevos-productos');
+      if (estado) estado.textContent = 'Producto agregado al carrito.';
+    }
+
+    async function cargarNuevosProductosAdmin() {
+      const estado = document.getElementById('estado-nuevos-productos');
+      const panel = document.getElementById('nuevos-productos-panel');
+      if (!panel) return;
+      if (estado) estado.textContent = 'Cargando...';
+      panel.innerHTML = '';
+      try {
+        if (typeof window.obtenerProductosNuevos !== 'function') {
+          throw new Error('No se encontró la función para cargar productos.');
+        }
+        const productos = await window.obtenerProductosNuevos();
+        if (!Array.isArray(productos) || productos.length === 0) {
+          if (estado) estado.textContent = 'No hay productos nuevos para cargar.';
+          return;
+        }
+        if (estado) estado.textContent = 'Productos cargados. Tocá "Nuevo producto" para agregarlo al carrito.';
+        productos.forEach(function (prod) {
+          const card = document.createElement('div');
+          card.className = 'nuevo-producto-card';
+
+          const info = document.createElement('div');
+          info.className = 'nuevo-producto-info';
+          const nombre = document.createElement('strong');
+          nombre.textContent = prod.nombre || 'Producto';
+          const precio = document.createElement('span');
+          precio.textContent = formatearPesos(Number(prod.precio) || 0);
+          info.append(nombre, precio);
+
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'btn-verificar-nuevo';
+          btn.textContent = 'Nuevo producto';
+          btn.addEventListener('click', function () {
+            agregarNuevoProductoAlCarrito(prod);
+          });
+
+          card.append(info, btn);
+          panel.appendChild(card);
+        });
+      } catch (error) {
+        console.error(error);
+        if (estado) estado.textContent = 'Error al cargar productos: ' + (error && error.message ? error.message : 'desconocido');
+      }
+    }
+
+    function aplicarCantidades(cantidades, finalizado) {
+      itemsCarrito.forEach(item => {
+        const input = item.querySelector('.cantidad-input');
+        const cantidad = parseInt((cantidades || {})[item.dataset.id], 10);
+        if (input) input.value = Number.isFinite(cantidad) && cantidad > 0 ? cantidad : 0;
+      });
+      document.getElementById('comprado').checked = finalizado === true;
+    }
+
     migrarCarritoASession();
-    cargarCarrito();
+    datosCarrito = leerStorage();
+    restaurarProductosNuevos(datosCarrito.productosNuevos || {});
+    itemsCarrito = Array.from(document.querySelectorAll('#carrito .item-carrito'));
+    ordenOriginal = itemsCarrito.slice();
     construirResumen();
+    aplicarCantidades(datosCarrito.cantidades || {}, datosCarrito.finalizado);
 
     itemsCarrito.forEach(item => {
-      const input = item.querySelector('.cantidad-input');
-      input.addEventListener('input', actualizarCarrito);
-      input.addEventListener('change', actualizarCarrito);
+      registrarItem(item);
     });
 
-    document.getElementById('buscador-carrito').addEventListener('input', () => filtrarProductos());
-    document.querySelectorAll('input[name="filtro-tipo"]').forEach(radio => {
-      radio.addEventListener('change', () => filtrarProductos());
+    document.getElementById('buscador-carrito').addEventListener('input', function () { filtrarProductos(); });
+    document.querySelectorAll('input[name="filtro-tipo"]').forEach(function (radio) {
+      radio.addEventListener('change', function () { filtrarProductos(); });
     });
-    document.getElementById('precio-desde').addEventListener('input', () => filtrarProductos());
-    document.getElementById('precio-hasta').addEventListener('input', () => filtrarProductos());
+    document.getElementById('precio-desde').addEventListener('input', function () { filtrarProductos(); });
+    document.getElementById('precio-hasta').addEventListener('input', function () { filtrarProductos(); });
     document.getElementById('ordenar-carrito').addEventListener('change', ordenarProductos);
     document.getElementById('comprado').addEventListener('change', actualizarCarrito);
     document.getElementById('cancelar-compra').addEventListener('click', cancelarCompra);
+    cargarNuevosProductosAdmin();
 
     actualizarCarrito();
   </script>

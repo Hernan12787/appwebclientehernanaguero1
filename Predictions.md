@@ -39,6 +39,7 @@ conectar mi mapa de google a un supabase
 Agregar filtros a mi buscador.
 Crear un admin.
 trabajar en el admin
+mejorar la grafica de admin
 
 
 
