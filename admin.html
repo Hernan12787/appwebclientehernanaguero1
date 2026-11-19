@@ -9,20 +9,48 @@
 </head>
 <body>
   <main>
-    <section class="admin">
-      <h1>Admin - Productos</h1>
-      <form id="admin-form">
-        <input type="number" id="admin-id" placeholder="ID (vacío para nuevo)" />
-        <input type="text" id="admin-nombre" placeholder="Nombre" />
-        <input type="number" id="admin-precio" step="any" placeholder="Precio" />
-        <input type="text" id="admin-url" placeholder="URL imagen" />
-        <button type="submit" id="admin-guardar">Guardar</button>
-      </form>
-      <p id="admin-estado"></p>
-      <button type="button" id="admin-cargar">Cargar productos</button>
-      <div id="admin-lista"></div>
+    <section id="admin">
+      <h2>Administración de productos</h2>
+      
+      <div class="admin-grid">
+        <form id="admin-form" class="admin-card">
+          <h3>Producto</h3>
+          <div>
+            <label for="admin-id">ID (automático)</label>
+            <input type="number" id="admin-id" placeholder="Automático" readonly />
+          </div>
+          <div>
+            <label for="admin-nombre">Nombre</label>
+            <input type="text" id="admin-nombre" placeholder="Nombre del producto" />
+          </div>
+          <div>
+            <label for="admin-precio">Precio</label>
+            <input type="number" id="admin-precio" step="any" placeholder="Precio" />
+          </div>
+          <div>
+            <label for="admin-url">URL de imagen</label>
+            <input type="text" id="admin-url" placeholder="https://..." />
+          </div>
+          <div class="admin-form-acciones">
+            <button type="submit" id="admin-guardar">Guardar</button>
+            <button type="button" id="admin-nuevo" class="admin-btn-secundario">Nuevo</button>
+          </div>
+          <p id="admin-estado" class="admin-estado" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="admin-card admin-lista-card">
+          <div class="admin-lista-header">
+            <h3>Productos cargados</h3>
+          </div>
+          <div id="admin-lista" class="admin-lista"></div>
+        </div>
+      </div>
     </section>
   </main>
+
+  <footer id="footer"></footer>
+
+  <script src="archivo.js"></script>
   <script src="producto.js"></script>
   <script src="admin.js"></script>
 </body>

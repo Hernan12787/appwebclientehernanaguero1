@@ -236,75 +236,65 @@ const  supabasemap = async () => {
 };
 window.supabasemap = supabasemap;
 
+
 const SUPABASE_NUEVOPRODUCTO_URL = "https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/nuevoproducto";
 const SUPABASE_NUEVOPRODUCTO_KEY = "sb_publishable_caiELbjOQdhK6NS9Ws2wuQ_ZyNeEMHl";
 
-const obtenerProductosNuevos = async () => {
-  const options = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "apikey": SUPABASE_NUEVOPRODUCTO_KEY
-    }
+const fetchProductoNuevoproducto = async (method, body, id) => {
+  const idValido = id !== null && id !== undefined && id !== "" && Number.isFinite(Number(id));
+  if ((method === "PATCH" || method === "DELETE") && !idValido) {
+    throw new Error("ID invÃ¡lido para " + (method === "DELETE" ? "eliminar" : "actualizar") + ".");
+  }
+  const endpoint = idValido
+    ? SUPABASE_NUEVOPRODUCTO_URL + "?id=eq." + encodeURIComponent(id)
+    : SUPABASE_NUEVOPRODUCTO_URL;
+  const headers = {
+    "Content-Type": "application/json",
+    "apikey": SUPABASE_NUEVOPRODUCTO_KEY,
+    "Prefer": "return=representation"
   };
-  return fetch(SUPABASE_NUEVOPRODUCTO_URL, options)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Error al obtener los productos');
-      }
-      return response.json();
-    })
-    .then(data => {
-      return data;
-    })
-    .catch(error => {
-      console.error('Error en la solicitud a Supabase:', error);
-      return [];
-    });
+  if (method !== "GET") {
+    headers["Authorization"] = "Bearer " + SUPABASE_NUEVOPRODUCTO_KEY;
+  }
+  const options = { method, headers };
+  if (body) {
+    options.body = JSON.stringify(body);
+  }
+  const response = await fetch(endpoint, options);
+  const texto = await response.text();
+  let data = null;
+  try {
+    data = texto ? JSON.parse(texto) : null;
+  } catch (e) {
+    data = texto;
+  }
+  if (!response.ok) {
+    throw new Error(method + " " + response.status + ": " + (typeof data === "string" ? data : JSON.stringify(data)));
+  }
+  if ((method === "PATCH" || method === "POST" || method === "DELETE") && Array.isArray(data) && data.length === 0) {
+    throw new Error(method + " sin resultado: no se guardÃ³/actualizÃ³/eliminÃ³ el registro (verificÃ¡ el ID y las polÃ­ticas RLS).");
+  }
+  return data;
+};
+
+const obtenerProductosNuevos = async () => {
+  return fetchProductoNuevoproducto("GET");
 };
 
 const actualizarProductoNuevoproducto = async (id, cambios) => {
-  const url = SUPABASE_NUEVOPRODUCTO_URL + "?id=eq." + encodeURIComponent(id);
-  const options = {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-      "apikey": SUPABASE_NUEVOPRODUCTO_KEY,
-      "Authorization": "Bearer " + SUPABASE_NUEVOPRODUCTO_KEY,
-      "Prefer": "return=representation"
-    },
-    body: JSON.stringify(cambios)
-  };
-  const response = await fetch(url, options);
-  if (!response.ok) {
-    const detalle = await response.text();
-    throw new Error('Error al actualizar el producto: ' + response.status + ' ' + detalle);
-  }
-  return response.json();
+  return fetchProductoNuevoproducto("PATCH", cambios, id);
+};
+
+const insertarProductoNuevoproducto = async (datos) => {
+  return fetchProductoNuevoproducto("POST", datos);
+};
+
+const eliminarProductoNuevoproducto = async (id) => {
+  return fetchProductoNuevoproducto("DELETE", null, id);
 };
 
 window.obtenerProductosNuevos = obtenerProductosNuevos;
 window.actualizarProductoNuevoproducto = actualizarProductoNuevoproducto;
-
-
-const insertarProductoNuevoproducto = async (datos) => {
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "apikey": SUPABASE_NUEVOPRODUCTO_KEY,
-      "Authorization": "Bearer " + SUPABASE_NUEVOPRODUCTO_KEY,
-      "Prefer": "return=representation"
-    },
-    body: JSON.stringify(datos)
-  };
-  const response = await fetch(SUPABASE_NUEVOPRODUCTO_URL, options);
-  if (!response.ok) {
-    const detalle = await response.text();
-    throw new Error('Error al guardar el producto: ' + response.status + ' ' + detalle);
-  }
-  return response.json();
-};
-
 window.insertarProductoNuevoproducto = insertarProductoNuevoproducto;
+window.eliminarProductoNuevoproducto = eliminarProductoNuevoproducto;
 
