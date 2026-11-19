@@ -7,18 +7,6 @@ function setAdminEstado(mensaje) {
   if (estado) estado.textContent = mensaje || '';
 }
 
-function llenarAdminForm(producto) {
-  const id = document.getElementById('admin-id');
-  const nombre = document.getElementById('admin-nombre');
-  const precio = document.getElementById('admin-precio');
-  const url = document.getElementById('admin-url');
-  if (!id || !nombre || !precio || !url) return;
-  id.value = producto.id;
-  nombre.value = producto.nombre || '';
-  precio.value = producto.precio === null || producto.precio === undefined ? '' : String(producto.precio);
-  url.value = producto.url || '';
-}
-
 function renderAdminLista(productos) {
   const contenedor = document.getElementById('admin-lista');
   if (!contenedor) return;
@@ -43,6 +31,7 @@ function renderAdminLista(productos) {
     const nombre = document.createElement('input');
     nombre.type = 'text';
     nombre.value = producto.nombre || '';
+    nombre.readOnly = true;
     grupoNombre.appendChild(labelNombre);
     grupoNombre.appendChild(nombre);
 
@@ -54,6 +43,7 @@ function renderAdminLista(productos) {
     precio.type = 'number';
     precio.step = 'any';
     precio.value = producto.precio === null || producto.precio === undefined ? '' : String(producto.precio);
+    precio.readOnly = true;
     grupoPrecio.appendChild(labelPrecio);
     grupoPrecio.appendChild(precio);
 
@@ -64,6 +54,7 @@ function renderAdminLista(productos) {
     const url = document.createElement('input');
     url.type = 'text';
     url.value = producto.url || '';
+    url.readOnly = true;
     grupoUrl.appendChild(labelUrl);
     grupoUrl.appendChild(url);
 
@@ -81,34 +72,6 @@ function renderAdminLista(productos) {
     const botones = document.createElement('div');
     botones.className = 'admin-item-botones';
 
-    const botonActualizar = document.createElement('button');
-    botonActualizar.type = 'button';
-    botonActualizar.className = 'admin-btn-actualizar';
-    botonActualizar.textContent = 'Actualizar';
-    botonActualizar.addEventListener('click', async function () {
-      if (typeof window.actualizarProductoNuevoproducto !== 'function') {
-        setAdminEstado('No se encontró la función de actualización.');
-        return;
-      }
-      const cambios = {
-        nombre: nombre.value.trim(),
-        precio: precio.value === '' ? 0 : Number(precio.value),
-        url: url.value.trim()
-      };
-      try {
-        botonActualizar.disabled = true;
-        setAdminEstado('Actualizando...');
-        await window.actualizarProductoNuevoproducto(producto.id, cambios);
-        setAdminEstado('Producto actualizado.');
-        await cargarAdmin(false).catch(function () {});
-      } catch (error) {
-        console.error(error);
-        setAdminEstado('Error al actualizar: ' + (error && error.message ? error.message : 'desconocido'));
-      } finally {
-        botonActualizar.disabled = false;
-      }
-    });
-
     const botonEliminar = document.createElement('button');
     botonEliminar.type = 'button';
     botonEliminar.className = 'admin-btn-eliminar';
@@ -123,12 +86,6 @@ function renderAdminLista(productos) {
         setAdminEstado('Eliminando...');
         await window.eliminarProductoNuevoproducto(producto.id);
         setAdminEstado('Producto eliminado.');
-        const idInput = document.getElementById('admin-id');
-        if (idInput && String(idInput.value).trim() === String(producto.id)) {
-          const form = document.getElementById('admin-form');
-          if (form) form.reset();
-          if (idInput) idInput.value = '';
-        }
         await cargarAdmin(false).catch(function () {});
       } catch (error) {
         console.error(error);
@@ -138,7 +95,6 @@ function renderAdminLista(productos) {
       }
     });
 
-    botones.appendChild(botonActualizar);
     botones.appendChild(botonEliminar);
     acciones.appendChild(idBadge);
     acciones.appendChild(botones);
@@ -175,7 +131,6 @@ async function guardarAdmin(evento) {
   const url = document.getElementById('admin-url');
   const boton = document.getElementById('admin-guardar');
 
-  const idVal = (id.value || "").toString().trim();
   const datos = {
     nombre: nombre.value.trim(),
     precio: precio.value === '' ? 0 : Number(precio.value),
@@ -189,34 +144,19 @@ async function guardarAdmin(evento) {
 
   try {
     if (boton) boton.disabled = true;
-    if (idVal !== "") {
-      const idNum = Number(idVal);
-      if (!Number.isFinite(idNum)) {
-        throw new Error('ID inválido para actualizar.');
-      }
-      if (typeof window.actualizarProductoNuevoproducto !== 'function') {
-        throw new Error('No se encontró la función de actualización.');
-      }
-      setAdminEstado('Actualizando...');
-      await window.actualizarProductoNuevoproducto(idNum, datos);
-      setAdminEstado('Producto actualizado correctamente.');
+    if (typeof window.insertarProductoNuevoproducto !== 'function') {
+      throw new Error('No se encontró la función de guardado.');
+    }
+    setAdminEstado('Guardando...');
+    const creado = await window.insertarProductoNuevoproducto(datos);
+    const creadoItem = Array.isArray(creado) ? creado[0] : creado;
+    const form = document.getElementById('admin-form');
+    if (form) form.reset();
+    if (id) id.value = '';
+    if (creadoItem && creadoItem.id !== undefined && creadoItem.id !== null) {
+      setAdminEstado('Producto guardado correctamente (ID ' + creadoItem.id + ').');
     } else {
-      if (typeof window.insertarProductoNuevoproducto !== 'function') {
-        throw new Error('No se encontró la función de guardado.');
-      }
-      setAdminEstado('Guardando...');
-      const creado = await window.insertarProductoNuevoproducto(datos);
-      const creadoItem = Array.isArray(creado) ? creado[0] : creado;
-      if (creadoItem && creadoItem.id !== undefined && creadoItem.id !== null) {
-        llenarAdminForm(creadoItem);
-        setAdminEstado('Producto guardado correctamente (ID ' + creadoItem.id + ').');
-      } else {
-        const form = document.getElementById('admin-form');
-        if (form) form.reset();
-        const idInput = document.getElementById('admin-id');
-        if (idInput) idInput.value = '';
-        setAdminEstado('Producto guardado correctamente.');
-      }
+      setAdminEstado('Producto guardado correctamente.');
     }
     await cargarAdmin(false).catch(function () {});
   } catch (error) {

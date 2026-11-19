@@ -44,7 +44,7 @@ function crearProductoDetalle(producto) {
   articulo.appendChild(descripcion);
 
   const especificaciones = document.createElement("ul");
-  producto.especificaciones.forEach((especificacion) => {
+  (producto.especificaciones || []).forEach((especificacion) => {
     const item = document.createElement("li");
     item.textContent = especificacion;
     especificaciones.appendChild(item);
@@ -52,14 +52,14 @@ function crearProductoDetalle(producto) {
   articulo.appendChild(especificaciones);
 
   const enlace = document.createElement("a");
-  enlace.href = producto.volver.url;
-  enlace.textContent = producto.volver.texto;
+  enlace.href = (producto.volver && producto.volver.url) || "index.html#catalogo";
+  enlace.textContent = (producto.volver && producto.volver.texto) || "Volver al catálogo";
   articulo.appendChild(enlace);
 
   return articulo;
 }
 
-function renderProductos() {
+async function renderProductos() {
   const contenedor = document.querySelector("#productos");
   if (!contenedor) {
     return;
@@ -67,16 +67,38 @@ function renderProductos() {
 
   const esCatalogo = contenedor.classList.contains("item-cards");
   const crearProducto = esCatalogo ? crearProductoCatalogo : crearProductoDetalle;
-  const fragmento = document.createDocumentFragment();
+  contenedor.innerHTML = "";
 
-  obtenerProductos().forEach((producto) => {
+  let productos = [];
+  if (typeof window.obtenerProductosDesdeSupabase === "function") {
+    productos = await window.obtenerProductosDesdeSupabase();
+  } else if (typeof window.obtenerProductos === "function") {
+    const res = window.obtenerProductos();
+    productos = Array.isArray(res) ? res : await Promise.resolve(res || []);
+  }
+
+  if (!esCatalogo) {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    if (id) {
+      const encontrado = productos.filter(function (p) {
+        return p.slug === id || p.dataId === id || p.id === id || String(p.dbId) === String(id);
+      });
+      if (encontrado.length) {
+        productos = encontrado;
+      }
+    }
+  }
+
+  const fragmento = document.createDocumentFragment();
+  (Array.isArray(productos) ? productos : []).forEach((producto) => {
     fragmento.appendChild(crearProducto(producto));
   });
   contenedor.appendChild(fragmento);
 }
 
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", renderProductos);
+  document.addEventListener("DOMContentLoaded", function () { renderProductos(); });
 } else {
   renderProductos();
 }
@@ -281,10 +303,6 @@ const obtenerProductosNuevos = async () => {
   return fetchProductoNuevoproducto("GET");
 };
 
-const actualizarProductoNuevoproducto = async (id, cambios) => {
-  return fetchProductoNuevoproducto("PATCH", cambios, id);
-};
-
 const insertarProductoNuevoproducto = async (datos) => {
   return fetchProductoNuevoproducto("POST", datos);
 };
@@ -294,7 +312,6 @@ const eliminarProductoNuevoproducto = async (id) => {
 };
 
 window.obtenerProductosNuevos = obtenerProductosNuevos;
-window.actualizarProductoNuevoproducto = actualizarProductoNuevoproducto;
 window.insertarProductoNuevoproducto = insertarProductoNuevoproducto;
 window.eliminarProductoNuevoproducto = eliminarProductoNuevoproducto;
 
