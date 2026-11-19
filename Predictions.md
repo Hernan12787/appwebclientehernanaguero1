@@ -40,6 +40,7 @@ Agregar filtros a mi buscador.
 Crear un admin.
 trabajar en el admin
 mejorar la grafica de admin
+agrego mis productos a nuevoproducto(supabase)
 
 
 
