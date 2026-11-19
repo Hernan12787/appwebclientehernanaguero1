@@ -17,3 +17,18 @@ on public.nuevoproducto
 for select
 to anon, authenticated
 using (true);
+
+drop policy if exists "nuevoproducto_insert_anon" on public.nuevoproducto;
+create policy "nuevoproducto_insert_anon"
+on public.nuevoproducto
+for insert
+to anon, authenticated
+with check (true);
+
+drop policy if exists "nuevoproducto_update_anon" on public.nuevoproducto;
+create policy "nuevoproducto_update_anon"
+on public.nuevoproducto
+for update
+to anon, authenticated
+using (true)
+with check (true);

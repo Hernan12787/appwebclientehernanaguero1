@@ -235,3 +235,76 @@ const  supabasemap = async () => {
   });
 };
 window.supabasemap = supabasemap;
+
+const SUPABASE_NUEVOPRODUCTO_URL = "https://hangxmottfnjoxtrnxzy.supabase.co/rest/v1/nuevoproducto";
+const SUPABASE_NUEVOPRODUCTO_KEY = "sb_publishable_caiELbjOQdhK6NS9Ws2wuQ_ZyNeEMHl";
+
+const obtenerProductosNuevos = async () => {
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": SUPABASE_NUEVOPRODUCTO_KEY
+    }
+  };
+  return fetch(SUPABASE_NUEVOPRODUCTO_URL, options)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Error al obtener los productos');
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data;
+    })
+    .catch(error => {
+      console.error('Error en la solicitud a Supabase:', error);
+      return [];
+    });
+};
+
+const actualizarProductoNuevoproducto = async (id, cambios) => {
+  const url = SUPABASE_NUEVOPRODUCTO_URL + "?id=eq." + encodeURIComponent(id);
+  const options = {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": SUPABASE_NUEVOPRODUCTO_KEY,
+      "Authorization": "Bearer " + SUPABASE_NUEVOPRODUCTO_KEY,
+      "Prefer": "return=representation"
+    },
+    body: JSON.stringify(cambios)
+  };
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    const detalle = await response.text();
+    throw new Error('Error al actualizar el producto: ' + response.status + ' ' + detalle);
+  }
+  return response.json();
+};
+
+window.obtenerProductosNuevos = obtenerProductosNuevos;
+window.actualizarProductoNuevoproducto = actualizarProductoNuevoproducto;
+
+
+const insertarProductoNuevoproducto = async (datos) => {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": SUPABASE_NUEVOPRODUCTO_KEY,
+      "Authorization": "Bearer " + SUPABASE_NUEVOPRODUCTO_KEY,
+      "Prefer": "return=representation"
+    },
+    body: JSON.stringify(datos)
+  };
+  const response = await fetch(SUPABASE_NUEVOPRODUCTO_URL, options);
+  if (!response.ok) {
+    const detalle = await response.text();
+    throw new Error('Error al guardar el producto: ' + response.status + ' ' + detalle);
+  }
+  return response.json();
+};
+
+window.insertarProductoNuevoproducto = insertarProductoNuevoproducto;
+
