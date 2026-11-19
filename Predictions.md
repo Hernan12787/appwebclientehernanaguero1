@@ -38,6 +38,8 @@ Conectar Contactos a supabase contactos
 conectar mi mapa de google a un supabase
 Agregar filtros a mi buscador.
 Crear un admin.
+trabajar en el admin
+
 
 
 

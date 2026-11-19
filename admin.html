@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Refresco Bebida Argentina</title>
+  <link rel="icon" type="image/x-icon" href="refresco.ico">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <section class="admin">
+      <h1>Admin - Productos</h1>
+      <form id="admin-form">
+        <input type="number" id="admin-id" placeholder="ID (vacío para nuevo)" />
+        <input type="text" id="admin-nombre" placeholder="Nombre" />
+        <input type="number" id="admin-precio" step="any" placeholder="Precio" />
+        <input type="text" id="admin-url" placeholder="URL imagen" />
+        <button type="submit" id="admin-guardar">Guardar</button>
+      </form>
+      <p id="admin-estado"></p>
+      <button type="button" id="admin-cargar">Cargar productos</button>
+      <div id="admin-lista"></div>
+    </section>
+  </main>
+  <script src="producto.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

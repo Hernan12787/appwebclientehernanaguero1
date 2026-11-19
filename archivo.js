@@ -1,4 +1,4 @@
-const miheader = {
+﻿const miheader = {
   logo: {
     src: "img/coca-tapa.svg",
     alt: "Tapa de Coca-Cola",
@@ -13,6 +13,7 @@ const miheader = {
       { text: "Descubrí", hash: "descubri" },
       { text: "Carrito", url: "carrito.html" },
       { text: "Contacto", url: "contacto.html" },
+      { text: "Admin", url: "admin.html" },
     ],
   },
 };
@@ -192,3 +193,4 @@ if (document.readyState === "loading") {
 } else {
   renderLayout();
 }
+
